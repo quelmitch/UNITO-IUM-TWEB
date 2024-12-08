@@ -1,3 +1,5 @@
+Python Version: 13.0.1
+
 Procedura Pulizia
 import
 1. Data Understanding
