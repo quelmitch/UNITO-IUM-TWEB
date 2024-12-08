@@ -1,3 +1,18 @@
+Procedura Pulizia
+import
+1. Data Understanding
+head
+shape
+dtypes
+2. Data Cleaning
+ Rename columns
+ Check for null values (reset index if rows are dropped)
+ Check for duplicate rows
+typing columns
+Deep Clean
+3. Final Result
+head
+
 
 TODO:
 
@@ -7,3 +22,5 @@ TODO:
 [Pulizia] Per il JEAN HERSHOLT HUMANITARIAN AWARD nella cerimonia del 2021 ci sono stati due vincitori
 [Pulizia] Reset indexing quando vengono rimmosse delle righe
 [Pulizia] Ripetere deep clean fatta in movies description in altri campi
+[Pulizia] Pulizia dei caratteri NBSP se causano problemi: df = df.apply(lambda x: x.str.replace('\u00A0', ' ', regex=False) if x.dtype == "object" else x)
+
