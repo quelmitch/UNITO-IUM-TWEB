@@ -5,3 +5,5 @@ TODO:
 [Pulizia] Possono esserci nomine anche senza un film specificato (guarda 1929 prima cerimonia)
 [Pulizia] Possono esserci nomine duplicate per quanto riguarda la categoria "MUSIC (Original Song)" poiché non è specificato il titolo
 [Pulizia] Per il JEAN HERSHOLT HUMANITARIAN AWARD nella cerimonia del 2021 ci sono stati due vincitori
+[Pulizia] Reset indexing quando vengono rimmosse delle righe
+[Pulizia] Ripetere deep clean fatta in movies description in altri campi
