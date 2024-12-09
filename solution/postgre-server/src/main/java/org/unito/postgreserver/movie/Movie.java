@@ -2,6 +2,10 @@ package org.unito.postgreserver.movie;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.unito.postgreserver.language.Language;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Table
 @Entity
@@ -31,6 +35,8 @@ public class Movie {
     @Column(nullable = true)
     private double rating; //TODO: constraints
 
+    //@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //private Set<Language> subtitles_languages;
 
     public Movie() {}
 

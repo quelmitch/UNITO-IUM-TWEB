@@ -14,7 +14,7 @@ const renderRoute = './routes/render'
 //const oscarRenderRouter = require(path.join(__dirname, renderRoute, 'oscar'))
 
 const discoverApiRouter = require(path.join(__dirname, apiRoute, 'discover/router'))
-//const movieApiRouter = require(path.join(__dirname, apiRoute, 'movie/router'))
+const movieApiRouter = require(path.join(__dirname, apiRoute, 'movie/router'))
 //const oscarsApiRouter = require(path.join(__dirname, apiRoute, 'oscars/router'))
 //const oscarApiRouter = require(path.join(__dirname, apiRoute, 'oscar/router'))
 
@@ -26,7 +26,7 @@ const app = express()
 //app.use('/oscar', oscarRenderRouter)
 
 app.use('/api/discover', discoverApiRouter)
-//app.use('/api/movie', movieApiRouter)
+app.use('/api/movie', movieApiRouter)
 //app.use('/api/oscars', oscarsApiRouter)
 //app.use('/api/oscar', oscarApiRouter)
 
