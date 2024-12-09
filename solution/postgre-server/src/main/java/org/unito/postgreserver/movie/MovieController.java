@@ -17,12 +17,17 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    @GetMapping("/filter")
+    public List<Movie> getMovies(@ModelAttribute MovieDTO filters) {
+        return movieService.getMovieWithFilter(filters);
+    }
+
     @GetMapping("/{id}")
     public Movie getMovieById(@PathVariable Long id) {
         return movieService.getMovieById(id);
     }
 
-    @GetMapping("")
+    @GetMapping("/title")
     public List<Movie> getMovieByTitle(@RequestParam(required = false) String title) {
         return movieService.getMovieByTitle(title);
     }

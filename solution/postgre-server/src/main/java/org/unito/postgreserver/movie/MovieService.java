@@ -3,9 +3,10 @@ package org.unito.postgreserver.movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.unito.postgreserver.utils.SpecificationUtil;
+import org.unito.postgreserver.utils.SpecificationUtility;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
@@ -24,30 +25,24 @@ public class MovieService {
 
     public List<Movie> getMovieByTitle(String title) {
         Specification<Movie> spec = Specification
-                .where(SpecificationUtil.equals("title", title));
+                .where(SpecificationUtility.equals("title", title));
         return movieRepository.findAll(spec);
     }
 
-//    // GT -> Greater Than; LT -> Less Than
-//    public List<Movie> getFilteredMovies(Integer releaseYearGT, Integer releaseYearLT, Integer rating, Integer durationGT, Integer durationLT) {
-//        Specification<Movie> spec = Specification.where(null);
-//
-//        if (releaseYearGT != null) {
-//            spec = spec.and(MovieSpecification.hasReleaseYearGreaterThan(releaseYearGT));
-//        }
-//        if (releaseYearLT != null) {
-//            spec = spec.and(MovieSpecification.hasReleaseYearLessThan(releaseYearLT));
-//        }
-//        if (durationGT != null) {
-//            spec = spec.and(MovieSpecification.hasDurationGreaterThan(durationGT));
-//        }
-//        if (durationLT != null) {
-//            spec = spec.and(MovieSpecification.hasDurationLessThan(durationLT));
-//        }
-//        if (rating != null) {
-//            spec = spec.and(MovieSpecification.hasRating(rating));
-//        }
-//
-//        return movieRepository.findAll(spec);
-//    }
+    public List<Movie> getMovieWithFilter(MovieDTO filter) {
+        Specification<Movie> spec = SpecificationUtility.combine(List.of(
+                SpecificationUtility.greaterThan("durationInMinutes", filter.getDurationGT()),
+                SpecificationUtility.lessThan("durationInMinutes", filter.getDurationLT()),
+                SpecificationUtility.greaterThan("releaseYear", filter.getReleaseYearGT()),
+                SpecificationUtility.lessThan("releaseYear", filter.getReleaseYearLT()),
+                SpecificationUtility.greaterThan("rating", filter.getRatingGT()),
+                SpecificationUtility.lessThan("rating", filter.getRatingLT())
+        ));
+
+        return movieRepository.findAll(spec)
+            .stream()
+            .skip(filter.getOffset())
+            .limit(filter.getLimit())
+            .collect(Collectors.toList());
+    }
 }

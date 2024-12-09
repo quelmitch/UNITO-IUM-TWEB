@@ -2,13 +2,13 @@ package org.unito.postgreserver.movie;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.*;
 import org.unito.postgreserver.language.Language;
 
-import java.util.HashSet;
-import java.util.Set;
-
-@Table
-@Entity
+// JPA Annotations
+@Table @Entity
+// Lombok Annotations
+@AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_seq")
@@ -37,74 +37,5 @@ public class Movie {
 
     //@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     //private Set<Language> subtitles_languages;
-
-    public Movie() {}
-
-    public Movie(Long id, String title, int releaseYear, String tagline, String description, int durationInMinutes, double rating) {
-        this.id = id;
-        this.title = title;
-        this.releaseYear = releaseYear;
-        this.tagline = tagline;
-        this.description = description;
-        this.durationInMinutes = durationInMinutes;
-        this.rating = rating;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getReleaseYear() {
-        return releaseYear;
-    }
-
-    public void setReleaseYear(int releaseYear) {
-        this.releaseYear = releaseYear;
-    }
-
-    public String getTagline() {
-        return tagline;
-    }
-
-    public void setTagline(String tagline) {
-        this.tagline = tagline;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getDurationInMinutes() {
-        return durationInMinutes;
-    }
-
-    public void setDurationInMinutes(int durationInMinutes) {
-        this.durationInMinutes = durationInMinutes;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
 }
 
