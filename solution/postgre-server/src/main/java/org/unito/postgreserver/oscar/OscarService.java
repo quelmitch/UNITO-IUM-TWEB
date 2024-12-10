@@ -4,44 +4,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
-public class OscarService {
+class OscarService {
+    @Autowired
     private OscarRepository oscarRepository;
 
-    @Autowired
-    public OscarService(OscarRepository oscarRepository) {
-        this.oscarRepository = oscarRepository;
+    public List<OscarCeremony> getCeremoniesWithNominationsByYear(int year) {
+        return oscarRepository.findCeremoniesWithNominationsByYear(year);
     }
 
-    public List<OscarCeremony> getAllCeremonies() {
-        return null; //oscarRepository.findAll();
+    public List<OscarCeremony> getCeremoniesByMovie(String movie) {
+        return oscarRepository.findCeremoniesByMovie(movie);
     }
 
-    public Map<Integer, List<OscarNomination>> getWinnersGroupedByCeremony() {
-        List<OscarNomination> winners = oscarRepository.findByWinnerTrue();
-        return winners.stream().collect(Collectors.groupingBy(nomination -> nomination.getCeremony().getNumber()));
+    public List<OscarCeremony> getCeremoniesByPerson(String person) {
+        return oscarRepository.findCeremoniesByPerson(person);
     }
 
-    public List<OscarNomination> getNominationsByCeremony(int ceremonyNumber) {
-        return oscarRepository.findByCeremony_Number(ceremonyNumber);
+    public List<OscarCeremony> getWinningCeremonies(Integer year, Integer number) {
+        return oscarRepository.findWinningCeremonies(year, number);
     }
 
-    public List<OscarNomination> getNominationsByMovie(String movieTitle) {
-        return oscarRepository.findByMovie(movieTitle);
+    public List<OscarCeremony> getWinnersByCategory(String category) {
+        return oscarRepository.findWinnersByCategory(category);
     }
 
-    public List<OscarNomination> getNominationsByPerson(String personName) {
-        return oscarRepository.findByPerson(personName);
-    }
-
-    public List<OscarNomination> getWinnersByCategory(String category) {
-        return oscarRepository.findByCategoryAndWinnerTrue(category);
-    }
-
-    public List<OscarNomination> getNominationsByCategory(String category) {
-        return oscarRepository.findByCategory(category);
+    public List<OscarCeremony> getCeremoniesByCategory(String category) {
+        return oscarRepository.findCeremoniesByCategory(category);
     }
 }
+

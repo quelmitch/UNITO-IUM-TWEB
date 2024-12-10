@@ -1,59 +1,43 @@
 package org.unito.postgreserver.oscar;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.unito.postgreserver.movie.MovieService;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/oscar")
-public class OscarController {
-    // TODO: HTTP routes go here
-
-    private final OscarService oscarService;
-
+class OscarController {
     @Autowired
-    public OscarController(OscarService oscarService) {
-        this.oscarService = oscarService;
-    }
+    private OscarService oscarService;
 
     @GetMapping("/ceremonies")
-    public ResponseEntity<List<OscarCeremony>> getAllCeremonies() {
-        return ResponseEntity.ok(oscarService.getAllCeremonies());
+    public List<OscarCeremony> getCeremoniesByYear(@RequestParam int year) {
+        return oscarService.getCeremoniesWithNominationsByYear(year);
     }
 
-    // Endpoint per OscarNomination
-    @GetMapping("/nominations/winners-by-ceremony")
-    public ResponseEntity<Map<Integer, List<OscarNomination>>> getWinnersGroupedByCeremony() {
-        return ResponseEntity.ok(oscarService.getWinnersGroupedByCeremony());
+    @GetMapping("/movies")
+    public List<OscarCeremony> getCeremoniesByMovie(@RequestParam String movie) {
+        return oscarService.getCeremoniesByMovie(movie);
     }
 
-    @GetMapping("/nominations/ceremony/{number}")
-    public ResponseEntity<List<OscarNomination>> getNominationsByCeremony(@PathVariable int number) {
-        return ResponseEntity.ok(oscarService.getNominationsByCeremony(number));
+    @GetMapping("/person")
+    public List<OscarCeremony> getCeremoniesByPerson(@RequestParam String person) {
+        return oscarService.getCeremoniesByPerson(person);
     }
 
-    @GetMapping("/nominations/movie")
-    public ResponseEntity<List<OscarNomination>> getNominationsByMovie(@RequestParam String title) {
-        return ResponseEntity.ok(oscarService.getNominationsByMovie(title));
+    @GetMapping("/winners")
+    public List<OscarCeremony> getWinningCeremonies(@RequestParam(required = false) Integer year, @RequestParam(required = false) Integer number) {
+        return oscarService.getWinningCeremonies(year, number);
     }
 
-    @GetMapping("/nominations/person")
-    public ResponseEntity<List<OscarNomination>> getNominationsByPerson(@RequestParam String name) {
-        return ResponseEntity.ok(oscarService.getNominationsByPerson(name));
+    @GetMapping("/winners/category")
+    public List<OscarCeremony> getWinnersByCategory(@RequestParam String category) {
+        return oscarService.getWinnersByCategory(category);
     }
 
-    @GetMapping("/nominations/category/winners")
-    public ResponseEntity<List<OscarNomination>> getWinnersByCategory(@RequestParam String category) {
-        return ResponseEntity.ok(oscarService.getWinnersByCategory(category));
+    @GetMapping("/category")
+    public List<OscarCeremony> getCeremoniesByCategory(@RequestParam String category) {
+        return oscarService.getCeremoniesByCategory(category);
     }
-
-    @GetMapping("/nominations/category")
-    public ResponseEntity<List<OscarNomination>> getNominationsByCategory(@RequestParam String category) {
-        return ResponseEntity.ok(oscarService.getNominationsByCategory(category));
-    }
-
 }

@@ -1,24 +1,27 @@
 package org.unito.postgreserver.oscar;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@Repository
-public interface OscarRepository extends JpaRepository<OscarNomination, Integer>, JpaSpecificationExecutor<OscarNomination> {
+interface OscarRepository extends JpaRepository<OscarCeremony, Integer> {
+    @Query(value = "SELECT * FROM oscar_ceremony c JOIN oscar_nomination n ON c.number = n.ceremony_number WHERE c.year = :year", nativeQuery = true)
+    List<OscarCeremony> findCeremoniesWithNominationsByYear(@RequestParam("year") int year);
 
-    List<OscarNomination> findByWinnerTrue();
+    @Query(value = "SELECT * FROM oscar_ceremony c JOIN oscar_nomination n ON c.number = n.ceremony_number WHERE n.movie = :movie", nativeQuery = true)
+    List<OscarCeremony> findCeremoniesByMovie(@RequestParam("movie") String movie);
 
-    List<OscarNomination> findByCeremony_Number(int ceremonyNumber);
+    @Query(value = "SELECT * FROM oscar_ceremony c JOIN oscar_nomination n ON c.number = n.ceremony_number WHERE n.person = :person", nativeQuery = true)
+    List<OscarCeremony> findCeremoniesByPerson(@RequestParam("person") String person);
 
-    List<OscarNomination> findByMovie(String movie);
+    @Query(value = "SELECT * FROM oscar_ceremony c JOIN oscar_nomination n ON c.number = n.ceremony_number WHERE n.winner = true AND (:year IS NULL OR c.year = :year) AND (:number IS NULL OR c.number = :number)", nativeQuery = true)
+    List<OscarCeremony> findWinningCeremonies(@RequestParam(value = "year", required = false) Integer year, @RequestParam(value = "number", required = false) Integer number);
 
-    List<OscarNomination> findByPerson(String person);
+    @Query(value = "SELECT * FROM oscar_ceremony c JOIN oscar_nomination n ON c.number = n.ceremony_number WHERE n.winner = true AND n.category = :category", nativeQuery = true)
+    List<OscarCeremony> findWinnersByCategory(@RequestParam("category") String category);
 
-    List<OscarNomination> findByCategoryAndWinnerTrue(String category);
-
-    List<OscarNomination> findByCategory(String category);
+    @Query(value = "SELECT * FROM oscar_ceremony c JOIN oscar_nomination n ON c.number = n.ceremony_number WHERE n.category = :category", nativeQuery = true)
+    List<OscarCeremony> findCeremoniesByCategory(@RequestParam("category") String category);
 }
-

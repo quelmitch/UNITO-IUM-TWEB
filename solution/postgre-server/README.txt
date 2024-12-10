@@ -10,4 +10,4 @@ Esempio: movie/title?title=Inception anziché movie/title/:{title_id}
 
 
 TODO:
-- Approfondire @Builder di Lombok per evitare boilerplate
+- Aggiungere metodi to lower per pulire gli input e il database deve avere anche tutti le stringhe in lower case

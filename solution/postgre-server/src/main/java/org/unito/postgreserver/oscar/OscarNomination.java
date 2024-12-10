@@ -1,38 +1,31 @@
 package org.unito.postgreserver.oscar;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-
-// JPA Annotations
-@Table @Entity
-// Lombok Annotations
-@AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class OscarNomination {
+@Entity
+@Data
+@Table(name = "oscar_nomination")
+class OscarNomination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @ManyToOne
-    @JoinColumn(name = "ceremony_number")
-    private OscarCeremony ceremony;
+    private Long id;
 
     @Column(nullable = false)
-    private String category; //TODO: enum?
+    private String category;
 
-    @Column (nullable = false)
-    private Integer movie_year;
-
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String movie;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String person;
 
     @Column(nullable = false)
-    private Boolean winner;
+    private boolean winner;
+
+    @ManyToOne
+    @JoinColumn(name = "ceremony_number", nullable = false)
+    @JsonIgnore
+    private OscarCeremony oscarCeremony;
 }
