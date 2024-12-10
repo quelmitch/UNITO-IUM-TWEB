@@ -28,10 +28,10 @@ public class OscarNomination {
     private Integer movie_year;
 
     @Column(nullable = true)
-    private String movie_title;
+    private String movie;
 
     @Column(nullable = true)
-    private String person_name;
+    private String person;
 
     @Column(nullable = false)
     private Boolean winner;
