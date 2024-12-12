@@ -1,6 +1,13 @@
 Java version: 23
 PostgreSQL Server version: 17.2
 
+
+Dependencies:
+- Java JPA
+- PostgreSQL Driver
+- Spring Web
+- Lombok
+
 API Enterprise:
 
 Deciso di passare i parametri nella maggior parte dei casi come parametro per sfruttare la flessibilità

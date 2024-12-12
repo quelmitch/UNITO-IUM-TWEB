@@ -1,4 +1,4 @@
-package org.unito.postgreserver.oscar;
+package org.unito.postgreserver.oscar.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

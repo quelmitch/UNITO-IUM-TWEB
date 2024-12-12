@@ -1,4 +1,4 @@
-package org.unito.postgreserver.oscar;
+package org.unito.postgreserver.oscar.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "oscar_ceremony")
-class OscarCeremony {
+public class OscarCeremony {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int number;

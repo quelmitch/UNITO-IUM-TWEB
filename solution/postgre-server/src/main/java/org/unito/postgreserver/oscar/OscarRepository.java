@@ -3,6 +3,7 @@ package org.unito.postgreserver.oscar;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.unito.postgreserver.oscar.model.OscarCeremony;
 
 import java.util.List;
 

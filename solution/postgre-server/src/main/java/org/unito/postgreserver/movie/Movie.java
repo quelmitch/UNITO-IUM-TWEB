@@ -19,7 +19,8 @@ public class Movie {
     private String title;
 
     @Column(nullable = true)
-    @Min(1800) @Max(9999)
+    @Min(value = 1800, message = "Movie Year min value: 1800")
+    @Max(value = 9999, message = "Movie Year max value: 9999")
     private int releaseYear;
 
     @Column(nullable = true)
@@ -33,7 +34,13 @@ public class Movie {
     private int durationInMinutes;
 
     @Column(nullable = true)
-    private double rating; //TODO: constraints
+    @DecimalMin(value = "0", message = "Movie Rating min value: 0")
+    @DecimalMax(value = "5", message = "Movie Rating max value: 5")
+    @Digits(integer = 1, fraction = 2, message = "Movie Rating can have at most 1 integer digit and 2 fractional digits")
+    private double rating; // TODO: constraints
+
+    //@Column(nullable = true)
+    // private String poster_link; // Store prefix without domain and add later
 
     //@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     //private Set<Language> subtitles_languages;
