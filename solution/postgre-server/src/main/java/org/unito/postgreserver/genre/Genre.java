@@ -1,22 +1,21 @@
-package org.unito.postgreserver.language;
+package org.unito.postgreserver.genre;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.unito.postgreserver.movie.Movie;
-import org.unito.postgreserver.oscar.model.OscarCeremony;
 
 // JPA Annotations
 @Table @Entity
 // Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class Language {
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private String type;
 
     @Column(nullable = false)
     private String name;
@@ -25,5 +24,4 @@ public class Language {
     @JoinColumn(name = "movie_id", nullable = false)
     @JsonIgnore
     private Movie movieId;
-
 }

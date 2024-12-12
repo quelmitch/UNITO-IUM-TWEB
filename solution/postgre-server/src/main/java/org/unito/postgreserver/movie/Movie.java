@@ -3,7 +3,11 @@ package org.unito.postgreserver.movie;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.unito.postgreserver.actor.Actor;
+import org.unito.postgreserver.genre.Genre;
 import org.unito.postgreserver.language.Language;
+
+import java.util.List;
 
 // JPA Annotations
 @Table @Entity
@@ -23,8 +27,8 @@ public class Movie {
     @Max(value = 9999, message = "Movie Year max value: 9999")
     private int releaseYear;
 
-    @Column(nullable = true)
-    private String tagline; // TODO: VARCHAR or TEXT ???
+    @Column(nullable = true, columnDefinition = "TEXT")
+    private String tagline;
 
     @Column(nullable = true, columnDefinition = "TEXT")
     private String description;
@@ -34,15 +38,21 @@ public class Movie {
     private int durationInMinutes;
 
     @Column(nullable = true)
-    @DecimalMin(value = "0", message = "Movie Rating min value: 0")
-    @DecimalMax(value = "5", message = "Movie Rating max value: 5")
-    @Digits(integer = 1, fraction = 2, message = "Movie Rating can have at most 1 integer digit and 2 fractional digits")
-    private double rating; // TODO: constraints
+    //@DecimalMin(value = "0", message = "Movie Rating min value: 0")
+    //@DecimalMax(value = "5", message = "Movie Rating max value: 5")
+    //@Digits(integer = 1, fraction = 2, message = "Movie Rating can have at most 1 integer digit and 2 fractional digits")
+    private double rating; // TODO: error in constraints
 
-    //@Column(nullable = true)
-    // private String poster_link; // Store prefix without domain and add later
+    @Column(nullable = true)
+    private String poster_link; // Store prefix without domain and add later
 
-    //@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //private Set<Language> subtitles_languages;
+    @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Language> languages;
+
+    @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Genre> genres;
+
+    @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Actor> actors;
 }
 
