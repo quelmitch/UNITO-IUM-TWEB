@@ -1,4 +1,4 @@
-Python Version: 13.0.1
+Python Version: 3.13.1
 
 Procedura Pulizia
 import

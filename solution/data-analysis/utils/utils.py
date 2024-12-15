@@ -1,13 +1,23 @@
 import re
 
-def find_matching(df, column_name, keywords):
-    pattern = re.compile(r'(?i)' + '|'.join(keywords))  # (?i) case-insensitive regex
-    filtered_df = df[df[column_name].str.len() <= 30]
-    match = filtered_df[filtered_df[column_name].str.contains(pattern, na=False)]
+
+def find_matching(df, column_name, keywords, min_length=None, max_length=None):
+    # Compile the regex pattern (case-insensitive)
+    pattern = re.compile(r'(?i)' + '|'.join(keywords))
+
+    # Apply min_length and max_length filtering, if specified
+    if min_length is not None:
+        df = df[df[column_name].str.len() >= min_length]
+    if max_length is not None:
+        df = df[df[column_name].str.len() <= max_length]
+
+    # Filter rows that match the pattern
+    match = df[df[column_name].str.contains(pattern, na=False)]
     return match
 
+
 # Made with generative AI. List of common phrases to indicate missing plot.
-null_description_keywords = [
+null_movie_description_keywords = [
     r'plot unavailable', r'plot unknown', r'plot not found', r'plot missing',
     r'plot (?:\S+\s+){0,3}unavailable', r'plot (?:\S+\s+){0,3}unknown', r'plot (?:\S+\s+){0,3}not found',
     r'plot (?:\S+\s+){0,3}missing',
@@ -35,4 +45,15 @@ null_description_keywords = [
     r'details unavailable', r'details unknown', r'details not found', r'details missing',
     r'details (?:\S+\s+){0,3}unavailable', r'details (?:\S+\s+){0,3}unknown', r'details (?:\S+\s+){0,3}not found',
     r'details (?:\S+\s+){0,3}missing'
+]
+
+self_actor_role_keywords = [
+    "self",
+    "himself",
+    "herself",
+    "itself",
+    "self \\(archive footage\\)",
+    "self \\(archive recording\\)",
+    "self \\(uncredited\\)",
+    "self \\(voice\\)"
 ]
