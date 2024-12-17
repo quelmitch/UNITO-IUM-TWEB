@@ -9,8 +9,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/oscar")
 class OscarController {
+
+    private final OscarService oscarService;
+
     @Autowired
-    private OscarService oscarService;
+    public OscarController(OscarService oscarService) {
+        this.oscarService = oscarService;
+    }
 
     @GetMapping("/ceremonies")
     public List<OscarCeremony> getCeremoniesByYear(@RequestParam int year) {
