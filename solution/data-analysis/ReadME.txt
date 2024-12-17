@@ -3,17 +3,20 @@ Python Version: 3.13.1
 Procedura Pulizia
 import
 1. Data Understanding
-head
-shape
-dtypes
+ head
+ shape
+ dtypes
 2. Data Cleaning
  Rename columns
- Check for null values (reset index if rows are dropped)
+ Check for null values
  Check for duplicate rows
-typing columns
-Deep Clean
+ typing columns
+ reset index if rows are dropped
+ Deep Clean (optional)
 3. Final Result
-head
+ head
+ shape
+ print to csv & set df to null
 
 
 TODO:
