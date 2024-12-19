@@ -1,6 +1,5 @@
 import re
 
-
 def find_matching(df, column_name, keywords, min_length=None, max_length=None):
     # Compile the regex pattern (case-insensitive)
     pattern = re.compile(r'(?i)' + '|'.join(keywords))
@@ -14,7 +13,6 @@ def find_matching(df, column_name, keywords, min_length=None, max_length=None):
     # Filter rows that match the pattern
     match = df[df[column_name].str.contains(pattern, na=False)]
     return match
-
 
 # Made with generative AI. List of common phrases to indicate missing plot.
 null_movie_description_keywords = [
