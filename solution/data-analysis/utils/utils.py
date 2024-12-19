@@ -65,3 +65,19 @@ self_actor_role_keywords = [
     "self \\(uncredited\\)",
     "self \\(voice\\)"
 ]
+
+special_oscar_awards = [
+    "SPECIAL AWARD",
+    "IRVING G. THALBERG MEMORIAL AWARD",
+    "JEAN HERSHOLT HUMANITARIAN AWARD",
+    "HONORARY AWARD",
+    "SPECIAL FOREIGN LANGUAGE FILM AWARD",
+    "HONORARY FOREIGN LANGUAGE FILM AWARD",
+    "SPECIAL ACHIEVEMENT AWARD",
+    "SPECIAL ACHIEVEMENT AWARD (Visual Effects)",
+    "SPECIAL ACHIEVEMENT AWARD (Sound Effects)",
+    "SPECIAL ACHIEVEMENT AWARD (Sound Effects Editing)",
+    "SPECIAL ACHIEVEMENT AWARD (Sound Editing)",
+    "GORDON E. SAWYER AWARD",
+    "AWARD OF COMMENDATION"
+]
