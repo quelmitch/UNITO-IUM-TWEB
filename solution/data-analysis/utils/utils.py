@@ -14,6 +14,16 @@ def find_matching(df, column_name, keywords, min_length=None, max_length=None):
     match = df[df[column_name].str.contains(pattern, na=False)]
     return match
 
+def check_valid_links(df, column_name):
+    # Define the regex for link validation
+    regex = r'\bhttps?:\/\/(?:www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?\b'
+
+    # Check if all values in the column match the regex
+    all_valid = df[column_name].str.match(regex).all()
+
+    # Return the result
+    return "All links are valid." if all_valid else "There are invalid links."
+
 # Made with generative AI. List of common phrases to indicate missing plot.
 null_movie_description_keywords = [
     r'plot unavailable', r'plot unknown', r'plot not found', r'plot missing',
