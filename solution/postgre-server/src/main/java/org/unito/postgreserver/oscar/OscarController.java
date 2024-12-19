@@ -3,8 +3,11 @@ package org.unito.postgreserver.oscar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.unito.postgreserver.oscar.model.OscarCeremony;
+import org.unito.postgreserver.oscar.model.OscarDTO;
+import org.unito.postgreserver.oscar.model.OscarFilterDTO;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/oscar")
@@ -17,9 +20,9 @@ class OscarController {
         this.oscarService = oscarService;
     }
 
-    @GetMapping("/ceremonies")
-    public List<OscarCeremony> getCeremoniesByYear(@RequestParam int year) {
-        return oscarService.getCeremoniesWithNominationsByYear(year);
+    @GetMapping("/filter")
+    public List<OscarDTO> getCeremoniesWithFilter(@ModelAttribute OscarFilterDTO filter) {
+        return oscarService.getCeremoniesWithFilter(filter);
     }
 
     @GetMapping("/movies")
@@ -30,20 +33,5 @@ class OscarController {
     @GetMapping("/person")
     public List<OscarCeremony> getCeremoniesByPerson(@RequestParam String person) {
         return oscarService.getCeremoniesByPerson(person);
-    }
-
-    @GetMapping("/winners")
-    public List<OscarCeremony> getWinningCeremonies(@RequestParam(required = false) Integer year, @RequestParam(required = false) Integer number) {
-        return oscarService.getWinningCeremonies(year, number);
-    }
-
-    @GetMapping("/winners/category")
-    public List<OscarCeremony> getWinnersByCategory(@RequestParam String category) {
-        return oscarService.getWinnersByCategory(category);
-    }
-
-    @GetMapping("/category")
-    public List<OscarCeremony> getCeremoniesByCategory(@RequestParam String category) {
-        return oscarService.getCeremoniesByCategory(category);
     }
 }

@@ -5,7 +5,7 @@ import lombok.*;
 
 // Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class MovieDTO {
+public class MovieFilterDTO {
     @Min(0)
     private Integer offset = 0;
     @Min(1)

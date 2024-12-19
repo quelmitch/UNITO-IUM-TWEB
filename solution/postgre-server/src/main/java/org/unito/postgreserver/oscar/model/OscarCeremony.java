@@ -1,5 +1,6 @@
 package org.unito.postgreserver.oscar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,6 +17,8 @@ public class OscarCeremony {
     @Column(nullable = false, unique = true)
     private int year;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "oscarCeremony", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OscarNomination> nominations;
+
 }

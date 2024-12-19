@@ -1,13 +1,12 @@
 package org.unito.postgreserver.oscar.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name = "oscar_nomination")
-class OscarNomination {
+public class OscarNomination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,6 +25,5 @@ class OscarNomination {
 
     @ManyToOne
     @JoinColumn(name = "ceremony_number", nullable = false)
-    @JsonIgnore
     private OscarCeremony oscarCeremony;
 }
