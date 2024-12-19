@@ -25,18 +25,18 @@ public class MovieService {
 
     public List<Movie> getMovieByTitle(String title) {
         Specification<Movie> spec = Specification
-                .where(SpecificationUtility.specEquals("title", title));
+                .where(SpecificationUtility.equalsTo("title", title));
         return movieRepository.findAll(spec);
     }
 
     public List<Movie> getMovieWithFilter(MovieFilterDTO filter) {
-        Specification<Movie> spec = SpecificationUtility.specCombine(List.of(
-                SpecificationUtility.specGreaterThan("durationInMinutes", filter.getDurationGT()),
-                SpecificationUtility.specLessThan("durationInMinutes", filter.getDurationLT()),
-                SpecificationUtility.specGreaterThan("releaseYear", filter.getReleaseYearGT()),
-                SpecificationUtility.specLessThan("releaseYear", filter.getReleaseYearLT()),
-                SpecificationUtility.specGreaterThan("rating", filter.getRatingGT()),
-                SpecificationUtility.specLessThan("rating", filter.getRatingLT())
+        Specification<Movie> spec = SpecificationUtility.combineWithAnd(List.of(
+                SpecificationUtility.greaterThan("durationInMinutes", filter.getDurationGT()),
+                SpecificationUtility.lessThan("durationInMinutes", filter.getDurationLT()),
+                SpecificationUtility.greaterThan("releaseYear", filter.getReleaseYearGT()),
+                SpecificationUtility.lessThan("releaseYear", filter.getReleaseYearLT()),
+                SpecificationUtility.greaterThan("rating", filter.getRatingGT()),
+                SpecificationUtility.lessThan("rating", filter.getRatingLT())
         ));
 
         return movieRepository.findAll(spec)

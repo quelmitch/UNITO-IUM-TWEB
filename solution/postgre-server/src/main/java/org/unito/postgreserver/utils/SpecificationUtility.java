@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Utility class for creating generic JPA Specifications.
+ * <p>
  * This class provides static methods for creating various types of JPA Specifications using Criteria API.
  * Specifications can be used for filtering entities in JPA queries.
  */
@@ -20,9 +21,9 @@ public class SpecificationUtility {
      * @param <T>   The type of the entity.
      * @return A Specification that checks for equality, or null if the value is null.
      */
-    public static <T> Specification<T> specEquals(String field, Object value) {
+    public static <T> Specification<T> equalsTo(String field, Object value) {
         return (root, _, criteriaBuilder) ->
-                value == null ? null : criteriaBuilder.equal(root.get(field), value);
+            value == null ? null : criteriaBuilder.equal(root.get(field), value);
     }
 
     /**
@@ -33,9 +34,9 @@ public class SpecificationUtility {
      * @param <T>   The type of the entity.
      * @return A Specification that checks for greater than comparison, or null if the value is null.
      */
-    public static <T> Specification<T> specGreaterThan(String field, Number value) {
+    public static <T> Specification<T> greaterThan(String field, Number value) {
         return (root, _, criteriaBuilder) ->
-                value == null ? null : criteriaBuilder.gt(root.get(field), value);
+            value == null ? null : criteriaBuilder.gt(root.get(field), value);
     }
 
     /**
@@ -46,9 +47,9 @@ public class SpecificationUtility {
      * @param <T>   The type of the entity.
      * @return A Specification that checks for less than comparison, or null if the value is null.
      */
-    public static <T> Specification<T> specLessThan(String field, Number value) {
+    public static <T> Specification<T> lessThan(String field, Number value) {
         return (root, _, criteriaBuilder) ->
-                value == null ? null : criteriaBuilder.lt(root.get(field), value);
+            value == null ? null : criteriaBuilder.lt(root.get(field), value);
     }
 
     /**
@@ -59,9 +60,9 @@ public class SpecificationUtility {
      * @param <T>   The type of the entity.
      * @return A Specification that checks for not equal comparison, or null if the value is null.
      */
-    public static <T> Specification<T> specNotEquals(String field, Object value) {
+    public static <T> Specification<T> notEqualsTo(String field, Object value) {
         return (root, _, criteriaBuilder) ->
-                value == null ? null : criteriaBuilder.notEqual(root.get(field), value);
+            value == null ? null : criteriaBuilder.notEqual(root.get(field), value);
     }
 
     /**
@@ -72,9 +73,9 @@ public class SpecificationUtility {
      * @param <T>    The type of the entity.
      * @return A Specification that checks for inclusion in a list, or null if the list is null or empty.
      */
-    public static <T> Specification<T> specIn(String field, List<?> values) {
+    public static <T> Specification<T> equalsIn(String field, List<?> values) {
         return (root, _, criteriaBuilder) ->
-                values == null || values.isEmpty() ? null : criteriaBuilder.in(root.get(field)).value(values);
+            values == null || values.isEmpty() ? null : criteriaBuilder.in(root.get(field)).value(values);
     }
 
 
@@ -91,8 +92,9 @@ public class SpecificationUtility {
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for equality on a joined field, or null if the value is null.
      */
-    public static <T, J> Specification<T> specJoinAndEquals(String joinField, String targetField, Object value) {
-        return (root, _, criteriaBuilder) -> value == null ? null : criteriaBuilder.equal(root.join(joinField, JoinType.INNER).get(targetField), value);
+    public static <T, J> Specification<T> joinAndEqualsTo(String joinField, String targetField, Object value) {
+        return (root, _, criteriaBuilder) ->
+            value == null ? null : criteriaBuilder.equal(root.join(joinField, JoinType.INNER).get(targetField), value);
     }
 
     /**
@@ -107,8 +109,9 @@ public class SpecificationUtility {
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for greater than on a joined field, or null if the value is null.
      */
-    public static <T, J> Specification<T> specJoinAndGreaterThan(String joinField, String targetField, Number value) {
-        return (root, _, criteriaBuilder) -> value == null ? null : criteriaBuilder.gt(root.join(joinField, JoinType.INNER).get(targetField), value);
+    public static <T, J> Specification<T> joinAndGreaterThan(String joinField, String targetField, Number value) {
+        return (root, _, criteriaBuilder) ->
+            value == null ? null : criteriaBuilder.gt(root.join(joinField, JoinType.INNER).get(targetField), value);
     }
 
     /**
@@ -123,8 +126,9 @@ public class SpecificationUtility {
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for less than on a joined field, or null if the value is null.
      */
-    public static <T, J> Specification<T> specJoinAndLessThan(String joinField, String targetField, Number value) {
-        return (root, _, criteriaBuilder) -> value == null ? null : criteriaBuilder.lt(root.join(joinField, JoinType.INNER).get(targetField), value);
+    public static <T, J> Specification<T> joinAndLessThan(String joinField, String targetField, Number value) {
+        return (root, _, criteriaBuilder) ->
+            value == null ? null : criteriaBuilder.lt(root.join(joinField, JoinType.INNER).get(targetField), value);
     }
 
     /**
@@ -139,8 +143,9 @@ public class SpecificationUtility {
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for not equals on a joined field, or null if the value is null.
      */
-    public static <T, J> Specification<T> specJoinAndNotEquals(String joinField, String targetField, Object value) {
-        return (root, _, criteriaBuilder) -> value == null ? null : criteriaBuilder.notEqual(root.join(joinField, JoinType.INNER).get(targetField), value);
+    public static <T, J> Specification<T> joinAndNotEqualsTo(String joinField, String targetField, Object value) {
+        return (root, _, criteriaBuilder) ->
+            value == null ? null : criteriaBuilder.notEqual(root.join(joinField, JoinType.INNER).get(targetField), value);
     }
 
     /**
@@ -155,9 +160,9 @@ public class SpecificationUtility {
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for inclusion in a list on a joined field, or null if the list is null or empty.
      */
-    public static <T, J> Specification<T> specJoinIn(String joinField, String targetField, List<Object> values) {
+    public static <T, J> Specification<T> joinAndEqualsIn(String joinField, String targetField, List<Object> values) {
         return (root, _, criteriaBuilder) ->
-                values == null || values.isEmpty() ? null : criteriaBuilder.in(root.join(joinField, JoinType.INNER).get(targetField)).value(values);
+            values == null || values.isEmpty() ? null : criteriaBuilder.in(root.join(joinField, JoinType.INNER).get(targetField)).value(values);
     }
 
     /**
@@ -167,7 +172,7 @@ public class SpecificationUtility {
      * @param <T>            The type of the entity.
      * @return A combined Specification, or null if the input list is null or empty.
      */
-    public static <T> Specification<T> specCombine(List<Specification<T>> specifications) {
+    public static <T> Specification<T> combineWithAnd(List<Specification<T>> specifications) {
         return (root, query, criteriaBuilder) -> {
             if (specifications == null || specifications.isEmpty())
                 return null;

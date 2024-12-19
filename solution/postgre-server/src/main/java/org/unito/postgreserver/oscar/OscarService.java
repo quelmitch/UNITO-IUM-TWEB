@@ -26,11 +26,11 @@ class OscarService {
 
     public List<OscarDTO> getCeremoniesWithFilter(OscarFilterDTO filter) {
         System.out.println(filter.getCategories());
-        Specification<OscarNomination> spec = specCombine(List.of(
-                specJoinAndLessThan("oscarCeremony", "year", filter.getYearLT()),
-                specJoinAndGreaterThan("oscarCeremony", "year", filter.getYearGT()),
-                specEquals("winner", filter.getWinner()),
-                specIn("category", filter.getCategories())
+        Specification<OscarNomination> spec = combineWithAnd(List.of(
+                joinAndLessThan("oscarCeremony", "year", filter.getYearLT()),
+                joinAndGreaterThan("oscarCeremony", "year", filter.getYearGT()),
+                equalsTo("winner", filter.getWinner()),
+                equalsIn("category", filter.getCategories())
         ));
 
         return mapToDTO(repo.findAll(spec));
