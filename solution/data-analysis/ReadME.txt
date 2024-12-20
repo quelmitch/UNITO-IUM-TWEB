@@ -23,9 +23,6 @@ TODO:
 - Crew: rimuovere o scrivere perché non è stato rimosso il valore nullo
 - Actors, Crew: ci sono alcuni nomi che hanno escape codes che forse andrebbero ripuliti
   (controllare quindi tutti i caratteri illegali). Es: \tCirilo Fernández
-- Genres: impostare colonna genre come categoriale (ha 19 valori unici)
-- Posters: se sono in relazione 1-1 con Movies si può fare il merge dei due datasets aggiungendo la colonna a movies.
-  Scriverlo poi anche in final results di Posters
 - Releases: C'è bisogno di un analisi più approfondita per rating in molti casi.
   Ad esempio molte righe riportano il valore 0, è un null o un valore valido?
   In un film rilasciato in Francia c'è il valore rating 10, ma cercando su internet non c'è nessun rating 10 in Francia. è un valore valido?
