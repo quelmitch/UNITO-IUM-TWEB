@@ -20,7 +20,6 @@ import
 
 
 TODO:
-- Crew: rimuovere o scrivere perché non è stato rimosso il valore nullo
 - Actors, Crew: ci sono alcuni nomi che hanno escape codes che forse andrebbero ripuliti
   (controllare quindi tutti i caratteri illegali). Es: \tCirilo Fernández
 - Releases: C'è bisogno di un analisi più approfondita per rating in molti casi.
@@ -29,7 +28,10 @@ TODO:
 - Releases: si potrebbe scrivere una riga sul perché abbiamo lasciato le righe con rating null
 - Studios: bisogna separare la stampa dei nulli e dei duplicati dalla rimozione altrimenti non si capisce. Si dovrebbe
   mettere anche una riga che spiega perché si fa drop o no.
-- Oscars: da fare il refactoring
+- Valutare una funzione da utilizzare per ogni dataset per stampare i duplicati in maniera più leggibile (da inserire in utils)
+- Cercare di specificare la funzionalità di ogni casella di codice attraverso il markdown piuttosto che usare i commenti
+- Utilizzare stampe più leggibili per visualizzare i dati
+- Forse è il caso di suddivere meglio la fase di data cleaning
 
 
 
