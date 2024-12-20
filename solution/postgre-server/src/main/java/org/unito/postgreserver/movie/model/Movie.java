@@ -1,4 +1,4 @@
-package org.unito.postgreserver.movie;
+package org.unito.postgreserver.movie.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;

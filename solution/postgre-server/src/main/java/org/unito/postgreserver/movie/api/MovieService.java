@@ -1,9 +1,10 @@
-package org.unito.postgreserver.movie;
+package org.unito.postgreserver.movie.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.unito.postgreserver.utils.SpecificationUtility;
+import org.unito.postgreserver.movie.model.Movie;
+import org.unito.postgreserver.movie.dto.MovieFilterDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,8 +13,6 @@ import static org.unito.postgreserver.utils.SpecificationUtility.*;
 
 @Service
 public class MovieService {
-    // TODO: Business Logic, calculations, data transformation go here
-
     private final MovieRepository movieRepository;
 
     @Autowired
@@ -21,14 +20,11 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public Movie getMovieById(Long id) {
-        return movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie not found"));
-    }
-
     public List<Movie> getMovieByTitle(String title) {
         return movieRepository.searchMovies(title);
     }
 
+    // TODO: valutare se between è utilizzabile in questo contesto (null??, un solo valore??)
     public List<Movie> getMovieWithFilter(MovieFilterDTO filter) {
         Specification<Movie> spec = combineWithAnd(List.of(
                 greaterThan("durationInMinutes", filter.getDurationGT()),
@@ -45,4 +41,8 @@ public class MovieService {
             .limit(filter.getLimit())
             .collect(Collectors.toList());
     }
+
+    // TODO: con tante informazioni legate al film si potrebbero fare diversi metodi per prelevare
+    //  un quantitativo diverso di informazioni oppure creare un nuovo DTO, o integrare quello già presente, per
+    //  segnalare quali informazioni prelevare (es genere (true/false))
 }

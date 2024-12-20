@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.unito.postgreserver.movie.Movie;
+import org.unito.postgreserver.movie.model.Movie;
 
 // JPA Annotations
 @Table @Entity

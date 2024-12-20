@@ -1,13 +1,12 @@
-package org.unito.postgreserver.oscar;
+package org.unito.postgreserver.oscar.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.unito.postgreserver.oscar.model.OscarCeremony;
-import org.unito.postgreserver.oscar.model.OscarDTO;
-import org.unito.postgreserver.oscar.model.OscarFilterDTO;
+import org.unito.postgreserver.oscar.dto.OscarDTO;
+import org.unito.postgreserver.oscar.dto.OscarFilterDTO;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/oscar")

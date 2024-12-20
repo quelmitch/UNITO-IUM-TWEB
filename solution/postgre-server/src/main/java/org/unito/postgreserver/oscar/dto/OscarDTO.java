@@ -1,9 +1,10 @@
-package org.unito.postgreserver.oscar.model;
+package org.unito.postgreserver.oscar.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.unito.postgreserver.oscar.model.OscarCeremony;
 
 import java.util.List;
 

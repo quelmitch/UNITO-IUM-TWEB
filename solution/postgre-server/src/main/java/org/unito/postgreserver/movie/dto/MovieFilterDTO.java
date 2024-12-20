@@ -1,4 +1,4 @@
-package org.unito.postgreserver.movie;
+package org.unito.postgreserver.movie.dto;
 
 import jakarta.validation.constraints.Min;
 import lombok.*;

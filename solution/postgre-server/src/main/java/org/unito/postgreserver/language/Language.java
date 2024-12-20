@@ -3,8 +3,7 @@ package org.unito.postgreserver.language;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.unito.postgreserver.movie.Movie;
-import org.unito.postgreserver.oscar.model.OscarCeremony;
+import org.unito.postgreserver.movie.model.Movie;
 
 // JPA Annotations
 @Table @Entity

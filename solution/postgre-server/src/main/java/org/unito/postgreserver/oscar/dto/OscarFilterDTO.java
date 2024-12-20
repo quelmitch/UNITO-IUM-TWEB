@@ -1,4 +1,4 @@
-package org.unito.postgreserver.oscar.model;
+package org.unito.postgreserver.oscar.dto;
 
 import lombok.*;
 import java.util.List;
@@ -10,5 +10,6 @@ public class OscarFilterDTO {
     private Integer yearGT;
     private Boolean winner;
     private List<String> categories; // TODO change to OscarCategory in case
-    private List<String> person;
+    private String movie;
+    private String person;
 }

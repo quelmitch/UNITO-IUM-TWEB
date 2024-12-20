@@ -1,15 +1,15 @@
-package org.unito.postgreserver.movie;
+package org.unito.postgreserver.movie.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.unito.postgreserver.movie.model.Movie;
+import org.unito.postgreserver.movie.dto.MovieFilterDTO;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/movie")
 public class MovieController {
-    // TODO: HTTP routes go here
-
     private final MovieService movieService;
 
     @Autowired
@@ -20,11 +20,6 @@ public class MovieController {
     @GetMapping("/filter")
     public List<Movie> getMovies(@ModelAttribute MovieFilterDTO filters) {
         return movieService.getMovieWithFilter(filters);
-    }
-
-    @GetMapping("/{id}")
-    public Movie getMovieById(@PathVariable Long id) {
-        return movieService.getMovieById(id);
     }
 
     @GetMapping("/title")
