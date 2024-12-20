@@ -10,6 +10,7 @@ public class MovieFilterDTO {
     private Integer offset = 0;
     @Min(1)
     private Integer limit = 10;
+
     private Integer durationGT;
     private Integer durationLT;
     private Integer releaseYearGT;

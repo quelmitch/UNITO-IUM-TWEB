@@ -1,10 +1,6 @@
 package org.unito.postgreserver.oscar.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.util.List;
 
 // Lombok Annotations
@@ -14,4 +10,5 @@ public class OscarFilterDTO {
     private Integer yearGT;
     private Boolean winner;
     private List<String> categories; // TODO change to OscarCategory in case
+    private List<String> person;
 }
