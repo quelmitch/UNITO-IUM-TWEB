@@ -8,6 +8,8 @@ import org.unito.postgreserver.utils.SpecificationUtility;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.unito.postgreserver.utils.SpecificationUtility.*;
+
 @Service
 public class MovieService {
     // TODO: Business Logic, calculations, data transformation go here
@@ -24,19 +26,17 @@ public class MovieService {
     }
 
     public List<Movie> getMovieByTitle(String title) {
-        Specification<Movie> spec = Specification
-                .where(SpecificationUtility.equalsTo("title", title));
-        return movieRepository.findAll(spec);
+        return movieRepository.searchMovies(title);
     }
 
     public List<Movie> getMovieWithFilter(MovieFilterDTO filter) {
-        Specification<Movie> spec = SpecificationUtility.combineWithAnd(List.of(
-                SpecificationUtility.greaterThan("durationInMinutes", filter.getDurationGT()),
-                SpecificationUtility.lessThan("durationInMinutes", filter.getDurationLT()),
-                SpecificationUtility.greaterThan("releaseYear", filter.getReleaseYearGT()),
-                SpecificationUtility.lessThan("releaseYear", filter.getReleaseYearLT()),
-                SpecificationUtility.greaterThan("rating", filter.getRatingGT()),
-                SpecificationUtility.lessThan("rating", filter.getRatingLT())
+        Specification<Movie> spec = combineWithAnd(List.of(
+                greaterThan("durationInMinutes", filter.getDurationGT()),
+                lessThan("durationInMinutes", filter.getDurationLT()),
+                greaterThan("releaseYear", filter.getReleaseYearGT()),
+                lessThan("releaseYear", filter.getReleaseYearLT()),
+                greaterThan("rating", filter.getRatingGT()),
+                lessThan("rating", filter.getRatingLT())
         ));
 
         return movieRepository.findAll(spec)

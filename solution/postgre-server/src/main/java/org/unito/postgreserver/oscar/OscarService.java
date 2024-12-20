@@ -50,6 +50,7 @@ class OscarService {
         ));
         return ceremonies;
     }
+
     private List<OscarDTO> mapToDTO(List<OscarNomination> nominations) {
         return nominations.stream()
             .collect(Collectors.groupingBy(OscarNomination::getOscarCeremony))
