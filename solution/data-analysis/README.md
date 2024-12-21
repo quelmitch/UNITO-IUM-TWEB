@@ -1,3 +1,5 @@
+- Data Cleaning Notebook link: http://127.0.0.1:8888/notebooks/data_cleaning.ipynb
+
 Python Version: 3.13.1
 
 Procedura Pulizia
@@ -22,6 +24,7 @@ TODO:
 - Actors, Crew: ci sono alcuni nomi che hanno escape codes che forse andrebbero ripuliti
   (controllare quindi tutti i caratteri illegali). Es: \tCirilo Fernández
 - Crew: io aggiungerei la stampa dei valori tipo Unknown più o meno come è stato fatto per Self nel ruolo dell'attore
+- Ricontrollare che ci sia il reset index ovunque sono state cancellate delle righe
 
 
 INFO:
