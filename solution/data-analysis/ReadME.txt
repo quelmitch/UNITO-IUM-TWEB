@@ -21,6 +21,8 @@ import
 TODO:
 - Actors, Crew: ci sono alcuni nomi che hanno escape codes che forse andrebbero ripuliti
   (controllare quindi tutti i caratteri illegali). Es: \tCirilo Fernández
+- Crew: io aggiungerei la stampa dei valori tipo Unknown più o meno come è stato fatto per Self nel ruolo dell'attore
+
 
 INFO:
 [Analisi] Ci possono essere più vincitori per la stessa categoria nella stessa annata di oscar (guarda 1968 best actress)
