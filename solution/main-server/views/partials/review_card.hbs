@@ -1,0 +1,18 @@
+<div class="review">
+    <div class="review-header">
+        <strong>{{review.critic_name}}</strong>
+        {{#if review.is_top_critic}} <span class="top-critic">(Top Critic)</span> {{/if}}
+        <span>on</span>
+        <strong>{{review.movie_title}}</strong>
+        <span class="review-publication">{{review.publisher_name}}</span>
+    </div>
+
+    <div class="review-content">
+        {{review.content}}
+    </div>
+
+    <div class="review-footer">
+        <span class="review-rating fresh">&#9733;</span> Rated: {{review.score}}
+        <span class="review-date">{{review.date}}</span>
+    </div>
+</div>

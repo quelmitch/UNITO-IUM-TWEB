@@ -1,2 +1,5 @@
 <h1>Welcome to the {{ title }}</h1>
 <p>This is where you can explore information about reviews.</p>
+{{#each reviews}}
+    {{> review_card review=this}}
+{{/each}}
