@@ -3,9 +3,15 @@ package org.unito.postgreserver.movie.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
 import org.unito.postgreserver.actor.Actor;
+import org.unito.postgreserver.country.Country;
+import org.unito.postgreserver.crew.Crew;
 import org.unito.postgreserver.genre.Genre;
 import org.unito.postgreserver.language.Language;
+import org.unito.postgreserver.release.Release;
+import org.unito.postgreserver.studio.Studio;
+import org.unito.postgreserver.theme.Theme;
 
 import java.util.List;
 
@@ -44,7 +50,7 @@ public class Movie {
     private double rating; // TODO: error in constraints
 
     @Column(nullable = true)
-    private String poster_link; // Store prefix without domain and add later
+    private String posterLink; // Store prefix without domain and add later
 
     @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Language> languages;
@@ -54,5 +60,19 @@ public class Movie {
 
     @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Actor> actors;
-}
 
+    @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Country> countries;
+
+    @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Crew> crewMembers;
+
+    @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Release> releases;
+
+    @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Studio> studios;
+
+    @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Theme> themes;
+}

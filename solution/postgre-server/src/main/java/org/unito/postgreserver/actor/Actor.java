@@ -15,10 +15,13 @@ import org.unito.postgreserver.movie.model.Movie;
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long movie_id;
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private String role;
 
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)

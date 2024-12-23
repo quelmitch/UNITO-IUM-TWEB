@@ -12,13 +12,13 @@ import org.unito.postgreserver.movie.model.Movie;
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long movie_id;
 
     @Column(nullable = false)
     private String type;
 
     @Column(nullable = false)
-    private String name;
+    private String language;
 
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)
