@@ -9,7 +9,7 @@ const app = express()
 
 
 // Mount Routes
-const renderRoute = require(path.join(__dirname, './routes/render/index.js'))
+const renderRoute = require(path.join(__dirname, './routes/render/index'))
 const apiRoute = require(path.join(__dirname, './routes/api/v1/v1.js'))
 app.use('/', renderRoute)
 //app.use('/api', apiRoute)
@@ -32,8 +32,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
-app.use((next) => {
-  next(createError(404));
+app.use((req, res, next) => {
+    console.log('Request 404 for:', req.originalUrl);
+    next(createError(404));
 });
 
 // error handler
