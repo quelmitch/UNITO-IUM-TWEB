@@ -1,34 +1,19 @@
 const express = require('express')
 const createError = require('http-errors')
 const {engine} = require('express-handlebars')
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-const apiRoute = './routes/api/'
-const renderRoute = './routes/render'
-
-//const discoverRenderRouter = require(path.join(__dirname, renderRoute, 'discover'))
-//const movieRenderRouter = require(path.join(__dirname, renderRoute, 'movie'))
-//const oscarsRenderRouter = require(path.join(__dirname, renderRoute, 'oscars'))
-//const oscarRenderRouter = require(path.join(__dirname, renderRoute, 'oscar'))
-
-const discoverApiRouter = require(path.join(__dirname, apiRoute, 'discover/router'))
-const movieApiRouter = require(path.join(__dirname, apiRoute, 'movie/router'))
-//const oscarsApiRouter = require(path.join(__dirname, apiRoute, 'oscars/router'))
-//const oscarApiRouter = require(path.join(__dirname, apiRoute, 'oscar/router'))
+const path = require('path');
+var cookieParser = require('cookie-parser'); //TODO:
+var logger = require('morgan'); // TODO:
 
 const app = express()
 
-//app.use('/discover', discoverRenderRouter)
-//app.use('/movie', movieRenderRouter)
-//app.use('/oscars', oscarsRenderRouter)
-//app.use('/oscar', oscarRenderRouter)
 
-app.use('/api/discover', discoverApiRouter)
-app.use('/api/movie', movieApiRouter)
-//app.use('/api/oscars', oscarsApiRouter)
-//app.use('/api/oscar', oscarApiRouter)
+// Mount Routes
+const renderRoute = require(path.join(__dirname, './routes/render/index.js'))
+const apiRoute = require(path.join(__dirname, './routes/api/v1/v1.js'))
+app.use('/', renderRoute)
+//app.use('/api', apiRoute)
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
