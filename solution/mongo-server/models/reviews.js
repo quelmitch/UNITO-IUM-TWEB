@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// define the schema
 const ReviewSchema = new mongoose.Schema({
         rotten_tomatoes_link: String,
         movie_title: String,
@@ -12,12 +13,5 @@ const ReviewSchema = new mongoose.Schema({
         content: String,
 });
 
-// Add a virtual getter for `date`
-// ReviewSchema.virtual('date').get(function () {
-//         return this.review_date;
-// });
-
-// Ensure virtuals are included when converting documents to JSON
-// ReviewSchema.set('toJSON', { getters: true, virtuals: true });
-
+// export the Mongoose model
 module.exports = mongoose.model('Review', ReviewSchema);

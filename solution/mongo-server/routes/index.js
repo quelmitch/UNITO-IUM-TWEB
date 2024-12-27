@@ -21,6 +21,8 @@ const controller = require("../controllers/reviews")
  *                 description: Title of the movie to filter reviews.
  *             example:
  *               movie_title: "Inception"
+ *               is_top_critic: true
+ *               type: "Fresh"
  *     responses:
  *       200:
  *         description: A list of movie reviews
@@ -44,7 +46,7 @@ const controller = require("../controllers/reviews")
  *                   type:
  *                     type: string
  *                   score:
- *                     type: number
+ *                     type: string
  *                   review_date:
  *                     type: string
  *                     format: date
@@ -53,14 +55,13 @@ const controller = require("../controllers/reviews")
  *       500:
  *         description: Internal server error
  */
-router.post('/query', async function(req, res, next) {
-  try {
-    const results = await controller.query(req.body);
-    res.json(results);
-  } catch (err) {
-    res.status(500).json({ error: err });
-  }
+router.post('/query', async function (req, res, next) {
+    try {
+        const results = await controller.query(req.body);
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({error: err});
+    }
 });
-
 
 module.exports = router;
