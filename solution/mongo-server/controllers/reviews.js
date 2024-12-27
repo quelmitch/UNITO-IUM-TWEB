@@ -1,11 +1,24 @@
 const Model = require('../models/reviews');
 
-async function query(body) {
+async function query(filters) {
     try {
-        const results = await Model.find(body).lean(); // Fetch data from MongoDB
+        const query = {};
 
+        Object.keys(filters).forEach((key) => {
+            const value = filters[key];
+            if (value) {
+                if (typeof value === 'string')
+                    // case-insensitive
+                    query[key] = { $regex: new RegExp(value, 'i') };
+                else
+                    // non-string types
+                    query[key] = value;
+            }
+        });
+
+        const results = await Model.find(query).lean();
         results.forEach((review) => {
-            delete review._id
+            delete review._id;
         });
 
         return results;
@@ -14,4 +27,4 @@ async function query(body) {
     }
 }
 
-module.exports = {query};
+module.exports = { query };

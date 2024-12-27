@@ -9,7 +9,7 @@ const swaggerSpec = swaggerJsdoc({
             description: 'API for querying movie reviews from a MongoDB database.',
         },
         servers: [
-            {url: 'http://localhost:3000', description: 'Local server'},
+            { url: 'http://localhost:3001', description: 'Local server' },
         ],
     },
     apis: ['./routes/*.js'], // path to the API docs

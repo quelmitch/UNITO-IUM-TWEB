@@ -1,28 +1,26 @@
 var express = require('express');
 var router = express.Router();
 
-const controller = require("../controllers/reviews")
+const controller = require("../controllers/reviews");
 
 /**
  * @swagger
  * /query:
- *   post:
- *     summary: Fetch movie reviews from MongoDB
- *     tags: [Reviews]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               movie_title:
- *                 type: string
- *                 description: Title of the movie to filter reviews.
- *             example:
- *               movie_title: "Inception"
- *               is_top_critic: true
- *               type: "Fresh"
+ *   get:
+ *     summary: Query movie reviews
+ *     parameters:
+ *       - name: movie_title
+ *         in: query
+ *         description: Title of the movie
+ *         required: false
+ *         schema:
+ *           type: string
+ *       - name: critic_name
+ *         in: query
+ *         description: Name of the critic
+ *         required: false
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
  *         description: A list of movie reviews
@@ -32,35 +30,13 @@ const controller = require("../controllers/reviews")
  *               type: array
  *               items:
  *                 type: object
- *                 properties:
- *                   rotten_tomatoes_link:
- *                     type: string
- *                   movie_title:
- *                     type: string
- *                   critic_name:
- *                     type: string
- *                   is_top_critic:
- *                     type: boolean
- *                   publisher_name:
- *                     type: string
- *                   type:
- *                     type: string
- *                   score:
- *                     type: string
- *                   review_date:
- *                     type: string
- *                     format: date
- *                   content:
- *                     type: string
- *       500:
- *         description: Internal server error
  */
-router.post('/query', async function (req, res, next) {
+router.get('/query', async function (req, res, next) {
     try {
-        const results = await controller.query(req.body);
+        const results = await controller.query(req.query);
         res.json(results);
     } catch (err) {
-        res.status(500).json({error: err});
+        res.status(500).json({ error: err });
     }
 });
 
