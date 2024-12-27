@@ -6,13 +6,13 @@ const swaggerSpec = swaggerJsdoc({
         info: {
             title: 'Movie Reviews API',
             version: '1.0.0',
-            description: 'API for querying movie reviews from a MongoDB database.',
+            description: 'API for querying Rotten Tomatoes Reviews from a MongoDB database.',
         },
         servers: [
             { url: 'http://localhost:3001', description: 'Local server' },
         ],
     },
-    apis: ['./routes/*.js'], // path to the API docs
+    apis: ['./routes/*.js'],
 });
 
 module.exports = swaggerSpec;
