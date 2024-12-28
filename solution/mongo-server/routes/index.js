@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const controller = require("../controllers/reviews");
+const controller = require("./reviews/controller");
 
 /**
  * @swagger
@@ -76,42 +76,38 @@ const controller = require("../controllers/reviews");
  *                 properties:
  *                   rotten_tomatoes_link:
  *                     type: string
- *                     description: Link to the Rotten Tomatoes page
  *                   movie_title:
  *                     type: string
- *                     description: Title of the movie
  *                   critic_name:
  *                     type: string
- *                     description: Name of the critic
  *                   is_top_critic:
  *                     type: boolean
- *                     description: Whether the critic is a top critic
  *                   publisher_name:
  *                     type: string
- *                     description: Name of the publisher
  *                   type:
  *                     type: string
- *                     description: Type of review (e.g., text, video)
  *                   score:
  *                     type: string
- *                     description: Review score
  *                   review_date:
  *                     type: string
  *                     format: date
- *                     description: Date the review was published
  *                   content:
  *                     type: string
- *                     description: Full review content
+ *       400:
+ *         description: Invalid input data (validation error)
+ *       404:
+ *         description: No reviews found matching the query
+ *       500:
+ *         description: Internal Server Error
  */
 router.get('/query', async function (req, res, next) {
     try {
         const results = await controller.query(req.query);
         res.json(results);
     } catch (err) {
-        res.status(500).json({ error: err });
+        // delegate to the next middleware (error handler)
+        next(err);
     }
 });
 
 module.exports = router;
-
-// TODO: check for is_top_critic on the query (treated like a string instead of a boolean)
