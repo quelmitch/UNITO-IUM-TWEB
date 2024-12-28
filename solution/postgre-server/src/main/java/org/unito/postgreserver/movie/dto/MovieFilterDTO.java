@@ -11,6 +11,9 @@ public class MovieFilterDTO {
     @Min(1)
     private Integer limit = 10;
 
+    // What DTO to return
+    private String responseType;
+
     private Integer durationGT;
     private Integer durationLT;
     private Integer releaseYearGT;

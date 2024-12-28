@@ -18,7 +18,7 @@ public class MovieController {
     }
 
     @GetMapping("/filter")
-    public List<Movie> getMovies(@ModelAttribute MovieFilterDTO filters) {
+    public List<?> getMovies(@ModelAttribute MovieFilterDTO filters) {
         return movieService.getMovieWithFilter(filters);
     }
 
