@@ -23,14 +23,4 @@ class OscarController {
     public List<OscarDTO> getCeremoniesWithFilter(@ModelAttribute OscarFilterDTO filter) {
         return oscarService.getCeremoniesWithFilter(filter);
     }
-
-    @GetMapping("/movies")
-    public List<OscarCeremony> getCeremoniesByMovie(@RequestParam String movie) {
-        return oscarService.getCeremoniesByMovie(movie);
-    }
-
-    @GetMapping("/person")
-    public List<OscarCeremony> getCeremoniesByPerson(@RequestParam String person) {
-        return oscarService.getCeremoniesByPerson(person);
-    }
 }

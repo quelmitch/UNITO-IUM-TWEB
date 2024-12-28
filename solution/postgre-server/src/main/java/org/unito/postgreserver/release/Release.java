@@ -15,7 +15,7 @@ import org.unito.postgreserver.movie.model.Movie;
 public class Release {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long movie_id;
+    private Long id;
 
     @Column(nullable = false)
     private String country;
