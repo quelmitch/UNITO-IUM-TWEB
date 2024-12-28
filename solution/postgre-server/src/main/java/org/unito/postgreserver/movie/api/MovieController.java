@@ -23,7 +23,7 @@ public class MovieController {
     }
 
     @GetMapping("/title")
-    public List<Movie> getMovieByTitle(@RequestParam(required = false) String title) {
+    public List<Movie> getMovieByTitle(@RequestParam String title) {
         return movieService.getMovieByTitle(title);
     }
 }

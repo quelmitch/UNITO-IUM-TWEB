@@ -12,7 +12,7 @@ public class MovieFilterDTO {
     private Integer limit = 10;
 
     // What DTO to return
-    private String responseType;
+    private String responseType = "";
 
     private Integer durationGT;
     private Integer durationLT;

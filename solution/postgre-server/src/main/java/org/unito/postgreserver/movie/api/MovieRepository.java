@@ -9,6 +9,7 @@ import org.unito.postgreserver.movie.model.Movie;
 import java.util.List;
 
 public interface MovieRepository extends JpaRepository<Movie, Long>, JpaSpecificationExecutor<Movie> {
+    // TODO: Need to run this query before CREATE EXTENSION IF NOT EXISTS pg_trgm;
     @Query(value = "SELECT * FROM movie WHERE (title ILIKE :searchTerm || '%' OR title % :searchTerm) OR to_tsvector('english', title) @@ to_tsquery('english', :searchTerm)", nativeQuery = true)
     List<Movie> searchMovies(@Param("searchTerm") String searchTerm);
 }

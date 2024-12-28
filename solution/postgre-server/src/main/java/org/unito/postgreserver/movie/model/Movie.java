@@ -50,7 +50,7 @@ public class Movie {
     private double rating; // TODO: error in constraints
 
     @Column(nullable = true)
-    private String posterLink; // Store prefix without domain and add later
+    private String posterLink;
 
     @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Language> languages;

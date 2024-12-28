@@ -30,9 +30,6 @@ dependencies {
     // Lombok to remove boilerplate code
     implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-
-    // Mapper to easily map two classes
-    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 }
 
 tasks.named('test') {

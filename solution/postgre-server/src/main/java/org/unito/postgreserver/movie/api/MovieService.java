@@ -28,26 +28,27 @@ public class MovieService {
 
     public List<?> getMovieWithFilter(MovieFilterDTO filter) {
         Specification<Movie> spec = combineWithAnd(List.of(
-                greaterThan("durationInMinutes", filter.getDurationGT()),
-                lessThan("durationInMinutes", filter.getDurationLT()),
-                greaterThan("releaseYear", filter.getReleaseYearGT()),
-                lessThan("releaseYear", filter.getReleaseYearLT()),
-                greaterThan("rating", filter.getRatingGT()),
-                lessThan("rating", filter.getRatingLT())
+            greaterThan("durationInMinutes", filter.getDurationGT()),
+            lessThan("durationInMinutes", filter.getDurationLT()),
+            greaterThan("releaseYear", filter.getReleaseYearGT()),
+            lessThan("releaseYear", filter.getReleaseYearLT()),
+            greaterThan("rating", filter.getRatingGT()),
+            lessThan("rating", filter.getRatingLT())
         ));
 
         return movieRepository.findAll(spec)
-                .stream()
-                .map(getMapper(filter.getResponseType())) // Apply mapping to each Movie object
-                .skip(filter.getOffset())
-                .limit(filter.getLimit())
-                .collect(Collectors.toList());
+            .stream()
+            .skip(filter.getOffset())
+            .limit(filter.getLimit())
+            .map(getMapper(filter.getResponseType())) // Apply mapping to each Movie object
+            .collect(Collectors.toList());
     }
 
+    // TODO: Change mapTO type
     private Function<Movie, ?> getMapper(String mapTo) {
         return switch (mapTo) {
             case "DTO" -> MovieDto::toDTO;
-            default -> Function.identity();
+            default -> x->x;
         };
     }
 }
