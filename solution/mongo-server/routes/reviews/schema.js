@@ -6,9 +6,12 @@ const ReviewSchema = new mongoose.Schema({
     critic_name: {type: String},
     is_top_critic: {type: Boolean},
     publisher_name: {type: String},
-    type: {type: String},
-    score: {type: String},
-    review_date: {type: Date},
+    type: {
+        type: String,
+        enum: ['Fresh', 'Rotten']
+    },
+    score: {type: String,},
+    review_date: {type: Date, default: Date.now},
     content: {type: String}
 });
 

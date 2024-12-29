@@ -7,66 +7,77 @@ const controller = require("./reviews/controller");
  * @swagger
  * /query:
  *   get:
- *     summary: Query movie reviews
+ *     summary: Query movie reviews from the database
+ *     description: Fetch movie reviews based on various query parameters. If no parameters are provided, returns all reviews.
  *     parameters:
  *       - name: rotten_tomatoes_link
  *         in: query
- *         description: Link to the Rotten Tomatoes page
+ *         description: URL of the Rotten Tomatoes review.
  *         required: false
  *         schema:
  *           type: string
+ *           example: "m/inception"
  *       - name: movie_title
  *         in: query
- *         description: Title of the movie
+ *         description: Title of the movie to filter reviews.
  *         required: false
  *         schema:
  *           type: string
+ *           example: "Inception"
  *       - name: critic_name
  *         in: query
- *         description: Name of the critic
+ *         description: Name of the critic to filter reviews by.
  *         required: false
  *         schema:
  *           type: string
+ *           example: "Pete Hammond"
  *       - name: is_top_critic
  *         in: query
- *         description: Whether the critic is a top critic
+ *         description: Whether the critic is considered a top critic by Rotten Tomatoes.
  *         required: false
  *         schema:
  *           type: boolean
+ *           example: false
  *       - name: publisher_name
  *         in: query
- *         description: Name of the publisher
+ *         description: Publisher or media outlet that released the review.
  *         required: false
  *         schema:
  *           type: string
+ *           example: "Boxoffice Magazine"
  *       - name: type
  *         in: query
- *         description: Type of review (Fresh or Rotten)
+ *         description: The type of review.
  *         required: false
  *         schema:
  *           type: string
+ *           enum: [Fresh, Rotten]
+ *           example: "Fresh"
  *       - name: score
  *         in: query
- *         description: Review score
+ *         description: Review score, expressed in various formats (e.g., '5/5', 'A+', '10').
  *         required: false
  *         schema:
  *           type: string
+ *           example: "5/5"
  *       - name: review_date
  *         in: query
- *         description: Date the review was published
+ *         description: "The publication date of the review. Format: YYYY-MM-DD."
  *         required: false
  *         schema:
  *           type: string
  *           format: date
+ *           example: "2010-07-05"
  *       - name: content
  *         in: query
- *         description: Full review content
+ *         description: Full content or summary of the review.
  *         required: false
  *         schema:
  *           type: string
+ *           example: "A wildly entertaining and dazzling mind-trip not to be missed. Kubrick would have been proud."
  *     responses:
  *       200:
- *         description: A list of movie reviews
+ *         description: A list of movie reviews matching the query parameters.
  *         content:
  *           application/json:
  *             schema:
@@ -76,29 +87,39 @@ const controller = require("./reviews/controller");
  *                 properties:
  *                   rotten_tomatoes_link:
  *                     type: string
+ *                     example: "m/inception"
  *                   movie_title:
  *                     type: string
+ *                     example: "Inception"
  *                   critic_name:
  *                     type: string
+ *                     example: "Pete Hammond"
  *                   is_top_critic:
  *                     type: boolean
+ *                     example: false
  *                   publisher_name:
  *                     type: string
+ *                     example: "Boxoffice Magazine"
  *                   type:
  *                     type: string
+ *                     enum: [Fresh, Rotten]
+ *                     example: "Fresh"
  *                   score:
  *                     type: string
+ *                     example: "5/5"
  *                   review_date:
  *                     type: string
  *                     format: date
+ *                     example: "2010-07-05"
  *                   content:
  *                     type: string
+ *                     example: "A wildly entertaining and dazzling mind-trip not to be missed. Kubrick would have been proud."
  *       400:
- *         description: Invalid input data (validation error)
+ *         description: Bad request – The request data is invalid (validation error).
  *       404:
- *         description: No reviews found matching the query
+ *         description: Not Found – No reviews found matching the query criteria.
  *       500:
- *         description: Internal Server Error
+ *         description: Internal Server Error – An unexpected error occurred on the server.
  */
 router.get('/query', async function (req, res, next) {
     try {

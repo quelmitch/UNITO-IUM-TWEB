@@ -20,7 +20,7 @@ class ApiError extends Error {
 
 const errorHandler = (err, req, res, next) => {
     if (err instanceof ApiError)
-        return res.status(err.status).json({error: err.message});
+        return res.status(err.status).json({status: err.status, error: err.message});
 
     return res.status(500).json({error: "Internal Server Error"});
 };
