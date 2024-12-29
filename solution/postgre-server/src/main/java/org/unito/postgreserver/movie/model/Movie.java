@@ -3,8 +3,7 @@ package org.unito.postgreserver.movie.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.unito.postgreserver.actor.Actor;
+import org.unito.postgreserver.actor.model.Actor;
 import org.unito.postgreserver.country.Country;
 import org.unito.postgreserver.crew.Crew;
 import org.unito.postgreserver.genre.Genre;
@@ -21,8 +20,6 @@ import java.util.List;
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class Movie {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_seq")
-    @SequenceGenerator(name = "movie_seq", sequenceName = "movie_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(nullable = false)

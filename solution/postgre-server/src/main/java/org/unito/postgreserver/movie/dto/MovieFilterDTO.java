@@ -20,4 +20,6 @@ public class MovieFilterDTO {
     private Integer releaseYearLT;
     private Integer ratingGT;
     private Integer ratingLT;
+
+    private String actorName;
 }

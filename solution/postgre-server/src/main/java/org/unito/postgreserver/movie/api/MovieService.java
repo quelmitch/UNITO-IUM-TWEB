@@ -3,6 +3,7 @@ package org.unito.postgreserver.movie.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.unito.postgreserver.movie.dto.MovieDto;
 import org.unito.postgreserver.movie.model.*;
 import org.unito.postgreserver.movie.dto.MovieFilterDTO;
@@ -33,7 +34,8 @@ public class MovieService {
             greaterThan("releaseYear", filter.getReleaseYearGT()),
             lessThan("releaseYear", filter.getReleaseYearLT()),
             greaterThan("rating", filter.getRatingGT()),
-            lessThan("rating", filter.getRatingLT())
+            lessThan("rating", filter.getRatingLT()),
+            like("movieId", "name", filter.getActorName())
         ));
 
         return movieRepository.findAll(spec)

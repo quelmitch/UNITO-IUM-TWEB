@@ -1,4 +1,4 @@
-package org.unito.postgreserver.actor;
+package org.unito.postgreserver.actor.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -20,7 +20,7 @@ public class Actor {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column
     private String role;
 
     @ManyToOne
