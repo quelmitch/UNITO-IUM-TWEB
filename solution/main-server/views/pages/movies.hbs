@@ -1,5 +1,9 @@
-<div>
+{{!-- > filter --}}
+{{> pagination prevPage=prevPage nextPage=nextPage}}
+<div class="movie-grid">
     {{#each movies}}
         {{> movie_card movie=this}}
     {{/each}}
 </div>
+{{> pagination prevPage=prevPage nextPage=nextPage}}
+<script src="scripts/elementsPerPage.js"></script>

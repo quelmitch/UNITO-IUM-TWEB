@@ -6,7 +6,9 @@ const navLinks = [
 ]
 
 const helpers = {
-    eq: (a, b) => a === b
+    eq: (a, b) => a === b,
+    sum: (a, b) => a + b,
+    sub: (a, b) => a - b
 }
 
 module.exports = {

@@ -1,7 +1,7 @@
 /* Global Styles */
 body {
   background-color: #121212 !important;
-  color: white;
+  color: white !important;
   /*  margin-bottom: 100px; */
   /* overflow: hidden; */
 }
@@ -39,6 +39,33 @@ body {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Ridotto il gap tra i pulsanti */
+  margin-top: 20px;
+}
+
+.pagination a {
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: #2c2c2c;
+  border-radius: 5px;
+  width: 150px; /* Impostato una larghezza fissa per tutti i pulsanti */
+  text-align: center; /* Centra il testo */
+  display: inline-block; /* Assicura che il padding funzioni correttamente */
+  box-sizing: border-box; /* Include il padding nella larghezza */
+}
+
+.pagination a.disabled {
+  display: none;
+}
+
+.pagination a:hover:not(.disabled) {
+  background-color: #555;
 }
 
 /* Review Card */
