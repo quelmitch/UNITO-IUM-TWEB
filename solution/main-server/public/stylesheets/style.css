@@ -1,9 +1,9 @@
 /* Global Styles */
 body {
-  background-color: #121212;
+  background-color: #121212 !important;
   color: white;
   /*  margin-bottom: 100px; */
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* Navbar */

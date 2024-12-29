@@ -15,13 +15,6 @@ app.use(cookieParser()) // Parse cookies from requests
 app.use(express.static(path.join(__dirname, 'public'))) // Serve static files from public directory
 
 
-// Mount Routes
-const renderRoute = require(path.join(__dirname, './routes/render/index'))
-const apiRoute = require(path.join(__dirname, './routes/api/v1/v1'))
-app.use('/', renderRoute)
-app.use('/api', apiRoute)
-
-
 // View Engine Setup
 const { navLinks, helpers } = require(path.join(__dirname,'./config/handlebars'))
 app.set('views', path.join(__dirname, 'views'))
@@ -37,10 +30,15 @@ app.engine(
 )
 app.set('view engine', 'hbs')
 app.use((req, res, next) => {
-    res.locals.navLink = navLinks
+    res.locals.navLinks = navLinks
     res.locals.currentPath = req.path
     next()
 })
+
+
+// Mount Routes
+const routes = require(path.join(__dirname, './routes/index'))
+app.use('/', routes)
 
 
 // Error Handling

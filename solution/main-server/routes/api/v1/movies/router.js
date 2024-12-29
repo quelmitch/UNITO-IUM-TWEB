@@ -1,8 +1,7 @@
 const express = require('express')
 const axios = require('axios')
-
-const { springbootServer } = require('../../../../config/config')
 const { fromObjectToUri } = require('./service')
+const { springbootServer } = require('../../../../config/server')
 
 const router = express.Router()
 
