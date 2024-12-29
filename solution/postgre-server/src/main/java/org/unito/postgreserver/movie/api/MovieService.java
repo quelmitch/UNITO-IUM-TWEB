@@ -1,6 +1,8 @@
 package org.unito.postgreserver.movie.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +30,7 @@ public class MovieService {
     }
 
     public List<?> getMovieWithFilter(MovieFilterDTO filter) {
-        Specification<Movie> spec = combineWithAnd(List.of(
+        Specification<Movie> specification = combineWithAnd(List.of(
             greaterThan("durationInMinutes", filter.getDurationGT()),
             lessThan("durationInMinutes", filter.getDurationLT()),
             greaterThan("releaseYear", filter.getReleaseYearGT()),
@@ -38,12 +40,14 @@ public class MovieService {
             like("movieId", "name", filter.getActorName())
         ));
 
-        return movieRepository.findAll(spec)
-            .stream()
-            .skip(filter.getOffset())
-            .limit(filter.getLimit())
+        Pageable pageable = PageRequest.of(
+                filter.getOffset() / filter.getLimit(),
+                filter.getLimit()
+        );
+
+        return movieRepository.findAll(specification, pageable)
             .map(getMapper(filter.getResponseType())) // Apply mapping to each Movie object
-            .collect(Collectors.toList());
+            .getContent();
     }
 
     // TODO: Change mapTO type

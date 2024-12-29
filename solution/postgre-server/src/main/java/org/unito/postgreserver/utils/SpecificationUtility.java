@@ -16,12 +16,12 @@ public class SpecificationUtility {
     /**
      * Creates a specification that checks if a field is equal to a specific value.
      *
-     * @param field The name of the field to check.
+     * @param field The name of the field to compare with the value.
      * @param value The value to compare with the field value.
      * @param <T>   The type of the entity.
      * @return A Specification that checks for equality, or null if the value is null.
      */
-    public static <T> Specification<T> equalsTo(String field, Object value) {
+    public static <T> Specification<T> equalsTo(String field, Comparable<?> value) {
         return (root, _, criteriaBuilder) ->
             value == null ? null : criteriaBuilder.equal(root.get(field), value);
     }
@@ -32,21 +32,21 @@ public class SpecificationUtility {
      * The generic type {@code J} is used for context and does not affect the method's behavior.
      *
      * @param joinField   The name of the field to join on.
-     * @param targetField The name of the field in the joined entity to check.
+     * @param matchField  The name of the field in the joined entity to compare with the value.
      * @param value       The value to compare with the joined field value.
      * @param <T>         The type of the entity.
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for equality on a joined field, or null if the value is null.
      */
-    public static <T, J> Specification<T> equalsTo(String joinField, String targetField, Object value) {
+    public static <T, J> Specification<T> equalsTo(String joinField, String matchField, Comparable<?> value) {
         return (root, _, criteriaBuilder) ->
-            value == null ? null : criteriaBuilder.equal(root.join(joinField, JoinType.INNER).get(targetField), value);
+            value == null ? null : criteriaBuilder.equal(root.join(joinField, JoinType.INNER).get(matchField), value);
     }
 
     /**
      * Creates a specification that checks if a field is greater than a specific value.
      *
-     * @param field The name of the field to check.
+     * @param field The name of the field to compare with the value.
      * @param value The value to compare with the field value.
      * @param <T>   The type of the entity.
      * @return A Specification that checks for greater than comparison, or null if the value is null.
@@ -62,21 +62,21 @@ public class SpecificationUtility {
      * The generic type {@code J} is used for context and does not affect the method's behavior.
      *
      * @param joinField   The name of the field to join on.
-     * @param targetField The name of the field in the joined entity to check.
+     * @param matchField  The name of the field in the joined entity to compare with the value.
      * @param value       The value to compare with the joined field value.
      * @param <T>         The type of the entity.
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for greater than on a joined field, or null if the value is null.
      */
-    public static <T, J> Specification<T> greaterThan(String joinField, String targetField, Number value) {
+    public static <T, J> Specification<T> greaterThan(String joinField, String matchField, Number value) {
         return (root, _, criteriaBuilder) ->
-            value == null ? null : criteriaBuilder.gt(root.join(joinField, JoinType.INNER).get(targetField), value);
+            value == null ? null : criteriaBuilder.gt(root.join(joinField, JoinType.INNER).get(matchField), value);
     }
 
     /**
      * Creates a specification that checks if a field is less than a specific value.
      *
-     * @param field The name of the field to check.
+     * @param field The name of the field to compare with the value.
      * @param value The value to compare with the field value.
      * @param <T>   The type of the entity.
      * @return A Specification that checks for less than comparison, or null if the value is null.
@@ -92,21 +92,21 @@ public class SpecificationUtility {
      * The generic type {@code J} is used for context and does not affect the method's behavior.
      *
      * @param joinField   The name of the field to join on.
-     * @param targetField The name of the field in the joined entity to check.
+     * @param matchField  The name of the field in the joined entity to compare with the value.
      * @param value       The value to compare with the joined field value.
      * @param <T>         The type of the entity.
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for less than on a joined field, or null if the value is null.
      */
-    public static <T, J> Specification<T> lessThan(String joinField, String targetField, Number value) {
+    public static <T, J> Specification<T> lessThan(String joinField, String matchField, Number value) {
         return (root, _, criteriaBuilder) ->
-            value == null ? null : criteriaBuilder.lt(root.join(joinField, JoinType.INNER).get(targetField), value);
+            value == null ? null : criteriaBuilder.lt(root.join(joinField, JoinType.INNER).get(matchField), value);
     }
 
     /**
      * Creates a specification that checks if a field is not equal to a specific value.
      *
-     * @param field The name of the field to check.
+     * @param field The name of the field to compare with the value.
      * @param value The value to compare with the field value.
      * @param <T>   The type of the entity.
      * @return A Specification that checks for not equal comparison, or null if the value is null.
@@ -122,21 +122,21 @@ public class SpecificationUtility {
      * The generic type {@code J} is used for context and does not affect the method's behavior.
      *
      * @param joinField   The name of the field to join on.
-     * @param targetField The name of the field in the joined entity to check.
+     * @param matchField  The name of the field in the joined entity to compare with the value.
      * @param value       The value to compare with the joined field value.
      * @param <T>         The type of the entity.
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for not equals on a joined field, or null if the value is null.
      */
-    public static <T, J> Specification<T> notEqualsTo(String joinField, String targetField, Object value) {
+    public static <T, J> Specification<T> notEqualsTo(String joinField, String matchField, Object value) {
         return (root, _, criteriaBuilder) ->
-            value == null ? null : criteriaBuilder.notEqual(root.join(joinField, JoinType.INNER).get(targetField), value);
+            value == null ? null : criteriaBuilder.notEqual(root.join(joinField, JoinType.INNER).get(matchField), value);
     }
 
     /**
      * Creates a specification that checks if a field value is included in a list of values.
      *
-     * @param field  The name of the field to check.
+     * @param field  The name of the field to compare with the value.
      * @param values The list of values to compare with the field value.
      * @param <T>    The type of the entity.
      * @return A Specification that checks for inclusion in a list, or null if the list is null or empty.
@@ -152,23 +152,23 @@ public class SpecificationUtility {
      * The generic type {@code J} is used for context and does not affect the method's behavior.
      *
      * @param joinField   The name of the field to join on.
-     * @param targetField The name of the field in the joined entity to check.
+     * @param matchField  The name of the field in the joined entity to compare with the value.
      * @param values      The list of values to compare with the joined field value.
      * @param <T>         The type of the entity.
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for inclusion in a list on a joined field, or null if the list is null or empty.
      */
-    public static <T, J> Specification<T> equalsIn(String joinField, String targetField, List<Object> values) {
+    public static <T, J> Specification<T> equalsIn(String joinField, String matchField, List<Object> values) {
         return (root, _, criteriaBuilder) ->
             values == null || values.isEmpty() ?
                 null :
-                criteriaBuilder.in(root.join(joinField, JoinType.INNER).get(targetField)).value(values);
+                criteriaBuilder.in(root.join(joinField, JoinType.INNER).get(matchField)).value(values);
     }
 
     /**
      * Creates a specification that performs a case-insensitive "like" search on a given field.
      *
-     * @param field The name of the field to check.
+     * @param field The name of the field to compare with the value.
      * @param value The value to search for, using a "like" pattern (e.g., '%value%').
      * @param <T>   The type of the entity.
      * @return A Specification that performs a case-insensitive "like" search, or null if the value is null or empty.
@@ -181,27 +181,40 @@ public class SpecificationUtility {
     }
 
     /**
-     * Creates a specification that performs a case-insensitive "like" search on a field of a joined entity.
+     * Creates a specification that performs a case-insensitive "like" search on a joinField of a joined entity.
      * <p>
      * The generic type {@code J} is used for context and does not affect the method's behavior.
      *
-     * @param field       The name of the field to join on.
-     * @param targetField The name of the field in the joined entity to check.
+     * @param joinField   The name of the joinField to join on.
+     * @param matchField  The name of the field in the joined entity to compare with the value.
      * @param value       The value to search for, using a "like" pattern (e.g., '%value%').
      * @param <T>         The type of the entity.
      * @param <J>         The type of the joined entity (for context only).
-     * @return A Specification that performs a case-insensitive "like" search on a joined field, or null if the value is null or empty.
+     * @return A Specification that performs a case-insensitive "like" search on a joined joinField, or null if the value is null or empty.
      */
-    public static <T, J> Specification<T> like(String field, String targetField, String value) {
+    public static <T, J> Specification<T> like(String joinField, String matchField, String value) {
         return (root, _, criteriaBuilder) ->
             value == null || value.isEmpty() ?
                 null :
                 criteriaBuilder.like(
-                    criteriaBuilder.lower(root.join(field, JoinType.INNER).get(targetField)),
+                    criteriaBuilder.lower(root.join(joinField, JoinType.INNER).get(matchField)),
                     "%" + value.toLowerCase() + "%"
                 );
     }
 
+    // TODO: need to be tested
+    /**
+     * Creates a specification that applies the DISTINCT keyword to the query.
+     *
+     * @param <T> The type of the entity.
+     * @return A Specification that applies the DISTINCT keyword to the query.
+     */
+    public static <T> Specification<T> distinct() {
+        return (_, query, _) -> {
+            query.distinct(true);
+            return null;
+        };
+    }
 
     /**
      * Combines a list of specifications into a single specification using logical AND.
@@ -223,5 +236,3 @@ public class SpecificationUtility {
         };
     }
 }
-
-// TODO:

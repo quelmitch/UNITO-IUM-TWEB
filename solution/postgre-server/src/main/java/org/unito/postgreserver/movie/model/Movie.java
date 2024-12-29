@@ -28,7 +28,7 @@ public class Movie {
     @Column(nullable = true)
     @Min(value = 1800, message = "Movie Year min value: 1800")
     @Max(value = 9999, message = "Movie Year max value: 9999")
-    private int releaseYear;
+    private Integer releaseYear;
 
     @Column(nullable = true, columnDefinition = "TEXT")
     private String tagline;
@@ -38,13 +38,13 @@ public class Movie {
 
     @Column(nullable = true)
     @Min(0) @Max(999)
-    private int durationInMinutes;
+    private Integer durationInMinutes;
 
     @Column(nullable = true)
     //@DecimalMin(value = "0", message = "Movie Rating min value: 0")
     //@DecimalMax(value = "5", message = "Movie Rating max value: 5")
     //@Digits(integer = 1, fraction = 2, message = "Movie Rating can have at most 1 integer digit and 2 fractional digits")
-    private double rating; // TODO: error in constraints
+    private Double rating; // TODO: error in constraints
 
     @Column(nullable = true)
     private String posterLink;

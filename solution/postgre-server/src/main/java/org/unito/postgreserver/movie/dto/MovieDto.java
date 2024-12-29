@@ -6,11 +6,11 @@ import org.unito.postgreserver.movie.model.Movie;
 @Data
 public class MovieDto {
     private String title;
-    private int releaseYear;
+    private Integer releaseYear;
     private String tagline;
     private String description;
-    private int durationInMinutes;
-    private double rating;
+    private Integer durationInMinutes;
+    private Double rating;
     private String posterLink;
 
     public static MovieDto toDTO(Movie movie){
