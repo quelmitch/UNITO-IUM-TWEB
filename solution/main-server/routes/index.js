@@ -4,6 +4,7 @@ const homeRouter = require('./pages/home');
 const moviesRouter = require('./pages/movies');
 const oscarsRouter = require('./pages/oscars');
 const reviewsRouter = require('./pages/reviews');
+const movieDetailRouter = require('./pages/movie-detail');
 const apiV1 = require('./api/v1/v1');
 
 const router = express.Router()
@@ -12,5 +13,6 @@ const router = express.Router()
     .use('/movies', moviesRouter)
     .use('/oscars', oscarsRouter)
     .use('/reviews', reviewsRouter)
+    .use('/movie', movieDetailRouter)
 
 module.exports = router;

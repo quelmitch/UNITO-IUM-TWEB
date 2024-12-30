@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
     const offset = (page-1) * limit;
 
-    axios.get(`${thisServer}/api/v1/movie/filter?responseType=DTO&limit=${limit}&offset=${offset}`)
+    axios.get(`${thisServer}/api/v1/movie/filter?responseType=BASIC&limit=${limit}&offset=${offset}`)
         .then((response) => {
             res.render('pages/movies', {
                 title: 'Movies',

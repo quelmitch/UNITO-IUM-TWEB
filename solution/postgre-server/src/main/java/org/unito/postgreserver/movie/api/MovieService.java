@@ -12,6 +12,7 @@ import org.unito.postgreserver.movie.dto.MovieFilterDTO;
 import org.unito.postgreserver.utils.GenericFilterDTO;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 import static org.unito.postgreserver.utils.SpecificationUtility.*;
@@ -23,6 +24,11 @@ public class MovieService {
     @Autowired
     public MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
+    }
+
+    public Movie getMovieById(Long id) {
+        Optional<Movie> movie = movieRepository.findById(id);
+        return movie.orElse(null);
     }
 
     public List<Movie> getMovieByTitle(GenericFilterDTO genericFilters, String title) {

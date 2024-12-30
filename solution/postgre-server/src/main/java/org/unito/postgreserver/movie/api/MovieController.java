@@ -18,13 +18,18 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @GetMapping("/filter")
-    public List<?> getMovies(@ModelAttribute GenericFilterDTO genericFilters, @ModelAttribute MovieFilterDTO movieFilters) {
-        return movieService.getMovieWithFilter(genericFilters, movieFilters);
+    @GetMapping("/{id}")
+    public Movie getMovieById(@PathVariable Long id) {
+        return movieService.getMovieById(id);
     }
 
     @GetMapping("/title")
     public List<Movie> getMovieByTitle(@ModelAttribute GenericFilterDTO genericFilters, @RequestParam String title) {
         return movieService.getMovieByTitle(genericFilters, title);
+    }
+
+    @GetMapping("/filter")
+    public List<?> getMovies(@ModelAttribute GenericFilterDTO genericFilters, @ModelAttribute MovieFilterDTO movieFilters) {
+        return movieService.getMovieWithFilter(genericFilters, movieFilters);
     }
 }
