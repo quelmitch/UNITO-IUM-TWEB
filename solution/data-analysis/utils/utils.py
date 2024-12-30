@@ -1,4 +1,17 @@
 import re
+import pandas as pd
+
+# Summarizes null values in a DataFrame.
+def summarize_nulls(df):
+    null_absolute = df.isna().sum()
+    null_percentage = (null_absolute / len(df)) * 100
+
+    null_summary = pd.DataFrame({
+        'Null Count': null_absolute,
+        'Null Percentage': null_percentage.map(lambda x: f"{x:.4f}%")
+    })
+
+    return null_summary
 
 def find_matching(df, column_name, keywords, min_length=None, max_length=None):
     # Compile the regex pattern (case-insensitive)
