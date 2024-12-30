@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.unito.postgreserver.movie.model.Movie;
 import org.unito.postgreserver.movie.dto.MovieFilterDTO;
+import org.unito.postgreserver.utils.GenericFilterDTO;
 
 import java.util.List;
 
@@ -18,12 +19,12 @@ public class MovieController {
     }
 
     @GetMapping("/filter")
-    public List<?> getMovies(@ModelAttribute MovieFilterDTO filters) {
-        return movieService.getMovieWithFilter(filters);
+    public List<?> getMovies(@ModelAttribute GenericFilterDTO genericFilters, @ModelAttribute MovieFilterDTO movieFilters) {
+        return movieService.getMovieWithFilter(genericFilters, movieFilters);
     }
 
     @GetMapping("/title")
-    public List<Movie> getMovieByTitle(@RequestParam String title) {
-        return movieService.getMovieByTitle(title);
+    public List<Movie> getMovieByTitle(@ModelAttribute GenericFilterDTO genericFilters, @RequestParam String title) {
+        return movieService.getMovieByTitle(genericFilters, title);
     }
 }

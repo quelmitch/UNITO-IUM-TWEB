@@ -1,5 +1,7 @@
 package org.unito.postgreserver.movie.api;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -9,8 +11,37 @@ import org.unito.postgreserver.movie.model.Movie;
 import java.util.List;
 
 public interface MovieRepository extends JpaRepository<Movie, Long>, JpaSpecificationExecutor<Movie> {
-    // TODO: Need to run this query before CREATE EXTENSION IF NOT EXISTS pg_trgm;
-    // TODO: Make the query more strict now its unusable
-    @Query(value = "SELECT * FROM movie WHERE (title ILIKE :searchTerm || '%' OR title % :searchTerm) OR to_tsvector('english', title) @@ to_tsquery('english', :searchTerm)", nativeQuery = true)
-    List<Movie> searchMovies(@Param("searchTerm") String searchTerm);
+    @Query(value =
+            """
+            SELECT * FROM movie
+            WHERE (title ILIKE :searchTerm || '%'  -- Prefix Search
+                OR title = :searchTerm  -- Perfect Match
+                OR to_tsvector('english', title) @@ to_tsquery('english', :searchTerm)  -- Full-text search
+            )
+            ORDER BY
+                -- Perfect Match + runtime not null + rating not null
+                CASE
+                    WHEN title = :searchTerm AND rating IS NOT NULL AND duration_in_minutes IS NOT NULL THEN 1
+                    ELSE 2
+                END,
+                -- Prefix Search
+                CASE
+                    WHEN title ILIKE :searchTerm || '%' THEN 1
+                    ELSE 2
+                END,
+                -- Full-text search
+                CASE
+                    WHEN to_tsvector('english', title) @@ to_tsquery('english', :searchTerm) THEN 1
+                    ELSE 2
+                END
+            """,
+            countQuery = """
+            SELECT count(*) FROM movie
+            WHERE (title ILIKE :searchTerm || '%'  -- Prefix Search
+                OR title = :searchTerm  -- Perfect Match
+                OR to_tsvector('english', title) @@ to_tsquery('english', :searchTerm)  -- Full-text search
+            )
+            """,
+            nativeQuery = true)
+    Page<Movie> searchMovies(@Param("searchTerm") String searchTerm, Pageable pageable);
 }

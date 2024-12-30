@@ -37,7 +37,7 @@ public class Movie {
     private String description;
 
     @Column(nullable = true)
-    @Min(0) @Max(999)
+    @Min(0)
     private Integer durationInMinutes;
 
     @Column(nullable = true)
