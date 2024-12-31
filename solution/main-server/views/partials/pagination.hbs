@@ -1,9 +1,9 @@
 <div class="pagination">
-    <a href="?page={{prevPage}}" class="prev  {{^if prevPage}}disabled{{/if}}">
+    <a href="?page={{pagingOptions.prevPage}}&{{filters.uri}}" class="prev  {{#if (eq pagingOptions.page 0)}}disabled{{/if}}">
         ← Previous
     </a>
 
-    <a href="?page={{nextPage}}" class="next {{^if nextPage}}disabled{{/if}}">
+    <a href="?page={{pagingOptions.nextPage}}&{{filters.uri}}" class="next {{#if (eq pagingOptions.page pagingOptions.totalPages)}}disabled{{/if}}">
         Next →
     </a>
 

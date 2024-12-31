@@ -7,6 +7,7 @@ import org.unito.postgreserver.movie.dto.MovieFilterDTO;
 import org.unito.postgreserver.utils.GenericFilterDTO;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/movie")
@@ -29,7 +30,7 @@ public class MovieController {
     }
 
     @GetMapping("/filter")
-    public List<?> getMovies(@ModelAttribute GenericFilterDTO genericFilters, @ModelAttribute MovieFilterDTO movieFilters) {
+    public Map<String, Object> getMovies(@ModelAttribute GenericFilterDTO genericFilters, @ModelAttribute MovieFilterDTO movieFilters) {
         return movieService.getMovieWithFilter(genericFilters, movieFilters);
     }
 }

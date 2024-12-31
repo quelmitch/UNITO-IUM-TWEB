@@ -5,6 +5,7 @@ import org.unito.postgreserver.movie.model.Movie;
 
 @Data
 public class MovieDto {
+    private Long id;
     private String title;
     private Integer releaseYear;
     private String tagline;
@@ -15,6 +16,7 @@ public class MovieDto {
 
     public static MovieDto toDTO(Movie movie){
         MovieDto dto = new MovieDto();
+        dto.setId(movie.getId());
         dto.setTitle(movie.getTitle());
         dto.setReleaseYear(movie.getReleaseYear());
         dto.setTagline(movie.getTagline());
