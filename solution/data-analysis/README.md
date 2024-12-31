@@ -1,6 +1,9 @@
 Python Version: 3.13.1
 
-Procedura Pulizia
+TODO:
+- Visualizzare e scrivere perché ci sono tanti valori di runtime così alti (sono serie tv) (pulizia o visualizzazione??)
+
+Data Cleaning
 import
 1. Data Understanding
  head
@@ -30,16 +33,29 @@ Data Visualization
    - Basic
      - Language Success
    - In-Depth
-     - Evolution of Movie Genres
-     - ?? Oscar Effect (Blessing or Curse) ?? 
-     - Characteristics of Highly-Rated Movies
-     - Geographic and Temporal distribution of Movie Production and Success
-     - Genre Fusion Popularity and Success
+     - Evolution of Movie Genres and Themes; Relation between them.
+     - Geographic and Temporal distribution of Movie Production
+     - Genre Fusion Popularity
      - Rotten Tomatoes "Top Critic" Bias
-     - Studio Influence on Genre and Success
-     - International Release Impact (Globalization Impact and Distribution Type Impact)
-     - The less-celebrated crew roles that lead to success
+     - Studio Influence on Genre
+     - The Language Map Distribution and Popularity
+     - Network (Graph) of Actors and Crew
+     - Most Popular Release Window and Release Type per Country
+     - EXTRA: Posters Colors Correlation with Genres
+     
 3. ?? Final Conclusions ??
 
 TODO:
 Give names to each in-depth EDA
+
+
+OLD IDEAS:
+- Evolution of Movie Genres
+- ?? Oscar Effect (Blessing or Curse) ?? 
+- Characteristics of Highly-Rated Movies
+- Geographic and Temporal distribution of Movie Production and Success
+- Genre Fusion Popularity and Success
+- Rotten Tomatoes "Top Critic" Bias
+- Studio Influence on Genre and Success
+- International Release Impact (Globalization Impact and Distribution Type Impact)
+- The less-celebrated crew roles that lead to success
