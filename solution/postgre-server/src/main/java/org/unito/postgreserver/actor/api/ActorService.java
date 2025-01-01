@@ -1,12 +1,21 @@
 package org.unito.postgreserver.actor.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.unito.postgreserver.actor.dto.ActorBasicDTO;
+import org.unito.postgreserver.actor.dto.ActorFilterDTO;
 import org.unito.postgreserver.actor.model.Actor;
+import org.unito.postgreserver.actor.model.ActorType;
+import org.unito.postgreserver.utils.GenericFilterDTO;
 
 import java.util.List;
+import java.util.Map;
 
+import static org.unito.postgreserver.utils.ServiceCommon.buildResponse;
+import static org.unito.postgreserver.utils.ServiceCommon.setPageable;
 import static org.unito.postgreserver.utils.SpecificationUtility.*;
 
 @Service
@@ -18,17 +27,38 @@ public class ActorService {
         this.actorRepository = actorRepository;
     }
 
-    public List<Actor> getActorByFilter(String name, String role) {
+    public Map<String, Object> getActorByFilter(GenericFilterDTO genericFilter, ActorFilterDTO actorFilter) {
         Specification<Actor> specification = combineWithAnd(List.of(
-            equalsTo("name", name),
-            equalsTo("role", role)
+            equalsTo("name", actorFilter.getName()),
+            equalsTo("role", actorFilter.getRole())
         ));
 
-        return actorRepository.findAll(specification);
+        Pageable pageable = setPageable(genericFilter, actorFilter.getSortBy());
+        Page<Actor> actorPage = actorRepository.findAll(specification, pageable);
+        List<? extends ActorType> actors = mapActors(actorPage.getContent(), genericFilter.getResponseType());
+
+        return buildResponse(genericFilter, actorPage.getTotalPages(), actors);
     }
 
-    public List<Actor> getAllActors(String name) {
-        // TODO: select distinct name
-        return null;
+    public Map<String, Object> getActorsByName(GenericFilterDTO genericFilter, ActorFilterDTO actorFilter) {
+        Specification<Actor> specification = combineWithAnd(List.of(
+                like("name", actorFilter.getName()),
+                distinct()
+        ));
+
+        Pageable pageable = setPageable(genericFilter, actorFilter.getSortBy());
+        Page<Actor> actorPage = actorRepository.findAll(specification, pageable);
+        List<? extends ActorType> actors = mapActors(actorPage.getContent(), GenericFilterDTO.Type.BASIC);
+
+        return buildResponse(genericFilter, actorPage.getTotalPages(), actors);
+    }
+
+    private List<? extends ActorType> mapActors(List<Actor> actors, GenericFilterDTO.Type responseType) {
+        return switch (responseType) {
+            case FULL -> actors;
+            case BASIC -> actors.stream()
+                .map(ActorBasicDTO::toDTO)
+                .toList();
+        };
     }
 }

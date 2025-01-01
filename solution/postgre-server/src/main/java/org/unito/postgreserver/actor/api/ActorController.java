@@ -2,9 +2,10 @@ package org.unito.postgreserver.actor.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.unito.postgreserver.actor.model.Actor;
+import org.unito.postgreserver.actor.dto.ActorFilterDTO;
+import org.unito.postgreserver.utils.GenericFilterDTO;
 
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/actor")
@@ -16,13 +17,17 @@ public class ActorController {
         this.actorService = actorService;
     }
 
-    @GetMapping("/filter")
-    public List<Actor> getActors(@RequestParam String name, @RequestParam String role) {
-        return actorService.getActorByFilter(name, role);
+    @GetMapping("")
+    public Map<String, Object> getActorsByName(@ModelAttribute GenericFilterDTO genericFilter,
+                                               @ModelAttribute ActorFilterDTO actorFilter
+    ) {
+        return actorService.getActorsByName(genericFilter, actorFilter);
     }
 
-    public List<Actor> getAllActors(@RequestParam String name) {
-        // return actorService.
-        return null;
+    @GetMapping("/filter")
+    public Map<String, Object> getActors(@ModelAttribute GenericFilterDTO genericFilter,
+                                         @ModelAttribute ActorFilterDTO actorFilter
+    ) {
+        return actorService.getActorByFilter(genericFilter, actorFilter);
     }
 }

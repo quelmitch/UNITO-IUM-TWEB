@@ -1,10 +1,12 @@
 package org.unito.postgreserver.movie.dto;
 
-import lombok.Data;
+import lombok.*;
 import org.unito.postgreserver.movie.model.Movie;
+import org.unito.postgreserver.movie.model.MovieType;
 
-@Data
-public class MovieDto {
+// Lombok Annotations
+@AllArgsConstructor @NoArgsConstructor @Getter @Setter
+public class MovieBasicDTO implements MovieType {
     private Long id;
     private String title;
     private Integer releaseYear;
@@ -14,8 +16,8 @@ public class MovieDto {
     private Double rating;
     private String posterLink;
 
-    public static MovieDto toDTO(Movie movie){
-        MovieDto dto = new MovieDto();
+    public static MovieBasicDTO toDTO(Movie movie){
+        MovieBasicDTO dto = new MovieBasicDTO();
         dto.setId(movie.getId());
         dto.setTitle(movie.getTitle());
         dto.setReleaseYear(movie.getReleaseYear());

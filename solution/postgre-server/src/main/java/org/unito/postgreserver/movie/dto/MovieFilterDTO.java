@@ -3,6 +3,8 @@ package org.unito.postgreserver.movie.dto;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 
+import java.util.List;
+
 // Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class MovieFilterDTO {
@@ -15,5 +17,5 @@ public class MovieFilterDTO {
     private Double ratingGT;
     private Double ratingLT;
 
-    private String actorName;
+    private List<String> actor;
 }

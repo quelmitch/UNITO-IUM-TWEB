@@ -11,6 +11,7 @@ import org.unito.postgreserver.language.Language;
 import org.unito.postgreserver.release.Release;
 import org.unito.postgreserver.studio.Studio;
 import org.unito.postgreserver.theme.Theme;
+import org.unito.postgreserver.utils.TableEntity;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @Table @Entity
 // Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class Movie {
+public class Movie implements TableEntity, MovieType {
     @Id
     private Long id;
 

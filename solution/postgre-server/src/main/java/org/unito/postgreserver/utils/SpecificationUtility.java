@@ -111,7 +111,7 @@ public class SpecificationUtility {
      * @param <T>   The type of the entity.
      * @return A Specification that checks for not equal comparison, or null if the value is null.
      */
-    public static <T> Specification<T> notEqualsTo(String field, Object value) {
+    public static <T> Specification<T> notEqualsTo(String field, Comparable<?> value) {
         return (root, _, criteriaBuilder) ->
             value == null ? null : criteriaBuilder.notEqual(root.get(field), value);
     }
@@ -128,7 +128,7 @@ public class SpecificationUtility {
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for not equals on a joined field, or null if the value is null.
      */
-    public static <T, J> Specification<T> notEqualsTo(String joinField, String matchField, Object value) {
+    public static <T, J> Specification<T> notEqualsTo(String joinField, String matchField, Comparable<?> value) {
         return (root, _, criteriaBuilder) ->
             value == null ? null : criteriaBuilder.notEqual(root.join(joinField, JoinType.INNER).get(matchField), value);
     }
@@ -141,7 +141,7 @@ public class SpecificationUtility {
      * @param <T>    The type of the entity.
      * @return A Specification that checks for inclusion in a list, or null if the list is null or empty.
      */
-    public static <T> Specification<T> equalsIn(String field, List<?> values) {
+    public static <T> Specification<T> equalsIn(String field, List<? extends Comparable<?>> values) {
         return (root, _, criteriaBuilder) ->
             values == null || values.isEmpty() ? null : criteriaBuilder.in(root.get(field)).value(values);
     }
@@ -158,7 +158,7 @@ public class SpecificationUtility {
      * @param <J>         The type of the joined entity (for context only).
      * @return A Specification that checks for inclusion in a list on a joined field, or null if the list is null or empty.
      */
-    public static <T, J> Specification<T> equalsIn(String joinField, String matchField, List<Object> values) {
+    public static <T, J> Specification<T> equalsIn(String joinField, String matchField, List<? extends Comparable<?>> values) {
         return (root, _, criteriaBuilder) ->
             values == null || values.isEmpty() ?
                 null :

@@ -8,7 +8,7 @@ import lombok.*;
 public class GenericFilterDTO {
     @Min(0)
     private Integer page = 0;
-    @Min(1)
+    @Min(1) // TODO should add max for safety reasons
     private Integer limit = 20;
 
     private Type responseType = Type.FULL;
