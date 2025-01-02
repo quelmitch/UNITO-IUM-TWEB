@@ -21,7 +21,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long>, JpaSpecific
             ORDER BY
                 -- Perfect Match + runtime not null + rating not null
                 CASE
-                    WHEN title = :searchTerm AND rating IS NOT NULL AND duration_in_minutes IS NOT NULL THEN 1
+                    WHEN title = :searchTerm AND rating IS NOT NULL AND runtime IS NOT NULL THEN 1
                     ELSE 2
                 END,
                 -- Prefix Search
