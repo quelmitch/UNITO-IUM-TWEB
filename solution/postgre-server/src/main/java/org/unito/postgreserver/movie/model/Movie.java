@@ -39,7 +39,7 @@ public class Movie implements TableEntity, MovieType {
 
     @Column(nullable = true)
     @Min(0)
-    private Integer durationInMinutes;
+    private Integer runtime;
 
     @Column(nullable = true)
     //@DecimalMin(value = "0", message = "Movie Rating min value: 0")
@@ -63,7 +63,7 @@ public class Movie implements TableEntity, MovieType {
     private List<Country> countries;
 
     @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Crew> crewMembers;
+    private List<Crew> crew;
 
     @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Release> releases;

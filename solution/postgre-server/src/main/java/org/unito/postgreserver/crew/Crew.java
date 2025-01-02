@@ -21,7 +21,7 @@ public class Crew {
     private String role;
 
     @Column(nullable = false)
-    private String crew_member_name;
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)

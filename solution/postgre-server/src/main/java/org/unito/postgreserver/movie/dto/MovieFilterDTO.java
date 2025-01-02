@@ -10,8 +10,8 @@ import java.util.List;
 public class MovieFilterDTO {
     private String sortBy = "id";
 
-    private Integer durationGT;
-    private Integer durationLT;
+    private Integer runtimeGT;
+    private Integer runtimeLT;
     private Integer releaseYearGT;
     private Integer releaseYearLT;
     private Double ratingGT;

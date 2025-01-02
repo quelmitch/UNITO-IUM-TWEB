@@ -26,7 +26,7 @@ public class Release {
     @Column(nullable = false)
     private String distribution_format;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String rating;
 
     @ManyToOne

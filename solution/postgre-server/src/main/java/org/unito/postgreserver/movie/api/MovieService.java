@@ -44,8 +44,8 @@ public class MovieService {
 
     public Map<String, Object> getMovieWithFilter(GenericFilterDTO genericFilter, MovieFilterDTO movieFilter) {
         Specification<Movie> specification = combineWithAnd(List.of(
-            greaterThan("durationInMinutes", movieFilter.getDurationGT()),
-            lessThan("durationInMinutes", movieFilter.getDurationLT()),
+            greaterThan("runtime", movieFilter.getRuntimeGT()),
+            lessThan("runtime", movieFilter.getRuntimeLT()),
             greaterThan("releaseYear", movieFilter.getReleaseYearGT()),
             lessThan("releaseYear", movieFilter.getReleaseYearLT()),
             greaterThan("rating", movieFilter.getRatingGT()),

@@ -12,7 +12,7 @@ public class MovieBasicDTO implements MovieType {
     private Integer releaseYear;
     private String tagline;
     private String description;
-    private Integer durationInMinutes;
+    private Integer runtime;
     private Double rating;
     private String posterLink;
 
@@ -23,7 +23,7 @@ public class MovieBasicDTO implements MovieType {
         dto.setReleaseYear(movie.getReleaseYear());
         dto.setTagline(movie.getTagline());
         dto.setDescription(movie.getDescription());
-        dto.setDurationInMinutes(movie.getDurationInMinutes());
+        dto.setRuntime(movie.getRuntime());
         dto.setRating(movie.getRating());
         dto.setPosterLink(movie.getPosterLink());
         return dto;

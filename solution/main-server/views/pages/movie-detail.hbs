@@ -5,7 +5,7 @@
     </div>
     <div class="movie-details">
         <div class="movie-title">{{movie.title}} <span class="movie-year">({{movie.releaseYear}})</span></div>
-        <div class="movie-year-genres">Comedy, Fantasy, Adventure &bull; {{movie.runtime_in_minutes}} minutes</div>
+        <div class="movie-year-genres">{{#each movie.genres}}{{this.genre}}, {{/each}} &bull; {{movie.runtime}} minutes</div>
         <div class="movie-rating">
             <div id="star-container" class="stars-container"></div>
             <div id="rating-value" class="rating-value"></div>
@@ -17,21 +17,28 @@
     </div>
     <div class="sidebar">
         <div>
-            <strong>Language</strong>
-            <span>English</span>
+            <strong>Languages</strong>
+            {{#each movie.languages}}
+                <span>{{this.language}} ({{this.type}})</span>
+            {{/each}}
         </div>
         <div>
             <strong>Countries of Production</strong>
-            <span>USA, UK</span>
+            {{#each movie.countries}}
+                <span>{{this.country}}</span>
+            {{/each}}
         </div>
         <div>
             <strong>Studios</strong>
-            <span>Mattel Creations</span>
-            <span>Warner Bros</span>
+            {{#each movie.studios}}
+                <span>{{this.studio}}</span>
+            {{/each}}
         </div>
         <div>
             <strong>Themes</strong>
-            <span>Emotional and captivating fantasy storytelling</span>
+            {{#each movie.themes}}
+                <span>{{this.theme}}</span>
+            {{/each}}
         </div>
     </div>
 </div>
@@ -68,7 +75,7 @@
             <div id="crew" class="accordion-collapse collapse" aria-labelledby="crewHeader" data-bs-parent="#additionalInfoAccordion">
                 <div class="accordion-body">
                     <ul class="list-group">
-                        {{#each movie.crewMembers:}}
+                        {{#each movie.crew}}
                             {{> movie-detail-crew-item crew=this}}
                         {{/each}}
                     </ul>
@@ -96,13 +103,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><img src="https://flagcdn.com/w40/it.png" class="flag" alt="Italy Flag"> Italy</td>
-                                    <td>21/11/2024</td>
-                                    <td>Theatrical</td>
-                                    <td>-</td>
-                                </tr>
-                                {{#each movie.releases:}}
+                                {{#each movie.releases}}
                                     {{> movie-detail-release-item release=this}}
                                 {{/each}}
                             </tbody>
