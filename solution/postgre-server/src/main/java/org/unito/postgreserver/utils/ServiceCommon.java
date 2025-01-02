@@ -34,7 +34,7 @@ public class ServiceCommon {
         response.put("limit", genericFilter.getLimit());
         response.put("page", genericFilter.getPage());
         response.put("totalPages", totalPages);
-        response.put("actors", content);
+        response.put("content", content);
         return response;
     }
 }

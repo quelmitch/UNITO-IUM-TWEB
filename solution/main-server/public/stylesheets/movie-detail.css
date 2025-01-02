@@ -1,0 +1,127 @@
+/* Main Movie Container */
+.movie-container {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem;
+    background-color: #1e1e1e;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    margin: 2rem;
+}
+
+/* Movie Poster */
+.poster {
+    flex: 0 0 250px;
+}
+.poster img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Movie Main Details*/
+.movie-details {
+    flex: 2;
+}
+.movie-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.movie-year-genres {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #bbbbbb;
+}
+.tagline {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #d4d4d4;
+    margin-top: 1rem;
+}
+.movie-description {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Movie Side Details */
+.sidebar {
+    flex: 1;
+    padding: 1rem;
+    background-color: #2a2a2a;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    font-size: 0.9rem;
+}
+.sidebar div {
+    margin-bottom: 1rem;
+}
+.sidebar div span {
+    color: #bbbbbb;
+    display: block;
+    font-size: 0.8rem;
+}
+
+
+/* Additional Info Section */
+.accordion-container {
+    padding: 2rem;
+    background-color: #1e1e1e;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    margin: 2rem;
+}
+.accordion-item {
+    background-color: #2a2a2a;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    position: sticky !important;
+    top: 0 !important;
+}
+.accordion-button {
+    background-color: #2a2a2a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+.accordion-button:not(.collapsed) {
+    background-color: #3a3a3a;
+}
+.accordion-button:focus {
+    box-shadow: none;
+}
+.accordion-body {
+    background-color: #222222;
+    padding: 1rem;
+    border-top: 1px solid #444444;
+}
+
+/* Actors and Crew Sections */
+.list-group {
+    background-color: #2a2a2a;
+}
+.list-group-item {
+    background-color: #2a2a2a;
+    border: none;
+    color: white;
+    padding: 0.75rem 1rem;
+}
+.list-group-item:not(:last-child) {
+    border-bottom: 1px solid #444444;
+}
+.actor-role, .crew-role {
+    font-size: 0.9rem;
+    color: #bbbbbb;
+}
+
+/* Releases Section */
+.flag {
+    width: 24px;
+    height: auto;
+    margin-right: 8px;
+}

@@ -10,6 +10,7 @@ router.get('/:id', (req, res) => {
 
     axios.get(`${thisServer}/api/v1/movie/${movie_id}`)
         .then((response) => {
+            console.log(response.data)
             res.render('pages/movie-detail', {
                 title: response.data.title || 'Not Found',
                 movie: response.data

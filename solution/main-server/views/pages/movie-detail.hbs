@@ -1,1 +1,115 @@
-{{movie.title}}
+<!-- Movie Details Section -->
+<div class="movie-container">
+    <div class="poster">
+        <img src="{{movie.posterLink}}" alt="{{movie.title}} Poster">
+    </div>
+    <div class="movie-details">
+        <div class="movie-title">{{movie.title}} <span class="movie-year">({{movie.releaseYear}})</span></div>
+        <div class="movie-year-genres">Comedy, Fantasy, Adventure &bull; {{movie.runtime_in_minutes}} minutes</div>
+        <div class="movie-rating">
+            <div id="star-container" class="stars-container"></div>
+            <div id="rating-value" class="rating-value"></div>
+        </div>
+        <div class="tagline">"{{movie.tagline}}"</div>
+        <div class="movie-description">
+            {{movie.description}}
+        </div>
+    </div>
+    <div class="sidebar">
+        <div>
+            <strong>Language</strong>
+            <span>English</span>
+        </div>
+        <div>
+            <strong>Countries of Production</strong>
+            <span>USA, UK</span>
+        </div>
+        <div>
+            <strong>Studios</strong>
+            <span>Mattel Creations</span>
+            <span>Warner Bros</span>
+        </div>
+        <div>
+            <strong>Themes</strong>
+            <span>Emotional and captivating fantasy storytelling</span>
+        </div>
+    </div>
+</div>
+
+<!-- Accordion Section -->
+<div class="accordion-container">
+    <h2>Additional Information</h2>
+    <div class="accordion mt-3" id="additionalInfoAccordion">
+        <!-- Actors Section -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="actorsHeader">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#actors" aria-expanded="false" aria-controls="actors">
+                    Actors
+                </button>
+            </h2>
+            <div id="actors" class="accordion-collapse collapse" aria-labelledby="actorsHeader" data-bs-parent="#additionalInfoAccordion">
+                <div class="accordion-body">
+                    <ul class="list-group">
+                        {{#each movie.actors}}
+                            {{> movie-detail-crew-item actor=this}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crew Section -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="crewHeader">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crew" aria-expanded="false" aria-controls="crew">
+                    Crew
+                </button>
+            </h2>
+            <div id="crew" class="accordion-collapse collapse" aria-labelledby="crewHeader" data-bs-parent="#additionalInfoAccordion">
+                <div class="accordion-body">
+                    <ul class="list-group">
+                        {{#each movie.crewMembers:}}
+                            {{> movie-detail-crew-item crew=this}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Releases Section -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="releasesHeader">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#releases" aria-expanded="false" aria-controls="releases">
+                    Releases
+                </button>
+            </h2>
+            <div id="releases" class="accordion-collapse collapse" aria-labelledby="releasesHeader" data-bs-parent="#additionalInfoAccordion">
+                <div class="accordion-body">
+                    <div class="table-responsive">
+                        <table class="table table-borderless align-middle">
+                            <thead>
+                            <tr>
+                                <th>Country</th>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Rating</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="https://flagcdn.com/w40/it.png" class="flag" alt="Italy Flag"> Italy</td>
+                                    <td>21/11/2024</td>
+                                    <td>Theatrical</td>
+                                    <td>-</td>
+                                </tr>
+                                {{#each movie.releases:}}
+                                    {{> movie-detail-release-item release=this}}
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

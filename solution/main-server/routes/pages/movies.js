@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
             delete filters.page;
             res.render('pages/movies', {
                 title: 'Movies',
-                movies: response.data.movies,
+                movies: response.data.content,
                 pagingOptions: {
                     page: page,
                     nextPage: page + 1,
