@@ -2,9 +2,6 @@ const {ApiError} = require('../../utils/errorHandler');
 const Model = require('./schema');
 
 function validateFilters(filters) {
-    if (Object.keys(filters).length === 0)
-        throw ApiError.badRequest("No filters provided");
-
     const tempModel = new Model(filters);
     const validationError = tempModel.validateSync();
 
