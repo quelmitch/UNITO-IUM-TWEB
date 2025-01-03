@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require("axios");
-const { thisServer } = require('../../config/server')
-const {fromObjectToUri} = require("../utils/common_service");
+const { thisServer } = require('@config/server')
+const {fromObjectToUri} = require("@routes-utils/common_service");
 const router = express.Router();
 
 router.get('/', (req, res) => {
