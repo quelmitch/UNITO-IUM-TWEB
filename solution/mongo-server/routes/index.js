@@ -10,13 +10,6 @@ const controller = require("./reviews/controller");
  *     summary: Query movie reviews from the database
  *     description: Fetch movie reviews based on various query parameters. If no parameters are provided, returns all reviews.
  *     parameters:
- *       - name: rotten_tomatoes_link
- *         in: query
- *         description: URL of the Rotten Tomatoes review.
- *         required: false
- *         schema:
- *           type: string
- *           example: "m/inception"
  *       - name: movie_title
  *         in: query
  *         description: Title of the movie to filter reviews.
@@ -85,9 +78,6 @@ const controller = require("./reviews/controller");
  *               items:
  *                 type: object
  *                 properties:
- *                   rotten_tomatoes_link:
- *                     type: string
- *                     example: "m/inception"
  *                   movie_title:
  *                     type: string
  *                     example: "Inception"

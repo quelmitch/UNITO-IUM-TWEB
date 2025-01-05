@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const ReviewSchema = new mongoose.Schema({
-    rotten_tomatoes_link: {type: String},
     movie_title: {type: String},
     critic_name: {type: String},
     is_top_critic: {type: Boolean},
