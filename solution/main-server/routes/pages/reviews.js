@@ -1,8 +1,35 @@
 const express = require('express');
+const axios = require("axios");
+const { thisServer } = require('@config/server')
+const { fromObjectToUri } = require('@routes-utils/common_service')
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('pages/reviews', { title: 'Reviews', reviews: null });
+    const filters = req.query;
+
+    axios.get(`${thisServer}/api/v1/review/filter?${fromObjectToUri(filters)}`)
+        .then((response) => {
+            // const page = response.data.page;
+            // const limit = response.data.limit;
+            // const totalPages = response.data.totalPages;
+            // delete filters.page;
+            res.render('pages/reviews', {
+                title: 'Reviews',
+                reviews: response.data,
+                // pagingOptions: {
+                //     page: page,
+                //     nextPage: page + 1,
+                //     prevPage: page - 1,
+                //     totalPages: totalPages-1,
+                //     limit: limit,
+                // },
+                // filters: {
+                //     obj : filters,
+                //     uri: fromObjectToUri(filters),
+                // },
+            })
+        })
+        .catch((error) => {}) // TODO
 });
 
 module.exports = router;
