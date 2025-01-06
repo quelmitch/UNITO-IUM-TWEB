@@ -1,9 +1,9 @@
 /* Movie Cards Grid*/
 .movie-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 2vw;
-    padding: 2vw;
+    padding: 1vw;
 }
 
 /* Movie Card */
@@ -16,7 +16,6 @@
     overflow: hidden;
     transition: transform 0.4s ease;
 }
-
 .movie-item:hover {
     transform: scale(1.05);
 }
@@ -52,7 +51,6 @@
     border-radius: 5px;
     font-size: 0.9rem;
 }
-
 .rating::before {
     content: '\2605';
     margin-right: 5px;
@@ -64,7 +62,6 @@
     padding: 1rem;
     text-align: center;
 }
-
 .movie-details h3 {
     margin: 0;
     font-size: 1.1rem;
@@ -73,7 +70,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 .movie-details .release-date {
     font-size: 0.9rem;
     color: #aaa;

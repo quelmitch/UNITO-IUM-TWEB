@@ -2,6 +2,7 @@
 <html lang="en-Us">
 <head>
     <title>{{title}}</title>
+
     <link rel='stylesheet' href='/stylesheets/style.css' />
     {{#if (eq currentPath '/movies')}}
         <link rel='stylesheet' href='/stylesheets/movies.css' />
@@ -9,14 +10,18 @@
         <link rel='stylesheet' href='/stylesheets/movie-detail.css' />
     {{/if}}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/movie-filter.css' />
 
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     {{> navbar}}
 
     {{{body}}}
     {{{footer}}}
+
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

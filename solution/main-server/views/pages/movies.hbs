@@ -1,16 +1,26 @@
-<div class="container">
+<div class="container-fluid my-4 px-5">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-lg-4">
             {{> movies_filter}}
         </div>
-        <div class="col-md-9">
-            {{> pagination prevPage=prevPage nextPage=nextPage}}
+
+        <!-- Movie cards container -->
+        <div class="col-lg-8">
+            <!-- Pagination centered at the top of the movie cards -->
+            <div class="d-flex justify-content-center mb-3">
+                {{> pagination prevPage=prevPage nextPage=nextPage}}
+            </div>
+
             <div class="movie-grid">
                 {{#each movies}}
                     {{> movie_card movie=this}}
                 {{/each}}
             </div>
-            {{> pagination prevPage=prevPage nextPage=nextPage}}
+
+            <!-- Pagination centered at the bottom of the movie cards -->
+            <div class="d-flex justify-content-center mt-3">
+                {{> pagination prevPage=prevPage nextPage=nextPage}}
+            </div>
         </div>
     </div>
 </div>
