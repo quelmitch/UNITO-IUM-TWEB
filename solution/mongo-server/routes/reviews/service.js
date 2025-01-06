@@ -1,5 +1,5 @@
-const { ApiError } = require('@utils/errorHandler');
-const { getPaginatedResults } = require('@utils/paginationHelper');
+const {ApiError} = require('@utils/errorHandler');
+const {getPaginatedResults} = require('@utils/paginationHelper');
 const Model = require('./schema');
 
 function validateFilters(filters) {
@@ -25,7 +25,7 @@ function buildQuery(filters) {
         if (value !== undefined && value !== null) {
             // case-insensitive
             if (typeof value === "string")
-                query[key] = { $regex: new RegExp(value, 'i') };
+                query[key] = {$regex: new RegExp(value, 'i')};
             else
                 query[key] = value;
         }
@@ -36,7 +36,7 @@ function buildQuery(filters) {
 
 function cleanResults(results) {
     results.content = results.content.map(doc => {
-        const { _id, review_date, ...rest } = doc.toObject();
+        const {_id, review_date, ...rest} = doc.toObject();
 
         return {
             ...rest,
@@ -53,4 +53,4 @@ module.exports = {
     buildQuery,
     validateFilters,
     cleanResults
-};
+}

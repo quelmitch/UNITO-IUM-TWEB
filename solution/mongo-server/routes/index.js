@@ -5,7 +5,7 @@ const reviewRouter = require("./reviews/router");
 
 /**
  * @swagger
- * /query:
+ * /review/filter:
  *   get:
  *     summary: Query movie reviews from the database
  *     description: Fetch movie reviews based on various query parameters. If no parameters are provided, returns all reviews.
