@@ -1,17 +1,17 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-const {errorHandler} = require('./utils/errorHandler');
+const {errorHandler} = require('@utils/errorHandler');
 
 const database = require('./databases/database');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swagger');
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 
-var app = express();
+const app = express();
 
 // serve Swagger UI at the `/api-docs` endpoint
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));

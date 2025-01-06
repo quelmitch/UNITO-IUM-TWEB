@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const Model = require("./schema");
 
-const reviewRouter = require("./reviews/router");
+const { validateFilters, buildQuery, cleanResults } = require("./service");
+const { getPaginatedResults } = require('@utils/paginationHelper');
+const { ApiError } = require("@utils/errorHandler");
+
 
 /**
  * @swagger
- * /query:
+ * /review/filter:
  *   get:
  *     summary: Query movie reviews from the database
  *     description: Fetch movie reviews based on various query parameters. If no parameters are provided, returns all reviews.
@@ -111,6 +115,25 @@ const reviewRouter = require("./reviews/router");
  *       500:
  *         description: Internal Server Error – An unexpected error occurred on the server.
  */
-router.use('/review', reviewRouter)
+router.get('/filter', (req, res, next) => {
+    // Step 1: Validate filters
+    validateFilters(req.query);
 
-module.exports = router;
+    // Step 2: Build query from filters
+    const query = buildQuery(req.query);
+
+    // Step 3: Execute query
+    getPaginatedResults(Model, query)
+        .then((result) => {
+            if (!result.totalPages)
+                throw ApiError.notFound("No reviews found matching the query"); // TODO: should return just the empty array or 404?
+
+            res.json(cleanResults(result));
+        })
+        .catch((err) => {
+            // delegate to the next middleware (error handler)
+            next(err);
+        })
+})
+
+module.exports = router

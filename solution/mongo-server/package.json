@@ -13,5 +13,12 @@
     "morgan": "~1.9.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "module-alias": "^2.2.3"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@utils" : "./utils"
   }
 }
