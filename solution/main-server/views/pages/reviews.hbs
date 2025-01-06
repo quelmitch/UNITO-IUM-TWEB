@@ -1,5 +1,18 @@
-<h1>Welcome to the {{ title }}</h1>
-<p>This is where you can explore information about reviews.</p>
-{{#each reviews}}
-    {{> review_card review=this}}
-{{/each}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- TODO: add a filter -->
+        </div>
+        <div class="col-md-9">
+            {{> pagination prevPage=prevPage nextPage=nextPage}}
+            <div class="movie-grid"> <!-- TODO: change css style -->
+                {{#each reviews}}
+                    {{> review_card review=this}}
+                {{/each}}
+            </div>
+            {{> pagination prevPage=prevPage nextPage=nextPage}}
+        </div>
+    </div>
+</div>
+
+<script src="scripts/elementsPerPage.js"></script>

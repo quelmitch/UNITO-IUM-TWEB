@@ -1,7 +1,8 @@
 import networkx as nx
 
+
 def network_graph(actors):
-    # Creazione delle relazioni persona -> persona per ogni film
+    # Creating person -> person relationships for each movie
     relationships = actors.merge(actors, on='movie_id')
     relationships = relationships[relationships['name_x'] != relationships['name_y']]
 

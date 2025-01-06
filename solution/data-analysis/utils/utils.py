@@ -1,12 +1,14 @@
 import re
 import pandas as pd
 
+
 # Summarizes null values in a DataFrame.
 def summarize_nulls(df):
     return pd.DataFrame({
         'Null Count': df.isna().sum(),
         'Null Percentage': (df.isna().mean() * 100).round(4).astype(str) + '%'
     })
+
 
 def find_matching(df, column_name, keywords, min_length=None, max_length=None):
     # Compile the regex pattern (case-insensitive)
@@ -21,6 +23,7 @@ def find_matching(df, column_name, keywords, min_length=None, max_length=None):
     # Filter rows that match the pattern
     match = df[df[column_name].str.contains(pattern, na=False)]
     return match
+
 
 # Made with generative AI. List of common phrases to indicate missing plot.
 null_movie_description_keywords = [

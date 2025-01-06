@@ -6,6 +6,7 @@ import pandas as pd
 from multiprocessing import Pool, cpu_count
 import time
 
+
 # Retrieve the mathematical average color
 def get_average_color(image_path):
     try:
@@ -28,6 +29,7 @@ def get_average_color(image_path):
     except Exception:
         return None
 
+
 # Elaborate single row
 def process_image_row(row):
     image_path = row['poster_path']
@@ -42,7 +44,7 @@ def process_image_row(row):
     }
 
 
-# Itearates dataset using thread pool (default all CPU cores)
+# Iterates dataset using thread pool (default all CPU cores)
 def iterate_dataset_with_thread_pool(movie_df, max_workers=cpu_count()):
     with Pool(processes=max_workers) as pool:
         results = pool.map(process_image_row, [row for _, row in movie_df.iterrows()])

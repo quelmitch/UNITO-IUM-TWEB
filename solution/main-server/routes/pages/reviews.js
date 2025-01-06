@@ -9,24 +9,24 @@ router.get('/', (req, res) => {
 
     axios.get(`${thisServer}/api/v1/review/filter?${fromObjectToUri(filters)}`)
         .then((response) => {
-            // const page = response.data.page;
-            // const limit = response.data.limit;
-            // const totalPages = response.data.totalPages;
-            // delete filters.page;
+            const page = response.data.page;
+            const limit = response.data.limit;
+            const totalPages = response.data.totalPages;
+            delete filters.page;
             res.render('pages/reviews', {
                 title: 'Reviews',
-                reviews: response.data,
-                // pagingOptions: {
-                //     page: page,
-                //     nextPage: page + 1,
-                //     prevPage: page - 1,
-                //     totalPages: totalPages-1,
-                //     limit: limit,
-                // },
-                // filters: {
-                //     obj : filters,
-                //     uri: fromObjectToUri(filters),
-                // },
+                reviews: response.data.content,
+                pagingOptions: {
+                    page: page,
+                    nextPage: page + 1,
+                    prevPage: page - 1,
+                    totalPages: totalPages-1,
+                    limit: limit,
+                },
+                filters: {
+                    obj : filters,
+                    uri: fromObjectToUri(filters),
+                },
             })
         })
         .catch((error) => {}) // TODO
