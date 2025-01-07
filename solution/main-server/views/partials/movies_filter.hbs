@@ -7,80 +7,83 @@
         <form class="p-2">
             <!-- Title -->
             <div class="form-group mb-2">
-                <label for="" class="form-label">Title</label>
-                <input type="text" class="form-control" id="" placeholder="Enter the movie title">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control" placeholder="Enter the movie title">
             </div>
 
             <!-- Year -->
             <div class="form-group mb-2">
-                <label for="" class="form-label">Year</label>
+                <label class="form-label">Year</label>
                 <div class="d-flex gap-2">
-                    <input type="number" class="form-control bg-dark text-white border-secondary" name="" min="" max="" placeholder="From">
-                    <input type="number" class="form-control bg-dark text-white border-secondary" name="" min="" max="" placeholder="To">
+                    <input type="number" class="form-control bg-dark text-white border-secondary" min="" max="" placeholder="From">
+                    <input type="number" class="form-control bg-dark text-white border-secondary" min="" max="" placeholder="To">
                 </div>
             </div>
 
             <!-- Rating -->
             <div class="form-group mb-2">
-                <label for="" class="form-label">Rating</label>
+                <label class="form-label">Rating</label>
                 <div class="d-flex gap-2">
-                    <input type="number" class="form-control bg-dark text-white border-secondary" name="" step="" min="" max="10" placeholder="From">
-                    <input type="number" class="form-control bg-dark text-white border-secondary" name="" step="0.1" min="" max="" placeholder="To">
+                    <input type="number" class="form-control bg-dark text-white border-secondary" step="0.1" min="" max="10" placeholder="From">
+                    <input type="number" class="form-control bg-dark text-white border-secondary" step="0.1" min="" max="" placeholder="To">
                 </div>
             </div>
 
             <!-- Genre -->
             <div class="form-group mb-2">
-                <label for="" class="form-label">Genre</label>
+                <label class="form-label">Genre</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="" value="">
+                    <input class="form-check-input" type="checkbox">
                     <label class="form-check-label">Action</label>
                 </div>
             </div>
 
             <!-- Duration -->
             <div class="form-group mb-2">
-                <label for="" class="form-label">Duration</label>
+                <label class="form-label">Duration</label>
                 <div class="d-flex gap-2">
-                    <input type="number" class="form-control bg-dark text-white border-secondary" name="" min="" max="" placeholder="">
-                    <input type="number" class="form-control bg-dark text-white border-secondary" name="" min="" max="" placeholder="">
+                    <input type="number" class="form-control bg-dark text-white border-secondary" min="" max="" placeholder="">
+                    <input type="number" class="form-control bg-dark text-white border-secondary" min="" max="" placeholder="">
                 </div>
             </div>
 
             <!-- Language -->
             <div class="form-group mb-2">
-                <label for="" class="form-label">Language</label>
+                <label class="form-label">Language</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="language" value="English">
+                    <input class="form-check-input" type="checkbox">
                     <label class="form-check-label">English</label>
                 </div>
             </div>
 
             <!-- Country -->
             <div class="form-group mb-2">
-                <label for="" class="form-label">Country</label>
-                <input type="text" class="form-control bg-dark text-white border-secondary" name="" placeholder="">
+                <label class="form-label">Country</label>
+                <input type="text" class="form-control bg-dark text-white border-secondary" placeholder="">
             </div>
 
             <!-- Studio -->
             <div class="form-group mb-2">
-                <label for="" class="form-label">Studio</label>
-                <input type="text" class="form-control bg-dark text-white border-secondary" name="" placeholder="">
+                <label class="form-label">Studio</label>
+                <input type="text" class="form-control bg-dark text-white border-secondary" placeholder="">
             </div>
 
-            <!-- MPAA Rating -->
+            <!-- MP AA Rating -->
             <div class="form-group mb-2">
-                <label for="" class="form-label">MPAA Rating</label>
-                <select class="form-control bg-dark text-white border-secondary" name="">
-                    <option value="">Select rating</option>
+                <label class="form-label">MP AA Rating</label>
+                <select class="form-control bg-dark text-white border-secondary">
+                    <option>Select rating</option>
                     <!-- example -->
                     <option value="1">1</option>
-                    <option value="1">1</option>
-                    <option value="1">1</option>
+                    <option value="2">1</option>
+                    <option value="3">1</option>
                 </select>
             </div>
 
-            <button type="" class="btn btn-primary w-100 my-3">Search</button>
+            <div class="d-flex gap-2 my-3">
+                <button class="btn btn-primary w-50">Search</button>
+                <button class="btn btn-danger w-50">Reset</button>
+            </div>
         </form>
     </div>
 </div>

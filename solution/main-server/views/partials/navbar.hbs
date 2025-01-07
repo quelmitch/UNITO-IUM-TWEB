@@ -1,11 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="navbar-container">
-        <div class="navbar-nav d-flex justify-content-center w-100">
-            {{#each navLinks}}
-                <a class="nav-link {{#if (eq ../currentPath this.path)}}active{{/if}}" href="{{this.path}}">
-                    {{this.label}}
-                </a>
-            {{/each}}
-        </div>
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="navbar-nav d-flex justify-content-center">
+        {{#each navLinks}}
+            <a class="nav-link {{#if (eq ../currentPath this.path)}}active{{/if}}" href="{{this.path}}">
+                {{this.label}}
+            </a>
+        {{/each}}
     </div>
 </nav>
