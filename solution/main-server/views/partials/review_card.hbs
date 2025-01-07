@@ -1,18 +1,26 @@
-<div class="review">
-    <div class="review-header">
-        <strong>{{review.critic_name}}</strong>
-        {{#if review.is_top_critic}} <span class="top-critic">(Top Critic)</span> {{/if}}
-        <span>on</span>
-        <strong>{{review.movie_title}}</strong>
-        <span class="review-publication">{{review.publisher_name}}</span>
-    </div>
+<div class="card mb-4 rounded text-white"
+     style="background-color: rgba(44, 44, 44, 1); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <strong>{{review.critic_name}}</strong>
+                {{#if review.is_top_critic}}
+                    <span class="badge bg-success ms-2">Top Critic</span>
+                {{/if}}
+                <span>on</span>
+                <strong>{{review.movie_title}}</strong>
+            </div>
+            <span class="text-secondary">{{review.publisher_name}}</span>
+        </div>
 
-    <div class="review-content">
-        {{review.content}}
-    </div>
+        <p class="card-text mb-3">{{review.content}}</p>
 
-    <div class="review-footer">
-        <span class="review-rating fresh">&#9733;</span> Rated: {{review.score}}
-        <span class="review-date">{{review.date}}</span>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <span class="text-success" style="font-size: 1.5rem;">&#9733;</span>
+                Rated: {{review.score}}
+            </div>
+            <span class="text-secondary">{{review.review_date}}</span>
+        </div>
     </div>
 </div>
