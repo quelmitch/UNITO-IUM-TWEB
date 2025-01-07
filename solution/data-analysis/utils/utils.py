@@ -25,6 +25,23 @@ def find_matching(df, column_name, keywords, min_length=None, max_length=None):
     return match
 
 
+def get_specific_season(date):
+    month = date.month
+    day = date.day
+    # Winter: December 21st to March 20th
+    if (month == 12 and day >= 21) or (month == 1) or (month == 2) or (month == 3 and day <= 20):
+        return 'Winter'
+    # Spring: March 21st to June 20th
+    if (month == 3 and day >= 21) or (month == 4) or (month == 5) or (month == 6 and day <= 20):
+        return 'Spring'
+    # Summer: June 21st to September 20th
+    if (month == 6 and day >= 21) or (month == 7) or (month == 8) or (month == 9 and day <= 20):
+        return 'Summer'
+    # Autumn: September 21st to December 20th
+    if (month == 9 and day >= 21) or (month == 10) or (month == 11) or (month == 12 and day <= 20):
+        return 'Autumn'
+
+
 # Made with generative AI. List of common phrases to indicate missing plot.
 null_movie_description_keywords = [
     r'plot unavailable', r'plot unknown', r'plot not found', r'plot missing',
@@ -82,3 +99,10 @@ special_oscar_awards = [
     "GORDON E. SAWYER AWARD",
     "AWARD OF COMMENDATION"
 ]
+
+season_colors = {
+    'Winter': 'blue',
+    'Spring': 'green',
+    'Summer': 'orange',
+    'Autumn': 'red'
+}
