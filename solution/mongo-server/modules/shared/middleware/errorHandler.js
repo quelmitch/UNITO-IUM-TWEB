@@ -1,3 +1,4 @@
+// TODO rename file name to match class name??
 class ApiError extends Error {
     constructor(status, message) {
         super(message);

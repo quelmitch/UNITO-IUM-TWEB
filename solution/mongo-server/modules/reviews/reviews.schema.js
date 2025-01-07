@@ -9,7 +9,7 @@ const ReviewSchema = new mongoose.Schema({
         type: String,
         enum: ['Fresh', 'Rotten']
     },
-    score: {type: String,},
+    score: {type: String},
     review_date: {type: Date, default: Date.now},
     content: {type: String}
 });

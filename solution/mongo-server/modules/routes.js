@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const reviewRouter = require("./reviews/router");
+const reviewRouter = require("./reviews/reviews.router");
 
 /**
  * @swagger
@@ -112,5 +112,8 @@ const reviewRouter = require("./reviews/router");
  *         description: Internal Server Error – An unexpected error occurred on the server.
  */
 router.use('/review', reviewRouter)
+
+// TODO how to handle the "/" and "/review" routes ???
+
 
 module.exports = router;

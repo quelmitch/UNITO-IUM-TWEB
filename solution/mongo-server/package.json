@@ -19,6 +19,8 @@
   },
   "_moduleAliases": {
     "@root": ".",
-    "@utils" : "./utils"
+    "@utils" : "./modules/shared/utils",
+    "@config": "./config",
+    "@middleware": "./modules/shared/middleware"
   }
 }

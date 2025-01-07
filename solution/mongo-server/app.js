@@ -2,14 +2,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-const {errorHandler} = require('@utils/errorHandler');
-
-const database = require('./databases/database');
 const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./swagger');
 
-const indexRouter = require('./routes/index');
+const {errorHandler} = require('@middleware/errorHandler');
+const database = require('@config/database');
+const swaggerSpec = require('@config/swagger');
+const indexRouter = require('./modules/routes');
 
 const app = express();
 
