@@ -26,7 +26,7 @@ public class Oscar implements OscarType{
     @Column(nullable = false)
     String category;
 
-    @Column(nullable = true)
+    @Column(nullable = true, columnDefinition = "TEXT")
     String nominee_name;
 
     @Column(nullable = true)

@@ -15,12 +15,37 @@ This server is extensively documented using **Swagger** for API routes and **Jav
 ## Project Structure
 The project follows a **domain-driven design**, with each domain encapsulating its own responsibilities:
 
+```
+├── java/
+│   └── org.unito.postgreserver/
+│       ├── <<entity>>/
+│       │   ├── api/
+│       │   │   ├── <<Entity>>Controller.java
+│       │   │   ├── <<Entity>>Repository.java
+│       │   │   ├── <<Entity>>Service.java
+│       │   ├── dto/
+│       │   │   ├── <<Entity>>BasicDTO.java
+│       │   │   ├── <<Entity>>FilterDTO.java
+│       │   ├── model/
+│       │   │   ├── <<Entity>>.java
+│       │   │   ├── <<Entity>>Type.java
+│       ├── utils/
+│       │   ├── GenericFilterDTO.java
+│       │   ├── ServiceCommon.java
+│       │   ├── SpecificationUtility.java
+│       │   ├── TableEntity.java
+│       └── PostgreServerApplication.java
+└── resources/
+    ├── application.properties
+    ├── application-dev.properties
+    └── data.sql
+```
 ### Domain Packages
 1. **`api`**: Contains controllers, services, and repositories.
 2. **`dto`**: Defines Data Transfer Objects, including:
    - Filter DTOs (e.g., `MovieFilterDTO`) for capturing dynamic URI parameters.
    - Specialized DTOs (e.g., `MovieBasicDTO`) for customized entity views.
-3. **`model`**: Houses JPA entities and marker interfaces (e.g., `TableEntity`) for type safety.
+3. **`model`**: Houses JPA entities and marker interfaces (e.g., `MovieType`) for type safety.
 
 ### Utility Package
 The `utils` package provides reusable components for simplifying common operations:
@@ -28,7 +53,7 @@ The `utils` package provides reusable components for simplifying common operatio
 - **`GenericFilterDTO`**: Handles generic filters like pagination, sorting, and response types.
 - **`ServiceCommon`**: Contains shared methods across services.
 - **`SpecificationUtility`**: Offers generic methods for constructing dynamic JPA Specifications. For example:
-
+- **`TableEntity`**: mark JPA entities for type safety
 ```java
 public static <T> Specification<T> equalsTo(String field, Comparable<?> value) {
     return (root, _, criteriaBuilder) ->
