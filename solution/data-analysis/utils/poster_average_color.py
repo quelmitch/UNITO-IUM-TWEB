@@ -84,7 +84,7 @@ def main():
     print(f"Full processing time: {end - start:.2f} seconds")
 
     # Save the results
-    output_csv = "../clean_datasets/movie_colors.csv"
+    output_csv = "../clean_datasets/posters_colors.csv"
     movie_df.to_csv(output_csv, index=True)
     print(f"Results saved to {output_csv}")
 
