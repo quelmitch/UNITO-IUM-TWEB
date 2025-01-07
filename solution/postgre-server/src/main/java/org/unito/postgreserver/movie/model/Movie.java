@@ -47,7 +47,7 @@ public class Movie implements TableEntity, MovieType {
     //@Digits(integer = 1, fraction = 2, message = "Movie Rating can have at most 1 integer digit and 2 fractional digits")
     private Double rating; // TODO: error in constraints
 
-    @Column(nullable = true)
+    @Column(nullable = true, columnDefinition = "TEXT")
     private String posterLink;
 
     @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

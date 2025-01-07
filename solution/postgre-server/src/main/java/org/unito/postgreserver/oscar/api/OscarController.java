@@ -2,9 +2,8 @@ package org.unito.postgreserver.oscar.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.unito.postgreserver.oscar.model.OscarCeremony;
-import org.unito.postgreserver.oscar.dto.OscarDTO;
 import org.unito.postgreserver.oscar.dto.OscarFilterDTO;
+import org.unito.postgreserver.oscar.model.Oscar;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ class OscarController {
     }
 
     @GetMapping("/filter")
-    public List<OscarDTO> getCeremoniesWithFilter(@ModelAttribute OscarFilterDTO filter) {
+    public List<Oscar> getCeremoniesWithFilter(@ModelAttribute OscarFilterDTO filter) {
         return oscarService.getCeremoniesWithFilter(filter);
     }
 }
