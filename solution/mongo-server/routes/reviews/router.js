@@ -14,7 +14,7 @@ router.get('/filter', (req, res, next) => {
     const query = buildQuery(req.query);
 
     // Step 3: Execute query
-    getPaginatedResults(Model, query)
+    getPaginatedResults(Model, query, req.query)
         .then((result) => {
             if (!result.totalPages)
                 throw ApiError.notFound("No reviews found matching the query"); // TODO: should return just the empty array or 404?

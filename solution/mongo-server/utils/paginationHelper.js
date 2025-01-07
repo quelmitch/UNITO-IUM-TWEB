@@ -7,13 +7,12 @@ async function getPaginatedResults(model, query, filters) {
     const skip = (page - 1) * limit;
     const sort = {[sortField]: sortOrder === 'asc' ? 1 : -1};
 
-
     const results = await model.find(query)
         .skip(skip)
         .limit(limit)
         .sort(sort);
 
-    const total = await model.countDocuments(query); // Total documents matching the query
+    const total = await model.countDocuments(query);
 
     return {
         limit,
