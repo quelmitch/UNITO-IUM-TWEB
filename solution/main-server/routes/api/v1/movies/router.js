@@ -29,7 +29,7 @@ router.get('/filter', async (req, res) => {
         })
         .catch((error) => {
             // TODO
-            res.status(500).json({ error: 'Errore nella comunicazione con il server Spring Boot' })
+            res.status(500).json({ error: 'Error communicating with the Spring Boot server' })
         })
 })
 

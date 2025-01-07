@@ -24,7 +24,7 @@ public class Oscar implements OscarType{
     Integer year_movie;
 
     @Column(nullable = false)
-    OscarCategory category;
+    String category;
 
     @Column(nullable = true)
     String nominee_name;

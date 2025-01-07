@@ -1,2 +1,5 @@
-<h1>Welcome to the {{ title }}</h1>
-<p>This is where you can explore information about oscars.</p>
+<div class="container-fluid my-4 px-5">
+    {{#each oscars}}
+        {{> oscar-accordion oscar=this}}
+    {{/each}}
+</div>

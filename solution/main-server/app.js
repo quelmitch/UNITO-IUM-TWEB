@@ -24,7 +24,13 @@ app.engine(
         extname: '.hbs',
         defaultLayout: 'layout',
         layoutsDir: path.join(__dirname, 'views/layouts'),
-        partialsDir: path.join(__dirname, 'views/partials'),
+        partialsDir: [
+            path.join(__dirname, 'views/partials'),
+            path.join(__dirname, 'views/partials/movies'),
+            path.join(__dirname, 'views/partials/oscars'),
+            path.join(__dirname, 'views/partials/reviews'),
+            path.join(__dirname, 'views/partials/ui'),
+        ],
         helpers: helpers,
     })
 )
