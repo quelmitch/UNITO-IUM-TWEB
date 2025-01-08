@@ -69,7 +69,7 @@ public class StudioController {
                       "timestamp": "2025-01-08T18:27:44.980+00:00",
                       "status": 500,
                       "error": "Internal Server Error",
-                      "path": "/studio"
+                      "path": "/studio/filter"
                     }
                     """
                 )

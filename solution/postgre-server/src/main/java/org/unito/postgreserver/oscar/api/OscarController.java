@@ -40,7 +40,7 @@ class OscarController {
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(
-                                    implementation = Map.class,
+                                    implementation = List.class,
                                     description = "A list of oscar category names",
                                     example = """
                     [
