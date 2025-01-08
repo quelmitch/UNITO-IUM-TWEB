@@ -1,5 +1,6 @@
 package org.unito.postgreserver.utils;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.*;
@@ -8,53 +9,42 @@ import lombok.*;
  * Data Transfer Object (DTO) for generic filtering and pagination.
  * This class encapsulates parameters used for filtering data, including pagination, response type, and sorting.
  */
-@AllArgsConstructor @NoArgsConstructor @Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Schema(description = "Generic Filter DTO")
 public class GenericFilterDTO {
-    /**
-     * The page number to retrieve. Defaults to 0 (first page).
-     * Must be a non-negative integer.
-     */
-    @Min(0)             private Integer page = 0;
+    @Schema(description = "The page number to retrieve.", example = "1", defaultValue = "0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Min(0)
+    private Integer page = 0;
 
-    /**
-     * The maximum number of items to return per page. Defaults to 20.
-     * Must be between 1 and 500 (inclusive).
-     */
-    @Min(1) @Max(500)   private Integer limit = 20;
+    @Schema(description = "The maximum number of items to return per page.", example = "10", defaultValue = "20", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Min(1)
+    @Max(500)
+    private Integer limit = 20;
 
-    /**
-     * The type of response to return (e.g., basic or full). Defaults to FULL.
-     * See {@link Type} for available options.
-     */
+    @Schema(description = "The type of response to return.", example = "FULL", defaultValue = "FULL", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private Type responseType = Type.FULL;
 
-    /**
-     * The sort order. Defaults to ASC (ascending).
-     * See {@link Sort} for available options.
-     */
+    @Schema(description = "The sort order.", example = "ASC", defaultValue = "ASC", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private Sort sort = Sort.ASC;
 
-    /**
-     * Enum representing the possible response types.
-     * <ul>
-     *     <li>BASIC: Returns a minimal set of data.</li>
-     *     <li>FULL: Returns all available data.</li>
-     * </ul>
-     */
+    @Schema(description = "The response type.", example = "FULL")
     public enum Type {
+        @Schema(description = "Returns a minimal set of data.")
         BASIC,
+
+        @Schema(description = "Returns all available data.")
         FULL
     }
 
-    /**
-     * Enum representing the possible sort orders.
-     * <ul>
-     *     <li>ASC: Ascending order.</li>
-     *     <li>DESC: Descending order.</li>
-     * </ul>
-     */
+    @Schema(description = "The sort order.", example = "ASC")
     public enum Sort {
+        @Schema(description = "Ascending order.")
         ASC,
+
+        @Schema(description = "Descending order.")
         DESC
     }
 }

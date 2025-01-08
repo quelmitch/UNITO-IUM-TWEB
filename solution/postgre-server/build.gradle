@@ -30,6 +30,9 @@ dependencies {
     // Lombok to remove boilerplate code
     implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // Swagger Docs
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.1'
 }
 
 tasks.named('test') {
