@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.unito.postgreserver.actor.dto.ActorBasicDTO;
 import org.unito.postgreserver.actor.dto.ActorFilterDTO;
 import org.unito.postgreserver.actor.model.Actor;
@@ -27,6 +28,19 @@ public class ActorService {
         this.actorRepository = actorRepository;
     }
 
+    public Map<String, Object> getActorsByName(GenericFilterDTO genericFilter, ActorFilterDTO actorFilter) {
+
+        Pageable pageable = setPageable(genericFilter, "name");
+        Page<String> actorPage;
+        if (actorFilter.getName() != null)
+            actorPage = actorRepository.findDistinctActors("%"+actorFilter.getName()+"%", pageable);
+        else
+            actorPage = actorRepository.findDistinctActors(pageable);
+
+        return buildResponse(genericFilter, actorPage.getTotalPages(), actorPage.getContent());
+    }
+
+
     public Map<String, Object> getActorByFilter(GenericFilterDTO genericFilter, ActorFilterDTO actorFilter) {
         Specification<Actor> specification = combineWithAnd(List.of(
             equalsTo("name", actorFilter.getName()),
@@ -40,18 +54,6 @@ public class ActorService {
         return buildResponse(genericFilter, actorPage.getTotalPages(), actors);
     }
 
-    public Map<String, Object> getActorsByName(GenericFilterDTO genericFilter, ActorFilterDTO actorFilter) {
-        Specification<Actor> specification = combineWithAnd(List.of(
-                like("name", actorFilter.getName()),
-                distinct()
-        ));
-
-        Pageable pageable = setPageable(genericFilter, actorFilter.getSortBy());
-        Page<Actor> actorPage = actorRepository.findAll(specification, pageable);
-        List<? extends ActorType> actors = mapActors(actorPage.getContent(), GenericFilterDTO.Type.BASIC);
-
-        return buildResponse(genericFilter, actorPage.getTotalPages(), actors);
-    }
 
     private List<? extends ActorType> mapActors(List<Actor> actors, GenericFilterDTO.Type responseType) {
         return switch (responseType) {

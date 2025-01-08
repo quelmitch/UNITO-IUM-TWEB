@@ -17,7 +17,7 @@ public class ActorController {
         this.actorService = actorService;
     }
 
-    @GetMapping("")
+    @GetMapping("/name")
     public Map<String, Object> getActorsByName(@ModelAttribute GenericFilterDTO genericFilter,
                                                @ModelAttribute ActorFilterDTO actorFilter
     ) {

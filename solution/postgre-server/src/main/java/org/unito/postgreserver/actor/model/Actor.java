@@ -23,7 +23,7 @@ public class Actor implements ActorType {
     @Column
     private String role;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     @JsonIgnore
     private Movie movieId;

@@ -21,9 +21,8 @@ public class Country implements CountryType {
     @Column(nullable = false)
     private String country;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     @JsonIgnore
-    @JsonBackReference
     private Movie movieId;
 }
