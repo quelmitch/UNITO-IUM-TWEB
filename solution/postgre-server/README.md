@@ -1,5 +1,7 @@
 TODO:
 - Update code snippets at the end
+- Make load_csv_into_db takes args
+- swagger and javadocs link
 
 # PostgreSQL Server
 
@@ -16,19 +18,20 @@ This server is extensively documented using **Swagger** for API routes and **Jav
 The project follows a **domain-driven design**, with each domain encapsulating its own responsibilities:
 
 ```
+postgre-server/
 ├── java/
 │   └── org.unito.postgreserver/
-│       ├── <<entity>>/
+│       ├── <<domain>>/
 │       │   ├── api/
-│       │   │   ├── <<Entity>>Controller.java
-│       │   │   ├── <<Entity>>Repository.java
-│       │   │   ├── <<Entity>>Service.java
+│       │   │   ├── <<domain>>Controller.java
+│       │   │   ├── <<domain>>Repository.java
+│       │   │   ├── <<domain>>Service.java
 │       │   ├── dto/
-│       │   │   ├── <<Entity>>BasicDTO.java
-│       │   │   ├── <<Entity>>FilterDTO.java
+│       │   │   ├── <<domain>>BasicDTO.java
+│       │   │   ├── <<domain>>FilterDTO.java
 │       │   ├── model/
-│       │   │   ├── <<Entity>>.java
-│       │   │   ├── <<Entity>>Type.java
+│       │   │   ├── <<domain>>.java
+│       │   │   ├── <<domain>>Type.java
 │       ├── utils/
 │       │   ├── GenericFilterDTO.java
 │       │   ├── ServiceCommon.java
@@ -101,3 +104,19 @@ public Map<String, Object> getMovieWithFilter(GenericFilterDTO genericFilter, Mo
     return buildResponse(genericFilter, moviePage.getTotalPages(), movies);
 }
 ```
+---
+## How to Import Database Data
+The clean datasets from the data-analysis project can be easily imported into PostgreSQL using the `load_csv_into_db.py` script.  
+This script can be modified to import all or specific datasets into the database.
+
+### Steps:
+1. Install the required library by running the following command in your terminal:
+   ```bash
+   pip install psycopg2
+   ```
+2. Set your database configuration in the `conn_params` variable within the script.
+3. To exclude specific datasets, comment out or remove the corresponding entries in the `csv_files` variable.
+4. Run the script using the following command:
+   ```bash
+   py .\load_csv_into_db.py
+   ```

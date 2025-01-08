@@ -12,3 +12,6 @@ mongoose.connect(database, {
     .catch((err) => {
         console.error('connection error:', err);
     });
+
+
+// TODO add config env
