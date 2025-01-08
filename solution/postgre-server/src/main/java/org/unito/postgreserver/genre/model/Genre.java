@@ -1,4 +1,4 @@
-package org.unito.postgreserver.theme;
+package org.unito.postgreserver.genre.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -12,15 +12,15 @@ import org.unito.postgreserver.movie.model.Movie;
 @Table @Entity
 // Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class Theme {
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String theme;
+    private String genre;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     @JsonIgnore
     private Movie movieId;

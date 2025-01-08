@@ -1,4 +1,4 @@
-package org.unito.postgreserver.studio;
+package org.unito.postgreserver.studio.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -20,7 +20,7 @@ public class Studio {
     @Column(nullable = false)
     private String studio;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     @JsonIgnore
     private Movie movieId;

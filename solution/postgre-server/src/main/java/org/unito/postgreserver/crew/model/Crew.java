@@ -1,4 +1,4 @@
-package org.unito.postgreserver.crew;
+package org.unito.postgreserver.crew.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -23,7 +23,7 @@ public class Crew {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     @JsonIgnore
     private Movie movieId;

@@ -1,4 +1,4 @@
-package org.unito.postgreserver.release;
+package org.unito.postgreserver.release.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -29,7 +29,7 @@ public class Release {
     @Column(nullable = true)
     private String rating;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     @JsonIgnore
     private Movie movieId;
