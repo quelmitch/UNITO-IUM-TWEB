@@ -1,5 +1,6 @@
 package org.unito.postgreserver.movie.api;
 
+import org.postgresql.core.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
@@ -32,14 +33,9 @@ public class MovieService {
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
     }
 
-    public List<Movie> getMovieByTitle(GenericFilterDTO genericFilter, String title) {
-        Pageable pageable = setPageable(genericFilter);
-
-        return movieRepository.searchMovies(title, pageable).getContent();
-    }
-
     public Map<String, Object> getMovieWithFilter(GenericFilterDTO genericFilter, MovieFilterDTO movieFilter) {
         Specification<Movie> specification = combineWithAnd(List.of(
+            like("title", movieFilter.getTitle()),
             greaterThan("runtime", movieFilter.getRuntimeGT()),
             lessThan("runtime", movieFilter.getRuntimeLT()),
             greaterThan("releaseYear", movieFilter.getReleaseYearGT()),

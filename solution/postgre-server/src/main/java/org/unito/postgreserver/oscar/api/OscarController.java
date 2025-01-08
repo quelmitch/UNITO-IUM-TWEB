@@ -29,46 +29,47 @@ class OscarController {
     }
 
     @Operation(
-            summary = "Fetch all Oscar Categories",
-            description =
-                    "Fetches all the different categories stored in the Oscar table. This endpoint does not support pagination."
+        summary = "Fetch all Oscar Categories",
+        description =
+            "Fetches all the different categories stored in the Oscar table." +
+            "<br>This endpoint does not support pagination."
     )
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "OK",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(
-                                    implementation = List.class,
-                                    description = "A list of oscar category names",
-                                    example = """
-                    [
-                        "ACTOR",
-                        "ACTRESS",
-                        "ART DIRECTOR"
-                    ]
-                """
-                            )
-                    )
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Internal Server Error",
-                    content = @Content(
-                            mediaType = "application/json",
-                            examples = @ExampleObject(
-                                    value = """
-                {
-                  "timestamp": "2025-01-08T18:27:44.980+00:00",
-                  "status": 500,
-                  "error": "Internal Server Error",
-                  "path": "/oscar/categories"
-                }
-                """
-                            )
-                    )
+        @ApiResponse(
+            responseCode = "200",
+            description = "OK",
+            content = @Content(
+                mediaType = "application/json",
+                schema = @Schema(
+                    implementation = List.class,
+                    description = "A list of oscar category names",
+                    example = """
+                        [
+                            "ACTOR",
+                            "ACTRESS",
+                            "ART DIRECTOR"
+                        ]
+                        """
+                )
             )
+        ),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal Server Error",
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    value = """
+                        {
+                            "timestamp": "2025-01-08T18:27:44.980+00:00",
+                            "status": 500,
+                            "error": "Internal Server Error",
+                            "path": "/oscar/categories"
+                        }
+                        """
+                )
+            )
+        )
     })
     @GetMapping("/categories")
     public List<String> getAllOscarsCategories() {
@@ -92,23 +93,23 @@ class OscarController {
                     implementation = Map.class,
                     description = "A paginated list of oscar objects",
                     example = """
-                    {
-                        "limit": 20,
-                        "totalPages": 545,
-                        "page": 0,
-                        "content": [
-                            {
-                                "numberCeremony": 1,
-                                "yearCeremony": 1928,
-                                "yearMovie": 1927,
-                                "category": "ACTOR",
-                                "nomineeName": "Richard Barthelmess",
-                                "nomineeMovie": "The Noose",
-                                "isWinner": false
-                            }
-                        ]
-                    }
-                """
+                        {
+                            "limit": 20,
+                            "totalPages": 545,
+                            "page": 0,
+                            "content": [
+                                {
+                                    "numberCeremony": 1,
+                                    "yearCeremony": 1928,
+                                    "yearMovie": 1927,
+                                    "category": "ACTOR",
+                                    "nomineeName": "Richard Barthelmess",
+                                    "nomineeMovie": "The Noose",
+                                    "isWinner": false
+                                }
+                            ]
+                        }
+                        """
                 )
             )
         ),
@@ -119,21 +120,21 @@ class OscarController {
                 mediaType = "application/json",
                 examples = @ExampleObject(
                     value = """
-                {
-                  "timestamp": "2025-01-08T18:27:44.980+00:00",
-                  "status": 500,
-                  "error": "Internal Server Error",
-                  "path": "/oscar/filter"
-                }
-                """
+                        {
+                            "timestamp": "2025-01-08T18:27:44.980+00:00",
+                            "status": 500,
+                            "error": "Internal Server Error",
+                            "path": "/oscar/filter"
+                        }
+                        """
                 )
             )
         )
     })
     @GetMapping("/filter")
     public Map<String, Object> getOscars(
-            @ParameterObject @ModelAttribute GenericFilterDTO genericFilter,
-            @ParameterObject @ModelAttribute OscarFilterDTO oscarFilter) {
+        @ParameterObject @ModelAttribute GenericFilterDTO genericFilter,
+        @ParameterObject @ModelAttribute OscarFilterDTO oscarFilter) {
         return oscarService.getOscarByFilters(genericFilter, oscarFilter);
     }
 }

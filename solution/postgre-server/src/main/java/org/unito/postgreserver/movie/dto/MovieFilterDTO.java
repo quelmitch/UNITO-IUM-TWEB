@@ -12,6 +12,9 @@ public class MovieFilterDTO {
     @Schema(description = "Field by which to sort the results.", example = "id", defaultValue = "id")
     private String sortBy = "id";
 
+    @Schema(description = "Filter movies with a title like the specified value.", example = "Barbie", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private String title;
+
     @Schema(description = "Filter movies with a runtime greater than the specified value.", example = "100", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private Integer runtimeGT;
 
@@ -33,27 +36,27 @@ public class MovieFilterDTO {
     @Schema(description = "List of actors in the movie.", example = "[\"Margot Robbie\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> actor;
 
-    @Schema(description = "List of crew members in the movie.", example = "[\"Christopher Nolan\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "List of crew members in the movie.", example = "[\"Greta Gerwig\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> crew;
 
-    @Schema(description = "List of genres the movie belongs to.", example = "[\"Action\", \"Thriller\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "List of genres the movie belongs to.", example = "[\"Comedy\", \"Adventure\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> genre;
 
-    @Schema(description = "List of countries where the movie was produced.", example = "[\"United States\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "List of countries where the movie was produced.", example = "[\"USA\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> productionCountry;
 
     @Schema(description = "List of languages in which the movie was released.", example = "[\"English\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> language;
 
-    @Schema(description = "List of countries where the movie was released.", example = "[\"United States\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "List of countries where the movie was released.", example = "[\"USA\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> releaseCountry;
 
-    @Schema(description = "List of studios that produced the movie.", example = "[\"Warner Bros.\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "List of studios that produced the movie.", example = "[\"Mattel\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> studio;
 
-    @Schema(description = "List of characters played by the actors in the movie.", example = "[\"Harley Quinn\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "List of characters played by the actors in the movie.", example = "[\"Barbie\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> character;
 
-    @Schema(description = "List of audience ratings the movie has received.", example = "[\"PG-13\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "List of audience ratings the movie has received.", example = "[\"PG\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> audienceRating;
 }

@@ -7,10 +7,10 @@ import lombok.*;
 @Schema(description = "Filter DTO for searching actors.")
 public class ActorFilterDTO {
 
-    @Schema(description = "Name of the actor.", example = "Robert Downey Jr.", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "Name of the actor to search using like", example = "Margot Robbie", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String name;
 
-    @Schema(description = "Role of the actor in the movie.", example = "Iron Man",  requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "Role of the actor in the movie.", example = "Barbie",  requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String role;
 
     @Schema(description = "Field by which to sort the results.", example = "id", defaultValue = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)

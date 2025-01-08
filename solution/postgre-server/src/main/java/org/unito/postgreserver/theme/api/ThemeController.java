@@ -21,11 +21,15 @@ public class ThemeController {
     private final ThemeService themeService;
 
     @Autowired
-    public ThemeController(final ThemeService themeService) { this.themeService = themeService; }
+    public ThemeController(final ThemeService themeService) {
+        this.themeService = themeService;
+    }
 
     @Operation(
-            summary = "Get all themes",
-            description = "Fetches all themes stored in the database. This endpoint does not support pagination."
+        summary = "Get all themes",
+        description =
+            "Fetches all themes stored in the database. " +
+            "<br>This endpoint does not support pagination."
     )
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Ok",
@@ -42,10 +46,10 @@ public class ThemeController {
                 examples = @ExampleObject(
                     value = """
                         {
-                          "timestamp": "2025-01-08T18:27:44.980+00:00",
-                          "status": 500,
-                          "error": "Internal Server Error",
-                          "path": "/theme"
+                            "timestamp": "2025-01-08T18:27:44.980+00:00",
+                            "status": 500,
+                            "error": "Internal Server Error",
+                            "path": "/theme"
                         }
                         """
                 )

@@ -8,11 +8,13 @@ import org.unito.postgreserver.crew.model.CrewType;
 public class CrewBasicDTO implements CrewType {
     private String name;
     private String role;
+    private Long movieId;
 
     public static CrewBasicDTO toDTO(Crew crew) {
         CrewBasicDTO dto = new CrewBasicDTO();
-        crew.setName(crew.getName());
-        crew.setRole(crew.getRole());
+        dto.setName(crew.getName());
+        dto.setRole(crew.getRole());
+        dto.setMovieId(crew.getMovieId().getId());
         return dto;
     }
 }

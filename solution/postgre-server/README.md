@@ -11,7 +11,7 @@ The PostgreSQL Server is a core microservice within the MovieDB project, respons
 ## API Documentation
 This server is extensively documented using **Swagger** for API routes and **JavaDocs** for internal code documentation. Developers can quickly access the Swagger UI and JavaDocs locally via the following links:
 
-- Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- Swagger UI: [http://localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui/index.html)
 - JavaDocs: [http://localhost:8080/docs](http://localhost:8080/docs)
 
 ## Project Structure

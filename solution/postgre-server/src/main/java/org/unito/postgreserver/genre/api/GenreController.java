@@ -21,36 +21,40 @@ public class GenreController {
     private final GenreService genreService;
 
     @Autowired
-    public GenreController(final GenreService genreService) { this.genreService = genreService; }
+    public GenreController(final GenreService genreService) {
+        this.genreService = genreService;
+    }
 
     @Operation(
-            summary = "Get all genres",
-            description = "Fetches all genres stored in the database. This endpoint does not support pagination."
+        summary = "Get all genres",
+        description =
+            "Fetches all genres stored in the database." +
+            "<br>This endpoint does not support pagination."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Ok",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = List.class,
-                                    description = "A list of genres",
-                                    example = "[\"Action\", \"Adventure\", \"Animation\"]"
-                            )
-                    )}
-            ),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error",
-                    content = @Content(
-                            mediaType = "application/json",
-                            examples = @ExampleObject(
-                                    value = """
+        @ApiResponse(responseCode = "200", description = "Ok",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = List.class,
+                    description = "A list of genres",
+                    example = "[\"Action\", \"Adventure\", \"Animation\"]"
+                )
+            )}
+        ),
+        @ApiResponse(responseCode = "500", description = "Internal Server Error",
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    value = """
                         {
-                          "timestamp": "2025-01-08T18:27:44.980+00:00",
-                          "status": 500,
-                          "error": "Internal Server Error",
-                          "path": "/genre"
+                            "timestamp": "2025-01-08T18:27:44.980+00:00",
+                            "status": 500,
+                            "error": "Internal Server Error",
+                            "path": "/genre"
                         }
                         """
-                            )
-                    )
+                )
             )
+        )
     })
     @GetMapping("")
     public List<String> getAllGenres() {

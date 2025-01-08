@@ -9,11 +9,13 @@ import org.unito.postgreserver.actor.model.ActorType;
 public class ActorBasicDTO implements ActorType {
     private String name;
     private String role;
+    private Long movieId;
 
     public static ActorBasicDTO toDTO(Actor actor) {
         ActorBasicDTO dto = new ActorBasicDTO();
         dto.setName(actor.getName());
         dto.setRole(actor.getRole());
+        dto.setMovieId(actor.getMovieId().getId());
         return dto;
     }
 }

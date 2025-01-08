@@ -9,15 +9,13 @@ import org.unito.postgreserver.crew.dto.CrewBasicDTO;
 import org.unito.postgreserver.crew.dto.CrewFilterDTO;
 import org.unito.postgreserver.crew.model.Crew;
 import org.unito.postgreserver.crew.model.CrewType;
-import org.unito.postgreserver.utils.GenericFilterDTO;
+import org.unito.postgreserver.utils.*;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.unito.postgreserver.utils.ServiceCommon.buildResponse;
-import static org.unito.postgreserver.utils.ServiceCommon.setPageable;
-import static org.unito.postgreserver.utils.SpecificationUtility.combineWithAnd;
-import static org.unito.postgreserver.utils.SpecificationUtility.equalsTo;
+import static org.unito.postgreserver.utils.ServiceCommon.*;
+import static org.unito.postgreserver.utils.SpecificationUtility.*;
 
 @Service
 public class CrewService {
@@ -26,21 +24,9 @@ public class CrewService {
     @Autowired
     public CrewService(final CrewRepository crewRepository) { this.crewRepository = crewRepository; }
 
-    public Map<String, Object> getCrewMembersByName(GenericFilterDTO genericFilter, String name) {
-
-        Pageable pageable = setPageable(genericFilter, "name");
-        Page<String> crewPage;
-        if (name != null)
-            crewPage = crewRepository.findDistinctCrewMembers("%"+name+"%", pageable);
-        else
-            crewPage = crewRepository.findDistinctCrewMembers(pageable);
-
-        return buildResponse(genericFilter, crewPage.getTotalPages(), crewPage.getContent());
-    }
-
     public Map<String, Object> getCrewMembersByFilter(GenericFilterDTO genericFilter, CrewFilterDTO crewFilter) {
         Specification<Crew> specification = combineWithAnd(List.of(
-                equalsTo("name", crewFilter.getName()),
+                like("name", crewFilter.getName()),
                 equalsTo("role", crewFilter.getRole())
         ));
 

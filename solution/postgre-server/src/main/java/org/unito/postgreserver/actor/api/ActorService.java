@@ -41,7 +41,7 @@ public class ActorService {
 
     public Map<String, Object> getActorByFilter(GenericFilterDTO genericFilter, ActorFilterDTO actorFilter) {
         Specification<Actor> specification = combineWithAnd(List.of(
-            equalsTo("name", actorFilter.getName()),
+            like("name", actorFilter.getName()),
             equalsTo("role", actorFilter.getRole())
         ));
 

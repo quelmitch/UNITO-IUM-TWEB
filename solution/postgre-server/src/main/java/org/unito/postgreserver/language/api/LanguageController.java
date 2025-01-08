@@ -23,36 +23,40 @@ public class LanguageController {
     private final LanguageService languageService;
 
     @Autowired
-    public LanguageController(final LanguageService languageService) { this.languageService = languageService; }
+    public LanguageController(final LanguageService languageService) {
+        this.languageService = languageService;
+    }
 
     @Operation(
-            summary = "Get all languages",
-            description = "Fetches all languages stored in the database. This endpoint does not support pagination."
+        summary = "Get all languages",
+        description =
+            "Fetches all languages stored in the database." +
+            "<br>This endpoint does not support pagination."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Ok",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = List.class,
-                                    description = "A list of languages",
-                                    example = "[\"Italian\", \"Japanese\", \"Korean\"]"
-                            )
-                    )}
-            ),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error",
-                    content = @Content(
-                            mediaType = "application/json",
-                            examples = @ExampleObject(
-                                    value = """
+        @ApiResponse(responseCode = "200", description = "Ok",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = List.class,
+                    description = "A list of languages",
+                    example = "[\"Italian\", \"Japanese\", \"Korean\"]"
+                )
+            )}
+        ),
+        @ApiResponse(responseCode = "500", description = "Internal Server Error",
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    value = """
                         {
-                          "timestamp": "2025-01-08T18:27:44.980+00:00",
-                          "status": 500,
-                          "error": "Internal Server Error",
-                          "path": "/language"
+                            "timestamp": "2025-01-08T18:27:44.980+00:00",
+                            "status": 500,
+                            "error": "Internal Server Error",
+                            "path": "/language"
                         }
                         """
-                            )
-                    )
+                )
             )
+        )
     })
     @GetMapping("")
     public List<String> getAllLanguages() {

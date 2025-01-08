@@ -24,14 +24,6 @@ public class CrewController {
     @Autowired
     public CrewController(final CrewService crewService) { this.crewService = crewService; }
 
-    @GetMapping("/name")
-    public Map<String, Object> getCrewMembersByName(
-            @ParameterObject @ModelAttribute GenericFilterDTO genericFilter,
-            @ParameterObject @RequestParam(required = false) String name
-    ) {
-        return crewService.getCrewMembersByName(genericFilter, name);
-    }
-
     @GetMapping("/filter")
     public Map<String, Object> getCrewMembers(
             @ParameterObject @ModelAttribute GenericFilterDTO genericFilter,

@@ -25,7 +25,9 @@ public class StudioController {
     private final StudioService studioService;
 
     @Autowired
-    public StudioController(final StudioService studioService) { this.studioService = studioService; }
+    public StudioController(final StudioService studioService) {
+        this.studioService = studioService;
+    }
 
     @Operation(
         summary = "Fetch studios by filter",
@@ -54,7 +56,7 @@ public class StudioController {
                                 "'S Wonderful Pictures"
                             ]
                         }
-                    """
+                        """
                 )
             )
         ),
@@ -65,21 +67,21 @@ public class StudioController {
                 mediaType = "application/json",
                 examples = @ExampleObject(
                     value = """
-                    {
-                      "timestamp": "2025-01-08T18:27:44.980+00:00",
-                      "status": 500,
-                      "error": "Internal Server Error",
-                      "path": "/studio/filter"
-                    }
-                    """
+                        {
+                            "timestamp": "2025-01-08T18:27:44.980+00:00",
+                            "status": 500,
+                            "error": "Internal Server Error",
+                            "path": "/studio/filter"
+                        }
+                        """
                 )
             )
         )
     })
     @GetMapping("/filter")
     public Map<String, Object> getStudiosByName(
-            @ParameterObject @ModelAttribute GenericFilterDTO genericFilter,
-            @ParameterObject @ModelAttribute StudioFilterDTO studioFilter
+        @ParameterObject @ModelAttribute GenericFilterDTO genericFilter,
+        @ParameterObject @ModelAttribute StudioFilterDTO studioFilter
     ) {
         return studioService.getAllStudios(genericFilter, studioFilter);
     }
