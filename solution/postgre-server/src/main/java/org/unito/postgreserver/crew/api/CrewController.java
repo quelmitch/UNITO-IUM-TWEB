@@ -19,14 +19,14 @@ public class CrewController {
     public CrewController(final CrewService crewService) { this.crewService = crewService; }
 
     @GetMapping("/name")
-    public Map<String, Object> GetCrewMembersByName(@ModelAttribute GenericFilterDTO genericFilter,
+    public Map<String, Object> getCrewMembersByName(@ModelAttribute GenericFilterDTO genericFilter,
                                                @ModelAttribute CrewFilterDTO crewFilter
     ) {
         return crewService.getCrewMembersByName(genericFilter, crewFilter);
     }
 
     @GetMapping("/filter")
-    public Map<String, Object> GetCrewMembers(@ModelAttribute GenericFilterDTO genericFilter,
+    public Map<String, Object> getCrewMembers(@ModelAttribute GenericFilterDTO genericFilter,
                                          @ModelAttribute CrewFilterDTO crewFilter
     ) {
         return crewService.getCrewMembersByFilter(genericFilter, crewFilter);
