@@ -6,9 +6,7 @@ import lombok.*;
 
 import java.util.List;
 
-// JPA Annotations
 @Table @Entity
-// Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class Oscar implements OscarType{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

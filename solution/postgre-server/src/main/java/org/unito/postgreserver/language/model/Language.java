@@ -5,9 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.unito.postgreserver.movie.model.Movie;
 
-// JPA Annotations
 @Table @Entity
-// Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class Language implements LanguageType {
     @Id

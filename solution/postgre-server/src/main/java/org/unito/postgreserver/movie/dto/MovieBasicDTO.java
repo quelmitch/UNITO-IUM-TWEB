@@ -4,7 +4,6 @@ import lombok.*;
 import org.unito.postgreserver.movie.model.Movie;
 import org.unito.postgreserver.movie.model.MovieType;
 
-// Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class MovieBasicDTO implements MovieType {
     private Long id;

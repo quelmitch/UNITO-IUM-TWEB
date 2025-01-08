@@ -4,7 +4,6 @@ import lombok.*;
 
 import java.util.List;
 
-// Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class OscarFilterDTO {
     private String sortBy = "id";

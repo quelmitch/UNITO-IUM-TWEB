@@ -4,8 +4,6 @@ import lombok.*;
 import org.unito.postgreserver.release.model.Release;
 import org.unito.postgreserver.release.model.ReleaseType;
 
-import java.util.Date;
-
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class ReleaseBasicDTO implements ReleaseType {
     private String country;

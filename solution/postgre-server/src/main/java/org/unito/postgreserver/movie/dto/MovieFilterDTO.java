@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.util.List;
 
-// Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 @Schema(description = "Filter DTO for searching movies.")
 public class MovieFilterDTO {
@@ -49,6 +48,4 @@ public class MovieFilterDTO {
     private List<String> character;
 
     private List<String> audienceRating;
-
-
 }

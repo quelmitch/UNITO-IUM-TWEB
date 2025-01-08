@@ -5,11 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.unito.postgreserver.movie.model.Movie;
 
-import java.util.Date;
-
-// JPA Annotations
 @Table @Entity
-// Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class Release implements ReleaseType{
     @Id

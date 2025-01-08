@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.unito.postgreserver.movie.model.Movie;
 
-// JPA Annotations
 @Table @Entity
-// Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class Genre {
     @Id
