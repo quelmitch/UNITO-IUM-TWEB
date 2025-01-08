@@ -24,7 +24,7 @@ public class GenericFilterDTO {
     @Max(500)
     private Integer limit = 20;
 
-    @Schema(description = "The type of response to return.", example = "FULL", defaultValue = "FULL", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "The type of response to return.", example = "BASIC", defaultValue = "BASIC", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private Type responseType = Type.BASIC;
 
     @Schema(description = "The sort order.", example = "ASC", defaultValue = "ASC", requiredMode = Schema.RequiredMode.NOT_REQUIRED)

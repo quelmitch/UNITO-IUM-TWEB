@@ -6,6 +6,7 @@ import org.unito.postgreserver.release.model.ReleaseType;
 
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class ReleaseBasicDTO implements ReleaseType {
+    private Long movieId;
     private String country;
     private String date;
     private String distributionFormat;
@@ -17,6 +18,7 @@ public class ReleaseBasicDTO implements ReleaseType {
         dto.setDate(release.getDate());
         dto.setDistributionFormat(release.getDistributionFormat());
         dto.setRating(release.getRating());
+        dto.setMovieId(release.getMovieId().getId());
         return dto;
     }
 }

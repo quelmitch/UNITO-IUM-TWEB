@@ -3,7 +3,9 @@ package org.unito.postgreserver.movie.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import org.unito.postgreserver.movie.dto.MovieBasicDTO;
 import org.unito.postgreserver.movie.model.*;
 import org.unito.postgreserver.movie.dto.MovieFilterDTO;
@@ -26,12 +28,12 @@ public class MovieService {
     }
 
     public Movie getMovieById(Long id) {
-        return movieRepository.findById(id).orElse(null); // TODO add on else
+        return movieRepository.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
     }
 
     public List<Movie> getMovieByTitle(GenericFilterDTO genericFilter, String title) {
         Pageable pageable = setPageable(genericFilter);
-
 
         return movieRepository.searchMovies(title, pageable).getContent();
     }

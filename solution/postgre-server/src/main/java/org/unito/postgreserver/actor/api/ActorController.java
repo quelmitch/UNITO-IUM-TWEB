@@ -1,5 +1,6 @@
 package org.unito.postgreserver.actor.api;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/actor")
+@Tag(name = "Actors")
 public class ActorController {
     private final ActorService actorService;
 
