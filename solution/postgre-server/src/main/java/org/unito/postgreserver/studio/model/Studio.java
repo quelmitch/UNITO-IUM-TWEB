@@ -12,7 +12,7 @@ import org.unito.postgreserver.movie.model.Movie;
 @Table @Entity
 // Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class Studio {
+public class Studio implements StudioType{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

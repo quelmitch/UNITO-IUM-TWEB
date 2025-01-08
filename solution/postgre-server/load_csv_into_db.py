@@ -45,7 +45,6 @@ if __name__ == "__main__":
             ("languages.csv", "language(movie_id, type, language)"),
             ("oscars.csv", "oscar(year_movie, year_ceremony, number_ceremony, category, nominee_name, nominee_movie, is_winner)"),
             ("releases.csv", "release(movie_id, country, date, distribution_format, rating)"),
-            ("genres.csv", "genre(movie_id, genre)"),
             ("studios.csv", "studio(movie_id, studio)"),
             ("themes.csv", "theme(movie_id, theme)"),
         ]

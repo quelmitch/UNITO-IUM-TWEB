@@ -9,7 +9,7 @@ import org.unito.postgreserver.movie.model.Movie;
 @Table @Entity
 // Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class Language {
+public class Language implements LanguageType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
