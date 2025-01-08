@@ -8,10 +8,12 @@ import org.unito.postgreserver.actor.model.ActorType;
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class ActorBasicDTO implements ActorType {
     private String name;
+    private String role;
 
     public static ActorBasicDTO toDTO(Actor actor) {
         ActorBasicDTO dto = new ActorBasicDTO();
         dto.setName(actor.getName());
+        dto.setRole(actor.getRole());
         return dto;
     }
 }

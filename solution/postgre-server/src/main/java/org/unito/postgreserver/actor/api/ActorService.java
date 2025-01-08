@@ -39,7 +39,6 @@ public class ActorService {
         return buildResponse(genericFilter, actorPage.getTotalPages(), actorPage.getContent());
     }
 
-
     public Map<String, Object> getActorByFilter(GenericFilterDTO genericFilter, ActorFilterDTO actorFilter) {
         Specification<Actor> specification = combineWithAnd(List.of(
             equalsTo("name", actorFilter.getName()),
@@ -52,7 +51,6 @@ public class ActorService {
 
         return buildResponse(genericFilter, actorPage.getTotalPages(), actors);
     }
-
 
     private List<? extends ActorType> mapActors(List<Actor> actors, GenericFilterDTO.Type responseType) {
         return switch (responseType) {

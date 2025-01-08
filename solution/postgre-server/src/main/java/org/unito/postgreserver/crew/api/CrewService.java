@@ -38,7 +38,6 @@ public class CrewService {
         return buildResponse(genericFilter, crewPage.getTotalPages(), crewPage.getContent());
     }
 
-
     public Map<String, Object> getCrewMembersByFilter(GenericFilterDTO genericFilter, CrewFilterDTO crewFilter) {
         Specification<Crew> specification = combineWithAnd(List.of(
                 equalsTo("name", crewFilter.getName()),
