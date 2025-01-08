@@ -2,17 +2,16 @@ package org.unito.postgreserver.release.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.unito.postgreserver.movie.model.Movie;
+
+import java.util.Date;
 
 // JPA Annotations
 @Table @Entity
 // Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class Release {
+public class Release implements ReleaseType{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +23,7 @@ public class Release {
     private String date;
 
     @Column(nullable = false)
-    private String distribution_format;
+    private String distributionFormat;
 
     @Column(nullable = true)
     private String rating;

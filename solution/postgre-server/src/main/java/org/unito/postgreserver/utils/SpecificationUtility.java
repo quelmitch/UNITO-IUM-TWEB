@@ -52,7 +52,7 @@ public class SpecificationUtility {
      * @param <T>    The type of the entity.
      * @return A Specification that checks for equality with each value in the list, combined with AND logic.
      */
-    public static <T> Specification<T> equalsTo(String field, List<Comparable<?>> values) {
+    public static <T> Specification<T> equalsTo(String field, List<? extends Comparable<?>> values) {
         if(values == null || values.isEmpty())
             return Specification.where(null);
 

@@ -4,9 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.unito.postgreserver.actor.dto.ActorBasicDTO;
-import org.unito.postgreserver.actor.model.Actor;
-import org.unito.postgreserver.actor.model.ActorType;
 import org.unito.postgreserver.movie.dto.MovieBasicDTO;
 import org.unito.postgreserver.movie.model.*;
 import org.unito.postgreserver.movie.dto.MovieFilterDTO;
@@ -14,10 +11,7 @@ import org.unito.postgreserver.utils.GenericFilterDTO;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
 
-import static org.unito.postgreserver.utils.GenericFilterDTO.Sort.ASC;
 import static org.unito.postgreserver.utils.ServiceCommon.buildResponse;
 import static org.unito.postgreserver.utils.ServiceCommon.setPageable;
 import static org.unito.postgreserver.utils.SpecificationUtility.*;
@@ -56,7 +50,7 @@ public class MovieService {
             equalsTo("genres", "genre", movieFilter.getGenre()),
             equalsTo("countries", "country", movieFilter.getProductionCountry()),
             equalsTo("languages", "language", movieFilter.getLanguage()),
-            equalsTo("studio", "studio", movieFilter.getStudio()),
+            equalsTo("studios", "studio", movieFilter.getStudio()),
             equalsTo("releases", "country", movieFilter.getReleaseCountry()),
             equalsTo("releases", "rating", movieFilter.getAudienceRating())
         ));

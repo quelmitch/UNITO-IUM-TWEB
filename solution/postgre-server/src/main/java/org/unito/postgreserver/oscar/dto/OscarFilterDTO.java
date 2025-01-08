@@ -1,12 +1,27 @@
 package org.unito.postgreserver.oscar.dto;
 
 import lombok.*;
-import org.unito.postgreserver.oscar.model.OscarCategory;
 
 import java.util.List;
 
 // Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class OscarFilterDTO {
-    OscarCategory category;
+    private String sortBy = "id";
+
+    private Integer numberCeremonyGT;
+    private Integer numberCeremonyLT;
+
+    private Integer yearCeremonyGT;
+    private Integer yearCeremonyLT;
+
+    private Integer yearMovie;
+
+    private List<String> category;
+
+    private List<String> nomineeName;
+
+    private List<String> nomineeMovie;
+
+    private Boolean isWinner;
 }
