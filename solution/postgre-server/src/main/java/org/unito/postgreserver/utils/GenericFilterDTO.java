@@ -15,7 +15,7 @@ import lombok.*;
 @Setter
 @Schema(description = "Generic Filter DTO")
 public class GenericFilterDTO {
-    @Schema(description = "The page number to retrieve.", example = "1", defaultValue = "0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "The page number to retrieve.", example = "0", defaultValue = "0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @Min(0)
     private Integer page = 0;
 

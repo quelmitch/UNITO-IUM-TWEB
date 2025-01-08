@@ -1,5 +1,6 @@
 package org.unito.postgreserver.movie.api;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.unito.postgreserver.movie.model.Movie;
@@ -25,12 +26,18 @@ public class MovieController {
     }
 
     @GetMapping("/title")
-    public List<Movie> getMovieByTitle(@ModelAttribute GenericFilterDTO genericFilters, @RequestParam String title) {
+    public List<Movie> getMovieByTitle(
+            @ParameterObject @ModelAttribute GenericFilterDTO genericFilters,
+            @ParameterObject @RequestParam String title
+    ) {
         return movieService.getMovieByTitle(genericFilters, title);
     }
 
     @GetMapping("/filter")
-    public Map<String, Object> getMovies(@ModelAttribute GenericFilterDTO genericFilters, @ModelAttribute MovieFilterDTO movieFilters) {
+    public Map<String, Object> getMovies(
+            @ParameterObject @ModelAttribute GenericFilterDTO genericFilters,
+            @ParameterObject @ModelAttribute MovieFilterDTO movieFilters
+    ) {
         return movieService.getMovieWithFilter(genericFilters, movieFilters);
     }
 }
