@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.unito.postgreserver.oscar.dto.OscarFilterDTO;
 import org.unito.postgreserver.utils.GenericFilterDTO;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,6 +28,52 @@ class OscarController {
         this.oscarService = oscarService;
     }
 
+    @Operation(
+            summary = "Fetch all Oscar Categories",
+            description =
+                    "Fetches all the different categories stored in the Oscar table. This endpoint does not support pagination."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "OK",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    implementation = Map.class,
+                                    description = "A list of oscar category names",
+                                    example = """
+                    [
+                        "ACTOR",
+                        "ACTRESS",
+                        "ART DIRECTOR"
+                    ]
+                """
+                            )
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal Server Error",
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    value = """
+                {
+                  "timestamp": "2025-01-08T18:27:44.980+00:00",
+                  "status": 500,
+                  "error": "Internal Server Error",
+                  "path": "/oscar/categories"
+                }
+                """
+                            )
+                    )
+            )
+    })
+    @GetMapping("/categories")
+    public List<String> getAllOscarsCategories() {
+        return oscarService.getAllOscarsCategories();
+    }
 
     @Operation(
         summary = "Fetch Oscars by filter",

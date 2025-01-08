@@ -27,6 +27,10 @@ class OscarService {
         this.oscarRepository = oscarRepository;
     }
 
+    public List<String> getAllOscarsCategories() {
+        return oscarRepository.findDistinctCategories();
+    }
+
     public Map<String, Object> getOscarByFilters(GenericFilterDTO genericFilter, OscarFilterDTO oscarFilter) {
         Specification<Oscar> specification = combineWithAnd(List.of(
             greaterThan("numberCeremony", oscarFilter.getNumberCeremonyGT()),
