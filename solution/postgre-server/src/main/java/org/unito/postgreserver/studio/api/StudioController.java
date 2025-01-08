@@ -19,8 +19,9 @@ public class StudioController {
     public StudioController(final StudioService studioService) { this.studioService = studioService; }
 
     @GetMapping("")
-    public Map<String, Object> getStudiosByName(@ModelAttribute GenericFilterDTO genericFilter,
-                                                    @ModelAttribute StudioFilterDTO studioFilter
+    public Map<String, Object> getStudiosByName(
+            @ModelAttribute GenericFilterDTO genericFilter,
+            @ModelAttribute StudioFilterDTO studioFilter
     ) {
         return studioService.getAllStudios(genericFilter, studioFilter);
     }

@@ -1,5 +1,6 @@
 package org.unito.postgreserver.crew.api;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,15 +20,17 @@ public class CrewController {
     public CrewController(final CrewService crewService) { this.crewService = crewService; }
 
     @GetMapping("/name")
-    public Map<String, Object> getCrewMembersByName(@ModelAttribute GenericFilterDTO genericFilter,
-                                               @ModelAttribute CrewFilterDTO crewFilter
+    public Map<String, Object> getCrewMembersByName(
+            @ModelAttribute GenericFilterDTO genericFilter,
+            @ModelAttribute CrewFilterDTO crewFilter
     ) {
         return crewService.getCrewMembersByName(genericFilter, crewFilter);
     }
 
     @GetMapping("/filter")
-    public Map<String, Object> getCrewMembers(@ModelAttribute GenericFilterDTO genericFilter,
-                                         @ModelAttribute CrewFilterDTO crewFilter
+    public Map<String, Object> getCrewMembers(
+            @ModelAttribute GenericFilterDTO genericFilter,
+            @ModelAttribute CrewFilterDTO crewFilter
     ) {
         return crewService.getCrewMembersByFilter(genericFilter, crewFilter);
     }

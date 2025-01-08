@@ -19,7 +19,9 @@ class OscarController {
     }
 
     @GetMapping("/filter")
-    public Map<String, Object> getOscars(@ModelAttribute GenericFilterDTO genericFilter, @ModelAttribute OscarFilterDTO oscarFilter) {
+    public Map<String, Object> getOscars(
+            @ModelAttribute GenericFilterDTO genericFilter,
+            @ModelAttribute OscarFilterDTO oscarFilter) {
         return oscarService.getOscarByFilters(genericFilter, oscarFilter);
     }
 }

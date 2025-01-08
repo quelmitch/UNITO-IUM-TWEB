@@ -18,15 +18,17 @@ public class ActorController {
     }
 
     @GetMapping("/name")
-    public Map<String, Object> getActorsByName(@ModelAttribute GenericFilterDTO genericFilter,
-                                               @ModelAttribute ActorFilterDTO actorFilter
+    public Map<String, Object> getActorsByName(
+            @ModelAttribute GenericFilterDTO genericFilter,
+            @ModelAttribute ActorFilterDTO actorFilter
     ) {
         return actorService.getActorsByName(genericFilter, actorFilter);
     }
 
     @GetMapping("/filter")
-    public Map<String, Object> getActors(@ModelAttribute GenericFilterDTO genericFilter,
-                                         @ModelAttribute ActorFilterDTO actorFilter
+    public Map<String, Object> getActors(
+            @ModelAttribute GenericFilterDTO genericFilter,
+            @ModelAttribute ActorFilterDTO actorFilter
     ) {
         return actorService.getActorByFilter(genericFilter, actorFilter);
     }

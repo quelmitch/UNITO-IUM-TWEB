@@ -11,6 +11,7 @@ import org.unito.postgreserver.movie.model.Movie;
 @Table @Entity
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class Country implements CountryType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

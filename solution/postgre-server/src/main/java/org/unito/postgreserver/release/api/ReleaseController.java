@@ -19,7 +19,9 @@ public class ReleaseController {
     public ReleaseController(final ReleaseService releaseService) { this.releaseService = releaseService; }
 
     @GetMapping("/filter")
-    public Map<String, Object> getReleases(@ModelAttribute GenericFilterDTO genericFilter, @ModelAttribute ReleaseFilterDTO releaseFilter) {
+    public Map<String, Object> getReleases(
+            @ModelAttribute GenericFilterDTO genericFilter,
+            @ModelAttribute ReleaseFilterDTO releaseFilter) {
         return releaseService.getReleaseByFilters(genericFilter, releaseFilter);
     }
 }

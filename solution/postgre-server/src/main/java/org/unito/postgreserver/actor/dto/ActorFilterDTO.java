@@ -3,7 +3,6 @@ package org.unito.postgreserver.actor.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
-// Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 @Schema(description = "Filter DTO for searching actors.")
 public class ActorFilterDTO {
