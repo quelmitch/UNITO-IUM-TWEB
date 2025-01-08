@@ -1,17 +1,17 @@
 package org.unito.postgreserver.movie.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.unito.postgreserver.actor.model.Actor;
-import org.unito.postgreserver.country.Country;
+import org.unito.postgreserver.country.model.Country;
 import org.unito.postgreserver.crew.Crew;
 import org.unito.postgreserver.genre.Genre;
 import org.unito.postgreserver.language.Language;
 import org.unito.postgreserver.release.Release;
 import org.unito.postgreserver.studio.Studio;
 import org.unito.postgreserver.theme.Theme;
-import org.unito.postgreserver.utils.TableEntity;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
 @Table @Entity
 // Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class Movie implements TableEntity, MovieType {
+public class Movie implements MovieType {
     @Id
     private Long id;
 
@@ -60,6 +60,7 @@ public class Movie implements TableEntity, MovieType {
     private List<Actor> actors;
 
     @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Country> countries;
 
     @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
