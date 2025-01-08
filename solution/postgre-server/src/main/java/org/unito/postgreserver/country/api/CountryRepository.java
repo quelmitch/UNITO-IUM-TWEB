@@ -9,6 +9,6 @@ import org.unito.postgreserver.country.model.Country;
 import java.util.List;
 
 public interface CountryRepository extends JpaRepository<Country, Long>, JpaSpecificationExecutor<Country> {
-    @Query("SELECT DISTINCT new org.unito.postgreserver.country.dto.CountryBasicDTO(c.country) FROM Country c")
+    @Query("SELECT DISTINCT c.country FROM Country c")
     List<String> findDistinctCountry();
 }
