@@ -3,6 +3,7 @@ package org.unito.postgreserver.utils;
 import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +42,45 @@ public class SpecificationUtility {
     public static <T, J> Specification<T> equalsTo(String joinField, String matchField, Comparable<?> value) {
         return (root, _, criteriaBuilder) ->
             value == null ? null : criteriaBuilder.equal(root.join(joinField, JoinType.INNER).get(matchField), value);
+    }
+
+    /**
+     * Creates a specification that checks if a field is equal to any value in the provided list of values.
+     *
+     * @param field  The name of the field to compare with the values.
+     * @param values The list of values to compare with the field.
+     * @param <T>    The type of the entity.
+     * @return A Specification that checks for equality with each value in the list, combined with AND logic.
+     */
+    public static <T> Specification<T> equalsTo(String field, List<Comparable<?>> values) {
+        if(values == null || values.isEmpty())
+            return Specification.where(null);
+
+        List<Specification<T>> specs = new ArrayList<>();
+        for (Comparable<?> value : values)
+            specs.add(equalsTo(field, value)); // Adding the equalsTo specification for each value in the list
+        return combineWithAnd(specs); // Combine all the specifications with AND logic
+    }
+
+    /**
+     * Creates a specification that checks a joined entity field for equality with all the values in the provided list.
+     * <p>
+     * The generic type {@code J} is used for context and does not affect the method's behavior.
+     *
+     * @param joinField The name of the field to join on.
+     * @param field     The name of the field in the joined entity to compare with the values.
+     * @param values    The list of values to compare with the joined field.
+     * @param <T>       The type of the root entity.
+     * @param <J>         The type of the joined entity (for context only).
+     * @return A Specification that checks for equality with each value in the list, combined with AND logic, on the joined field.
+     */
+    public static <T, J> Specification<T> equalsTo(String joinField, String field, List<? extends Comparable<?>> values) {
+        if(values == null || values.isEmpty())
+            return Specification.where(null);
+        List<Specification<T>> specs = new ArrayList<>();
+        for (Comparable<?> value : values)
+            specs.add(equalsTo(joinField, field, value));
+        return combineWithAnd(specs);
     }
 
     /**

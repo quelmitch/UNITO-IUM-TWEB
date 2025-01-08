@@ -1,7 +1,6 @@
 package org.unito.postgreserver.movie.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Min;
 import lombok.*;
 
 import java.util.List;
@@ -35,4 +34,22 @@ public class MovieFilterDTO {
     //TODO
     @Schema(description = "List of actors in the movie.", example = "[\"Robert Downey Jr.\", \"Chris Hemsworth\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> actor;
+
+    private List<String> crew;
+
+    private List<String> genre;
+
+    private List<String> productionCountry;
+
+    private List<String> language;
+
+    private List<String> releaseCountry;
+
+    private List<String> studio;
+
+    private List<String> character;
+
+    private List<String> audienceRating;
+
+
 }

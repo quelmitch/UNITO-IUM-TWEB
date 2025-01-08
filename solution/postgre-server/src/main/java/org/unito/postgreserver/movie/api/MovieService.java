@@ -50,7 +50,15 @@ public class MovieService {
             lessThan("releaseYear", movieFilter.getReleaseYearLT()),
             greaterThan("rating", movieFilter.getRatingGT()),
             lessThan("rating", movieFilter.getRatingLT()),
-            equalsIn("actors", "name", movieFilter.getActor())
+            equalsTo("actors", "name", movieFilter.getActor()),
+            equalsTo("actors", "role", movieFilter.getCharacter()),
+            equalsTo("crew", "name", movieFilter.getCrew()),
+            equalsTo("genres", "genre", movieFilter.getGenre()),
+            equalsTo("countries", "country", movieFilter.getProductionCountry()),
+            equalsTo("languages", "language", movieFilter.getLanguage()),
+            equalsTo("studio", "studio", movieFilter.getStudio()),
+            equalsTo("releases", "country", movieFilter.getReleaseCountry()),
+            equalsTo("releases", "rating", movieFilter.getAudienceRating())
         ));
 
         Pageable pageable = setPageable(genericFilter, movieFilter.getSortBy());
