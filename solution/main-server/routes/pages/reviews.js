@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
                 title: 'Reviews',
                 reviews: response.data.content,
                 pagingOptions: {
-                    page: page,
+                    page: page - 1,
                     nextPage: page + 1,
                     prevPage: page - 1,
                     totalPages: totalPages-1,

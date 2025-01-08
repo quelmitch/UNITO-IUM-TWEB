@@ -1,23 +1,25 @@
 <div class="container-fluid my-4 px-5">
     <div class="row">
-        <div class="col-lg-4">
-            {{> review-filter}}
-        </div>
+        <!-- <div class="col-lg-4">
+            {{!> review-filter}}
+        </div> -->
 
         <!-- Movie cards container -->
-        <div class="col-lg-8">
-            <!-- Pagination centered at the top of the movie cards -->
+        <div class="col-lg-12">
+            <!-- Pagination centered at the top of the review cards -->
             <div class="d-flex justify-content-center mb-3">
                 {{> pagination prevPage=prevPage nextPage=nextPage}}
             </div>
 
-            <div class="movie-grid">
+            <div class="row g-3">
                 {{#each reviews}}
-                    {{> review-card review=this}}
+                    <div class="col-6">
+                        {{> review-card review=this}}
+                    </div>
                 {{/each}}
             </div>
 
-            <!-- Pagination centered at the bottom of the movie cards -->
+            <!-- Pagination centered at the bottom of the review cards -->
             <div class="d-flex justify-content-center mt-3">
                 {{> pagination prevPage=prevPage nextPage=nextPage}}
             </div>

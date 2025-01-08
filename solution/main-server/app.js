@@ -14,7 +14,6 @@ app.use(express.urlencoded({ extended: false })) // Parse form data
 app.use(cookieParser()) // Parse cookies from requests
 app.use(express.static(path.join(__dirname, 'public'))) // Serve static files from public directory
 
-
 // View Engine Setup
 const { navLinks, helpers } = require(path.join(__dirname,'./config/handlebars'))
 app.set('views', path.join(__dirname, 'views'))
