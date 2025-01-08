@@ -1,5 +1,6 @@
 package org.unito.postgreserver.release.api;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,8 +21,8 @@ public class ReleaseController {
 
     @GetMapping("/filter")
     public Map<String, Object> getReleases(
-            @ModelAttribute GenericFilterDTO genericFilter,
-            @ModelAttribute ReleaseFilterDTO releaseFilter) {
+            @ParameterObject @ModelAttribute GenericFilterDTO genericFilter,
+            @ParameterObject @ModelAttribute ReleaseFilterDTO releaseFilter) {
         return releaseService.getReleaseByFilters(genericFilter, releaseFilter);
     }
 }

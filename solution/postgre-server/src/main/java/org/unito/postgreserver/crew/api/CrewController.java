@@ -2,10 +2,7 @@ package org.unito.postgreserver.crew.api;
 
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.unito.postgreserver.crew.dto.CrewFilterDTO;
 import org.unito.postgreserver.utils.GenericFilterDTO;
 
@@ -21,16 +18,16 @@ public class CrewController {
 
     @GetMapping("/name")
     public Map<String, Object> getCrewMembersByName(
-            @ModelAttribute GenericFilterDTO genericFilter,
-            @ModelAttribute CrewFilterDTO crewFilter
+            @ParameterObject @ModelAttribute GenericFilterDTO genericFilter,
+            @ParameterObject @RequestParam(required = false) String name
     ) {
-        return crewService.getCrewMembersByName(genericFilter, crewFilter);
+        return crewService.getCrewMembersByName(genericFilter, name);
     }
 
     @GetMapping("/filter")
     public Map<String, Object> getCrewMembers(
-            @ModelAttribute GenericFilterDTO genericFilter,
-            @ModelAttribute CrewFilterDTO crewFilter
+            @ParameterObject @ModelAttribute GenericFilterDTO genericFilter,
+            @ParameterObject @ModelAttribute CrewFilterDTO crewFilter
     ) {
         return crewService.getCrewMembersByFilter(genericFilter, crewFilter);
     }

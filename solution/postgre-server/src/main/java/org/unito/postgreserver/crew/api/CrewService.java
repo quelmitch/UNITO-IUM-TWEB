@@ -26,12 +26,12 @@ public class CrewService {
     @Autowired
     public CrewService(final CrewRepository crewRepository) { this.crewRepository = crewRepository; }
 
-    public Map<String, Object> getCrewMembersByName(GenericFilterDTO genericFilter, CrewFilterDTO crewFilter) {
+    public Map<String, Object> getCrewMembersByName(GenericFilterDTO genericFilter, String name) {
 
         Pageable pageable = setPageable(genericFilter, "name");
         Page<String> crewPage;
-        if (crewFilter.getName() != null)
-            crewPage = crewRepository.findDistinctCrewMembers("%"+crewFilter.getName()+"%", pageable);
+        if (name != null)
+            crewPage = crewRepository.findDistinctCrewMembers("%"+name+"%", pageable);
         else
             crewPage = crewRepository.findDistinctCrewMembers(pageable);
 

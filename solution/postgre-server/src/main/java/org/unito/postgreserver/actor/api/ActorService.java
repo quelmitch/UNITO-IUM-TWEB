@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.unito.postgreserver.actor.dto.ActorBasicDTO;
 import org.unito.postgreserver.actor.dto.ActorFilterDTO;
 import org.unito.postgreserver.actor.model.Actor;
@@ -28,12 +27,12 @@ public class ActorService {
         this.actorRepository = actorRepository;
     }
 
-    public Map<String, Object> getActorsByName(GenericFilterDTO genericFilter, ActorFilterDTO actorFilter) {
+    public Map<String, Object> getActorsByName(GenericFilterDTO genericFilter, String name) {
 
         Pageable pageable = setPageable(genericFilter, "name");
         Page<String> actorPage;
-        if (actorFilter.getName() != null)
-            actorPage = actorRepository.findDistinctActors("%"+actorFilter.getName()+"%", pageable);
+        if (name != null)
+            actorPage = actorRepository.findDistinctActors("%"+name+"%", pageable);
         else
             actorPage = actorRepository.findDistinctActors(pageable);
 

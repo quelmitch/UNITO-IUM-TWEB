@@ -1,5 +1,6 @@
 package org.unito.postgreserver.actor.api;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.unito.postgreserver.actor.dto.ActorFilterDTO;
@@ -19,16 +20,16 @@ public class ActorController {
 
     @GetMapping("/name")
     public Map<String, Object> getActorsByName(
-            @ModelAttribute GenericFilterDTO genericFilter,
-            @ModelAttribute ActorFilterDTO actorFilter
+            @ParameterObject @ModelAttribute GenericFilterDTO genericFilter,
+            @ParameterObject @RequestParam(required = false) String name
     ) {
-        return actorService.getActorsByName(genericFilter, actorFilter);
+        return actorService.getActorsByName(genericFilter, name);
     }
 
     @GetMapping("/filter")
     public Map<String, Object> getActors(
-            @ModelAttribute GenericFilterDTO genericFilter,
-            @ModelAttribute ActorFilterDTO actorFilter
+            @ParameterObject @ModelAttribute GenericFilterDTO genericFilter,
+            @ParameterObject @ModelAttribute ActorFilterDTO actorFilter
     ) {
         return actorService.getActorByFilter(genericFilter, actorFilter);
     }
