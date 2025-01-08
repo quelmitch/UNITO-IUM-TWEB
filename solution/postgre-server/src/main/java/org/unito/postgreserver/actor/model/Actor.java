@@ -7,13 +7,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.unito.postgreserver.movie.model.Movie;
-import org.unito.postgreserver.utils.TableEntity;
 
 // JPA Annotations
 @Table @Entity
 // Lombok Annotations
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class Actor implements TableEntity, ActorType {
+public class Actor implements ActorType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

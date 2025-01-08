@@ -202,7 +202,6 @@ public class SpecificationUtility {
                 );
     }
 
-    // TODO: need to be tested
     /**
      * Creates a specification that applies the DISTINCT keyword to the query.
      *

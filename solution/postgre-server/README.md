@@ -36,7 +36,6 @@ postgre-server/
 │       │   ├── GenericFilterDTO.java
 │       │   ├── ServiceCommon.java
 │       │   ├── SpecificationUtility.java
-│       │   ├── TableEntity.java
 │       └── PostgreServerApplication.java
 └── resources/
     ├── application.properties
@@ -56,7 +55,6 @@ The `utils` package provides reusable components for simplifying common operatio
 - **`GenericFilterDTO`**: Handles generic filters like pagination, sorting, and response types.
 - **`ServiceCommon`**: Contains shared methods across services.
 - **`SpecificationUtility`**: Offers generic methods for constructing dynamic JPA Specifications. For example:
-- **`TableEntity`**: mark JPA entities for type safety
 ```java
 public static <T> Specification<T> equalsTo(String field, Comparable<?> value) {
     return (root, _, criteriaBuilder) ->
