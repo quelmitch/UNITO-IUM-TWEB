@@ -10,6 +10,7 @@ def summarize_nulls(df):
     })
 
 
+# Find matches in a column given patterns and length
 def find_matching(df, column_name, keywords, min_length=None, max_length=None):
     # Compile the regex pattern (case-insensitive)
     pattern = re.compile(r'(?i)' + '|'.join(keywords))
@@ -25,6 +26,7 @@ def find_matching(df, column_name, keywords, min_length=None, max_length=None):
     return match
 
 
+# Return the season of a date
 def get_specific_season(date):
     month = date.month
     day = date.day
