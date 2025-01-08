@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.unito.postgreserver.theme.model.Theme;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class ThemeController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Ok",
             content = {@Content(mediaType = "application/json",
-                schema = @Schema(implementation = Theme.class,
+                schema = @Schema(implementation = List.class,
                     description = "A list of theme names",
                     example = "[\"Epic heroes\", \"Heists and thrilling action\", \"Spooky, scary comedy\"]"
                 )
