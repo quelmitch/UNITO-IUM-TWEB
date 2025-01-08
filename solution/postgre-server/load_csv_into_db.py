@@ -1,4 +1,6 @@
 import psycopg2
+import argparse
+
 
 def import_csv(conn, table_name, file_path):
     """Imports a CSV file into a PostgreSQL table."""
@@ -8,12 +10,24 @@ def import_csv(conn, table_name, file_path):
         conn.commit()
 
 if __name__ == "__main__":
-    # PostgreSQL connection details
+    # Create an ArgumentParser object
+    parser = argparse.ArgumentParser(description="Connect to PostgreSQL database.")
+
+    # Add arguments for each connection parameter
+    parser.add_argument("--host", default="localhost", help="Hostname of the PostgreSQL server:")
+    parser.add_argument("--database", required=True, help="Name of the database")
+    parser.add_argument("--user", required=True, help="Username for database access")
+    parser.add_argument("--password", required=True, help="Password for database access")
+
+    # Parse the command-line arguments
+    args = parser.parse_args()
+
+    # Create a dictionary with the parsed arguments
     conn_params = {
-        "host": "localhost",
-        "database": "moviesdb",
-        "user": "postgres",
-        "password": "admin" 
+        "host": args.host,
+        "database": args.database,
+        "user": args.user,
+        "password": args.password
     }
 
     try:
