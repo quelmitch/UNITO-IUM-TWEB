@@ -54,8 +54,8 @@ class OscarService {
         return switch (responseType) {
             case FULL -> oscars;
             case BASIC -> oscars.stream()
-                    .map(OscarBasicDTO::toDTO)
-                    .toList();
+                .map(OscarBasicDTO::toDTO)
+                .toList();
         };
     }
 }

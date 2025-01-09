@@ -1,6 +1,5 @@
 TODO:
 - Update code snippets at the end
-- Make load_csv_into_db takes args
 - swagger and javadocs link
 
 # PostgreSQL Server
