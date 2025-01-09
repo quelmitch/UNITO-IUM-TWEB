@@ -1,4 +1,5 @@
 const {GenericFilter} = require("@utils/GenericFilter");
+const {ApiError} = require("./errorHandler");
 
 function parseFilters(FilterClass) {
     return (req, res, next) => {
@@ -9,8 +10,7 @@ function parseFilters(FilterClass) {
                 req.entity_filters = new FilterClass(req.query);
             next();
         } catch (error) {
-            // TODO error handling
-            res.status(400).json({error: error.message});
+            throw ApiError.badRequest('Unable to parse filters');
         }
     };
 }

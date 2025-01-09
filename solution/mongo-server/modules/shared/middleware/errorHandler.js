@@ -1,4 +1,3 @@
-// TODO rename file name to match class name??
 class ApiError extends Error {
     constructor(status, message) {
         super(message);
@@ -23,6 +22,7 @@ const errorHandler = (err, req, res, next) => {
     if (err instanceof ApiError)
         return res.status(err.status).json({status: err.status, error: err.message});
 
+    console.log(err);
     return res.status(500).json({error: "Internal Server Error"});
 };
 

@@ -18,17 +18,18 @@ reviewsRouter.get('/filter',
     genericFilterMiddleware,
     reviewFilterMiddleware,
     (req, res, next) => {
+        const sortField = req.query?.sortField;
 
-        getPaginatedResults(Model, toPlainObject(req.entity_filters), req.generic_filters)
+        getPaginatedResults(Model, toPlainObject(req.entity_filters), req.generic_filters, sortField)
             .then((result) => {
                 if (!result.totalPages)
-                    throw ApiError.notFound("No reviews found matching the query"); // TODO: should return just the empty array or 404?
+                    throw ApiError.notFound("No reviews found matching the query");
 
                 res.json(cleanResults(result));
             })
             .catch((err) => {
                 // delegate to the next middleware (error handler)
-                next(err);
+                next(err)
             })
     }
 )

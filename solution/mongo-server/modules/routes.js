@@ -7,40 +7,70 @@ const reviewRouter = require("./reviews/reviews.router");
  * @swagger
  * /review/filter:
  *   get:
- *     summary: Query movie reviews from the database
- *     description: Fetch movie reviews based on various query parameters. If no parameters are provided, returns all reviews.
+ *     summary: Retrieve movie reviews with filtering options
+ *     description: Fetch movie reviews from the database based on provided query parameters. Returns all reviews if no parameters are specified.
  *     parameters:
- *       - name: movie_title
+ *       - name: page
  *         in: query
- *         description: Title of the movie to filter reviews.
+ *         description: The page number of the results to retrieve.
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *       - name: limit
+ *         in: query
+ *         description: The number of results to return per page.
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           example: 10
+ *       - name: sortOrder
+ *         in: query
+ *         description: The order in which to sort the results.
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *           example: "asc"
+ *       - name: sortField
+ *         in: query
+ *         description: The field by which to sort the results.
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [movie_title, critic_name, is_top_critic, publisher_name, type, score, review_date]
+ *           example: ""
+ *       - name: movieTitle
+ *         in: query
+ *         description: Filter reviews by the title of the movie.
  *         required: false
  *         schema:
  *           type: string
  *           example: "Inception"
- *       - name: critic_name
+ *       - name: criticName
  *         in: query
- *         description: Name of the critic to filter reviews by.
+ *         description: Filter reviews by the critic's name.
  *         required: false
  *         schema:
  *           type: string
  *           example: "Pete Hammond"
- *       - name: is_top_critic
+ *       - name: isTopCritic
  *         in: query
- *         description: Whether the critic is considered a top critic by Rotten Tomatoes.
+ *         description: Specify if the critic is recognized as a top critic by Rotten Tomatoes.
  *         required: false
  *         schema:
  *           type: boolean
  *           example: false
- *       - name: publisher_name
+ *       - name: publisherName
  *         in: query
- *         description: Publisher or media outlet that released the review.
+ *         description: Filter reviews by the publisher or media outlet.
  *         required: false
  *         schema:
  *           type: string
  *           example: "Boxoffice Magazine"
  *       - name: type
  *         in: query
- *         description: The type of review.
+ *         description: Filter by the review type.
  *         required: false
  *         schema:
  *           type: string
@@ -48,72 +78,85 @@ const reviewRouter = require("./reviews/reviews.router");
  *           example: "Fresh"
  *       - name: score
  *         in: query
- *         description: Review score, expressed in various formats (e.g., '5/5', 'A+', '10').
+ *         description: Filter by review score, which can be in various formats (e.g., '5/5', 'A+', '10').
  *         required: false
  *         schema:
  *           type: string
  *           example: "5/5"
- *       - name: review_date
+ *       - name: reviewDateGT
  *         in: query
- *         description: "The publication date of the review. Format: YYYY-MM-DD."
+ *         description: "Minimum review date (format: YYYY-MM-DD)."
  *         required: false
  *         schema:
  *           type: string
  *           format: date
- *           example: "2010-07-05"
- *       - name: content
+ *           example: "2010-07-04"
+ *       - name: reviewDateLT
  *         in: query
- *         description: Full content or summary of the review.
+ *         description: "Maximum review date (format: YYYY-MM-DD)."
  *         required: false
  *         schema:
  *           type: string
- *           example: "A wildly entertaining and dazzling mind-trip not to be missed. Kubrick would have been proud."
+ *           format: date
+ *           example: "2010-07-06"
  *     responses:
  *       200:
- *         description: A list of movie reviews matching the query parameters.
+ *         description: A list of movie reviews that match the query parameters.
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   movie_title:
- *                     type: string
- *                     example: "Inception"
- *                   critic_name:
- *                     type: string
- *                     example: "Pete Hammond"
- *                   is_top_critic:
- *                     type: boolean
- *                     example: false
- *                   publisher_name:
- *                     type: string
- *                     example: "Boxoffice Magazine"
- *                   type:
- *                     type: string
- *                     enum: [Fresh, Rotten]
- *                     example: "Fresh"
- *                   score:
- *                     type: string
- *                     example: "5/5"
- *                   review_date:
- *                     type: string
- *                     format: date
- *                     example: "2010-07-05"
- *                   content:
- *                     type: string
- *                     example: "A wildly entertaining and dazzling mind-trip not to be missed. Kubrick would have been proud."
+ *               type: object
+ *               properties:
+ *                 limit:
+ *                   type: integer
+ *                   example: 10
+ *                 page:
+ *                   type: integer
+ *                   example: 1
+ *                 totalPages:
+ *                   type: integer
+ *                   example: 1
+ *                 content:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       rotten_tomatoes_link:
+ *                         type: string
+ *                         example: "m/inception"
+ *                       movie_title:
+ *                         type: string
+ *                         example: "Inception"
+ *                       critic_name:
+ *                         type: string
+ *                         example: "Pete Hammond"
+ *                       is_top_critic:
+ *                         type: boolean
+ *                         example: false
+ *                       publisher_name:
+ *                         type: string
+ *                         example: "Boxoffice Magazine"
+ *                       type:
+ *                         type: string
+ *                         enum: [Fresh, Rotten]
+ *                         example: "Fresh"
+ *                       score:
+ *                         type: string
+ *                         example: "5/5"
+ *                       review_date:
+ *                         type: string
+ *                         format: date
+ *                         example: "2010-07-05"
+ *                       content:
+ *                         type: string
+ *                         example: "A wildly entertaining and dazzling mind-trip not to be missed. Kubrick would have been proud."
  *       400:
- *         description: Bad request – The request data is invalid (validation error).
+ *         description: Bad Request – Invalid or malformed request.
  *       404:
- *         description: Not Found – No reviews found matching the query criteria.
+ *         description: Not Found – No reviews match the query criteria.
  *       500:
- *         description: Internal Server Error – An unexpected error occurred on the server.
+ *         description: Internal Server Error – An unexpected error occurred.
  */
 router.use('/review', reviewRouter)
-
-// TODO how to handle the "/" and "/review" routes ???
-
 
 module.exports = router;
