@@ -3,11 +3,11 @@
 <head>
     <title>{{title}}</title>
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/chat.css' />
+
     {{#if (eq currentPath '/movies')}}
         <link rel='stylesheet' href='/stylesheets/movies.css' />
         <link rel='stylesheet' href='/stylesheets/movie-filter.css' />
@@ -15,13 +15,22 @@
         <link rel='stylesheet' href='/stylesheets/movie-detail.css' />
     {{else if (startsWith currentPath '/oscars')}}
         <link rel='stylesheet' href='/stylesheets/oscars.css' />
-        <script src="scripts/fetchCeremony.js"></script>
     {{/if}}
 
 </head>
 <body>
     {{> navbar}}
     {{{body}}}
+    {{> chat }}
     {{{footer}}}
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    {{#if (startsWith currentPath '/oscars')}}
+        <script src="scripts/fetchCeremony.js"></script>
+    {{/if}}
+    <script src="scripts/chat.js"></script>
+
 </body>
 </html>
