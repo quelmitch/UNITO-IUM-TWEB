@@ -24,12 +24,3 @@
 .dropdown-menu::-webkit-scrollbar-thumb:hover {
     background-color: #555; /* thumb hover color */
 }
-
-.default-dark {
-    background-color: rgba(44, 44, 44, 1);
-}
-
-.default-dark-rounded {
-    border-radius: 10px 0 0 10px;
-    background-color: rgba(44, 44, 44, 1);
-}
