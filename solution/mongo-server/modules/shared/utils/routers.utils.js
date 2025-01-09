@@ -1,6 +1,4 @@
-async function getPaginatedResults(model, query, filters) {
-    const sortField = filters?.sortField || '_id'; // TODO remove
-
+async function getPaginatedResults(model, query, filters, sortField='_id') {
     const skip = (filters.page - 1) * filters.limit;
     const sort = {[sortField]: filters.sortOrder === 'asc' ? 1 : -1};
 

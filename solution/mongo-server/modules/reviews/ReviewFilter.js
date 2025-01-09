@@ -7,28 +7,31 @@ class ReviewFilter {
                     type,
                     reviewDateGT,
                     reviewDateLT,
-                    score,
-                    sortField
-    }) {
-        this.movie_title = movieTitle
-        this.critic_name = criticName
-        this.is_top_critic = isTopCritic // TODO parse Boolean
-        this.publisher_name = publisherName
-        this.type = type
-        this.score = score
-        this.sort_field = sortField
+                    score
+                }) {
+        this.movie_title = {$regex: new RegExp(movieTitle, 'i')}
+        this.critic_name = {$regex: new RegExp(criticName, 'i')}
+        this.is_top_critic = convertToBoolean(isTopCritic);
+        this.publisher_name = {$regex: new RegExp(publisherName, 'i')}
+        this.type = {$regex: new RegExp(type, 'i')}
+        this.score = {$regex: new RegExp(score, 'i')}
 
-        if (reviewDateGT || reviewDateLT) { // Check if at least one date is provided
+        if (reviewDateGT || reviewDateLT) {
             this.review_date = {};
             if (reviewDateGT)
                 this.review_date.$gt = new Date(reviewDateGT);
             if (reviewDateLT)
                 this.review_date.$lt = new Date(reviewDateLT);
         } else
-            this.review_date = undefined; // Set to undefined if both are missing
-
-        // if (this.review_date.$gt || !this.review_date.$lt) throw new Error('Incorrect Date Format'); // TODO is needed?
+            this.review_date = undefined;
     }
+}
+
+function convertToBoolean(value) {
+    if (typeof value === 'string')
+        return value.toLowerCase() === 'true';
+
+    return !!value;
 }
 
 module.exports = {ReviewFilter}
