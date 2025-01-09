@@ -10,12 +10,15 @@ router.get('/', (req, res) => {
 
     axios.get(`${thisServer}/api/v1/oscar/filter?${fromObjectToUri(filters)}`)
         .then((response) => {
+            console.log(response.data.content)
             res.render('pages/oscars', {
                 title: 'Oscars',
-                oscars: response.data
+                oscars: response.data.content
             })
         })
-        .catch((error) => {}) // TODO
+        .catch((error) => {
+            console.log(error)
+        }) // TODO
 });
 
 module.exports = router;

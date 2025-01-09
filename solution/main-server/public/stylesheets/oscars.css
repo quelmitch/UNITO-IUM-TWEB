@@ -1,0 +1,138 @@
+:root {
+    --bg-color: #121212;
+    --card-bg: #1f1f1f;
+    --highlight-color: #ffd700;
+    --text-color: #ffffff;
+    --border-radius: 12px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    --nominee-bg: #292929;
+    --nominee-hover: #3a3a3a;
+    --winner-bg: linear-gradient(90deg, #ffd700, #ff9d00);
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 30px 0;
+    color: var(--highlight-color);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.floating-container {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.category-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--highlight-color);
+    padding-left: 10px;
+    color: var(--highlight-color);
+}
+
+.winner-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.winner {
+    flex: 1 1 calc(50% - 10px);
+    background: #ffd700;
+    color: black;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.nominees {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.nominee {
+    flex: 1 1 calc(50% - 10px);
+    background-color: #333;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+.nominee span {
+    display: block;
+    color: var(--highlight-color);
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.nominee:hover {
+    background-color: var(--nominee-hover);
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.nav-button {
+    padding: 10px 20px;
+    border: none;
+    background: var(--highlight-color);
+    color: black;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+}
+
+.nav-button:hover {
+    background-color: #e0b800;
+}
+
+.ceremony-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.ceremony-dropdown {
+    background: var(--nominee-bg);
+    color: var(--text-color);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 5px 10px;
+    font-size: 1rem;
+}
+
+.ceremony-dropdown:focus {
+    outline: 2px solid var(--highlight-color);
+}

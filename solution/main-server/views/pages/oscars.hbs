@@ -1,5 +1,22 @@
-<div class="container-fluid my-4 px-5">
-    {{#each oscars}}
-        {{> oscar-accordion oscar=this}}
+<div class="container">
+    <div class="main-title">{{oscars.yearCeremony}} - {{oscars.numberCeremony}}th Academy Awards</div>
+    <div class="navigation">
+        <button class="nav-button">Previous</button>
+        <div class="ceremony-selector">
+            <label for="ceremony-dropdown">Select Ceremony:</label>
+            <select id="ceremony-dropdown" class="ceremony-dropdown">
+                <option value="2024">2024 - 96th</option>
+                <option value="2023">2023 - 95th</option>
+                <option value="2022">2022 - 94th</option>
+                <option value="2021">2021 - 93rd</option>
+                <option value="2020">2020 - 92nd</option>
+            </select>
+        </div>
+        <button class="nav-button">Next</button>
+    </div>
+
+    {{#each oscars.categories}}
+        {{> oscar-category category=@key winners=this.winners nominees=this.nominees }}
     {{/each}}
+
 </div>

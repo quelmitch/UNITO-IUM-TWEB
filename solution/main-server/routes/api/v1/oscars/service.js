@@ -1,24 +1,33 @@
-function groupByCeremonyAndCategory (data) {
-    return data.content.reduce((acc, nominee) => {
-        const { numberCeremony, category } = nominee;
+function groupByAndReduce(data) {
+    const { numberCeremony, yearCeremony } = data.content[0]; // Si assume che siano uguali per tutti i record.
 
-        // Initialize the group for the ceremony if it doesn't exist
-        if (!acc[numberCeremony]) {
-            acc[numberCeremony] = {};
-        }
+    // Creare la struttura desiderata
+    const result = {
+        numberCeremony,
+        yearCeremony,
+        categories: {}
+    };
 
-        // Initialize the group for the category within the ceremony if it doesn't exist
-        if (!acc[numberCeremony][category]) {
-            acc[numberCeremony][category] = [];
-        }
+    // Popolare le categorie
+    data.content.forEach(nominee => {
+        const { category, isWinner, nomineeName, nomineeMovie } = nominee;
+        const nomineeData = { nomineeName, nomineeMovie };
 
-        // Add the nominee to the appropriate category within the ceremony
-        acc[numberCeremony][category].push(nominee);
+        // Inizializzare la categoria se non esiste
+        if (!result.categories[category])
+            result.categories[category] = { winners: [], nominees: [] };
 
-        return acc;
-    }, {});
+        // Aggiungere il nominato al giusto array
+        if (isWinner)
+            result.categories[category].winners.push(nomineeData);
+        else
+            result.categories[category].nominees.push(nomineeData);
+    });
+
+    data.content = result;
+    return data;
 }
 
 module.exports = {
-    groupByCeremonyAndCategory
+    groupByAndReduce
 };
