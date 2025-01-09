@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.unito.postgreserver.oscar.dto.CeremonyDTO;
 import org.unito.postgreserver.oscar.dto.OscarBasicDTO;
 import org.unito.postgreserver.oscar.dto.OscarFilterDTO;
 import org.unito.postgreserver.oscar.model.Oscar;
@@ -57,5 +58,9 @@ class OscarService {
                 .map(OscarBasicDTO::toDTO)
                 .toList();
         };
+    }
+
+    public List<CeremonyDTO> getAllOscarsCeremonies() {
+        return oscarRepository.findDistinctCeremonies();
     }
 }

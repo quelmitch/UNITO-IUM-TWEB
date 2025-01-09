@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.unito.postgreserver.oscar.dto.CeremonyDTO;
 import org.unito.postgreserver.oscar.dto.OscarFilterDTO;
 import org.unito.postgreserver.utils.GenericFilterDTO;
 
@@ -74,6 +75,59 @@ class OscarController {
     @GetMapping("/categories")
     public List<String> getAllOscarsCategories() {
         return oscarService.getAllOscarsCategories();
+    }
+
+    @Operation(
+        summary = "Fetch all Oscar Ceremonies",
+        description =
+            "Fetches all the different ceremonies stored in the Oscar table." +
+                "<br>This endpoint does not support pagination."
+    )
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "OK",
+            content = @Content(
+                mediaType = "application/json",
+                schema = @Schema(
+                    implementation = List.class,
+                    description = "A list of oscar ceremony objects",
+                    example = """
+                        [
+                            {
+                              "numberCeremony": 1,
+                              "yearCeremony": 1928
+                            },
+                            {
+                              "numberCeremony": 2,
+                              "yearCeremony": 1929
+                            }
+                        ]
+                        """
+                )
+            )
+        ),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal Server Error",
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    value = """
+                        {
+                            "timestamp": "2025-01-08T18:27:44.980+00:00",
+                            "status": 500,
+                            "error": "Internal Server Error",
+                            "path": "/oscar/ceremonies"
+                        }
+                        """
+                )
+            )
+        )
+    })
+    @GetMapping("/ceremonies")
+    public List<CeremonyDTO> getAllOscarsCeremonies() {
+        return oscarService.getAllOscarsCeremonies();
     }
 
     @Operation(
