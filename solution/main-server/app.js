@@ -5,7 +5,12 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('@config/swagger');
+
 const app = express()
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Middleware
 app.use(logger('dev')) // HTTP request logger
