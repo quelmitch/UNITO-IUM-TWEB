@@ -24,8 +24,19 @@ router.get('/filter', async (req, res) => {
     axios.get(`${springbootServer}/oscar/filter?${filters}`)
         .then((response) => {
             const data = groupByAndReduce(response.data)
-            console.log(data)
             res.json(data)
+        })
+        .catch((error) => {
+            // TODO
+            console.log(error)
+            res.status(500).json({ error: 'Error communicating with the Spring Boot server' })
+        })
+})
+
+router.get('/ceremonies', async (req, res) => {
+    axios.get(`${springbootServer}/oscar/ceremonies`)
+        .then((response) => {
+            res.json(response.data)
         })
         .catch((error) => {
             // TODO

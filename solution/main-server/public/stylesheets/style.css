@@ -6,6 +6,10 @@ body {
     /* overflow: hidden; */
 }
 
+a {
+    text-decoration: none !important;
+}
+
 /* Navbar */
 .navbar {
     background-color: #1c1c1c;
@@ -53,8 +57,11 @@ body {
     display: inline-block; /* Assicura che il padding funzioni correttamente */
     box-sizing: border-box; /* Include il padding nella larghezza */
 }
-.pagination a.disabled {
+.disabled {
     display: none;
+}
+.hidden {
+    visibility:hidden;
 }
 .pagination a:hover:not(.disabled) {
     background-color: #555;
