@@ -43,6 +43,41 @@
     line-height: 1.5;
 }
 
+/* Movie Rating */
+#rating-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#star-container {
+    display: flex;
+    gap: 5px;
+}
+
+#star-container svg {
+    width: 24px;
+    height: 24px;
+    stroke: #f4c10f;
+    stroke-width: 1.5;
+}
+#star-container .star {
+    fill: gray;
+}
+#star-container .filled {
+    fill: #f4c10f;
+}
+#star-container .half {
+    fill: #f4c10f;
+    clip-path: inset(0 0 0 0);
+}
+#rating-container .rating {
+    font-size: 16px;
+    font-weight: bold;
+    color: #d4d4d4;
+}
+
 /* Movie Side Details */
 .sidebar {
     flex: 1;

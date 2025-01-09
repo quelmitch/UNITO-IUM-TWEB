@@ -6,9 +6,9 @@
     <div class="movie-details">
         <div class="movie-title">{{movie.title}} <span class="movie-year">({{movie.releaseYear}})</span></div>
         <div class="movie-year-genres">{{#each movie.genres}}{{this.genre}}, {{/each}} &bull; {{movie.runtime}} minutes</div>
-        <div class="movie-rating">
-            <div id="star-container" class="stars-container"></div>
-            <div id="rating-value" class="rating-value"></div>
+        <div id="rating-container">
+            <div class="rating" id="rating-value"></div>
+            <div id="star-container"></div>
         </div>
         <div class="tagline">"{{movie.tagline}}"</div>
         <div class="movie-description">
@@ -114,3 +114,5 @@
         </div>
     </div>
 </div>
+
+<script src="/scripts/movie-detail-rating.js"></script>
