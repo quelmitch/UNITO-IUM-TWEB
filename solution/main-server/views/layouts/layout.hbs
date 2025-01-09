@@ -6,6 +6,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     {{#if (eq currentPath '/movies')}}
         <link rel='stylesheet' href='/stylesheets/movies.css' />
+        <link rel='stylesheet' href='/stylesheets/movie-filter.css' />
     {{else if (startsWith currentPath '/movie')}}
         <link rel='stylesheet' href='/stylesheets/movie-detail.css' />
     {{else if (startsWith currentPath '/oscars')}}

@@ -17,6 +17,7 @@
     transition: transform 0.4s ease;
     text-decoration: none;
 }
+
 .movie-item:hover {
     transform: scale(1.05);
 }
@@ -52,6 +53,7 @@
     border-radius: 5px;
     font-size: 0.9rem;
 }
+
 .rating::before {
     content: '\2605';
     margin-right: 5px;
@@ -63,6 +65,7 @@
     padding: 1rem;
     text-align: center;
 }
+
 .movie-details h3 {
     margin: 0;
     font-size: 1.1rem;
@@ -71,6 +74,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .movie-details .release-date {
     font-size: 0.9rem;
     color: #aaa;
