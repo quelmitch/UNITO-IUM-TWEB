@@ -1,7 +1,7 @@
-const rating = 4.3; // Example rating
+const rating = parseFloat(document.getElementById('rating-value').textContent);
+
 const numStars = 5;
 const starContainer = document.getElementById('star-container');
-const ratingValue = document.getElementById('rating-value');
 
 // Generate stars based on rating
 for (let i = 0; i < numStars; i++) {
@@ -22,11 +22,9 @@ for (let i = 0; i < numStars; i++) {
         svg.classList.add('half');
         svg.style.clipPath = `inset(0 ${100 - clipPercentage}% 0 0)`;
     } else {
+        svg.style.clipPath = `inset(0 100% 0 0)`;
         svg.classList.add('star');
     }
 
     starContainer.appendChild(svg);
 }
-
-// Display the rating value
-ratingValue.textContent = `${rating.toFixed(1)}/5`;

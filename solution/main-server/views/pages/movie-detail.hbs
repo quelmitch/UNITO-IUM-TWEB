@@ -7,7 +7,7 @@
         <div class="movie-title">{{movie.title}} <span class="movie-year">({{movie.releaseYear}})</span></div>
         <div class="movie-year-genres">{{#each movie.genres}}{{this.genre}}, {{/each}} &bull; {{movie.runtime}} minutes</div>
         <div id="rating-container">
-            <div class="rating" id="rating-value"></div>
+            <div class="rating" id="rating-value">{{movie.rating}}</div>
             <div id="star-container"></div>
         </div>
         <div class="tagline">"{{movie.tagline}}"</div>
