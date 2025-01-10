@@ -1,4 +1,8 @@
 function groupByAndReduce(data) {
+    // TODO
+    if (data?.content)
+        throw Error(`No content for ${data?.content}`)
+
     const { numberCeremony, yearCeremony } = data.content[0]; // Si assume che siano uguali per tutti i record.
 
     // Creare la struttura desiderata

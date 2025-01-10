@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /language/all:
+ * /api/v1/language/all:
  *   get:
  *     summary: Get all languages from the Spring Boot server
  *     description: Fetches a list of all languages from the server.
@@ -19,26 +19,10 @@ const router = express.Router();
  *               type: array
  *               items:
  *                 type: string
- *                 example:
- *       500:
- *         description: Internal Server Error
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 timestamp:
- *                   type: string
- *                   example: "2025-01-08T18:27:44.980+00:00"
- *                 status:
- *                   type: integer
- *                   example: 500
- *                 error:
- *                   type: string
- *                   example: "Internal Server Error"
- *                 path:
- *                   type: string
- *                   example: "/language"
+ *               example:
+ *               - "Italian"
+ *               - "English"
+ *               - "Spanish"
  */
 router.get('/all', async (req, res) => {
     axios.get(`${springbootServer}/language`)
