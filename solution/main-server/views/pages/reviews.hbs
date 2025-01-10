@@ -1,8 +1,20 @@
 <div class="container-fluid my-4 px-5">
     <div class="row">
-        <!-- <div class="col-lg-4">
-            {{!> review-filter}}
-        </div> -->
+        <form id="filter-form">
+            <!-- Review Searchbar (movie title) -->
+            <div class="col-12">
+                {{!> movie-searchbar title=filters.obj.title}}
+            </div>
+
+            <!-- Review Generic Filters -->
+            <div class="col-12">
+                {{!> filter-checkboxes elements=genres active-elements=filters.obj.genre id="genre" name="Genre"}}
+
+                {{!> filter-checkboxes-search elements=languages active-elements=filters.obj.language id="language" name="Language"}}
+
+                {{!> filter-search active-elements=filters.obj.actor id="actor" name="Actor"}}
+            </div>
+        </form>
 
         <!-- Movie cards container -->
         <div class="col-lg-12">

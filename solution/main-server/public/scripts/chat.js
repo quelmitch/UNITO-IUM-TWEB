@@ -9,6 +9,7 @@ const chatInputContainer = document.getElementById('chatInputContainer');
 const usernameInputContainer = document.getElementById('usernameInputContainer');
 const usernameInput = document.getElementById('usernameInput');
 const usernameSubmit = document.getElementById('usernameSubmit');
+const usernameError = document.getElementById('usernameError');
 
 const roomId = window.location.href
 
@@ -46,11 +47,12 @@ usernameSubmit.addEventListener('click', () => {
 
         socket.emit('joinRoom', { room: roomId, username: user });
 
+        usernameError.style.display = 'inline-block';
         usernameInputContainer.style.display = 'none';
         chatMessages.style.display = 'flex';
         chatInputContainer.style.display = 'flex';
     } else {
-        alert('Please enter a valid username');
+        usernameError.style.display = 'inline-block';
     }
 });
 

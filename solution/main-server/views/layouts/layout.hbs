@@ -11,9 +11,9 @@
     {{#if (eq currentPath '/movies')}}
         <link rel='stylesheet' href='/stylesheets/movies.css' />
         <link rel='stylesheet' href='/stylesheets/filters.css' />
+    {{else if (eq currentPath '/reviews')}}
+        <link rel='stylesheet' href='/stylesheets/filters.css' />
 
-<!--    TODO REMOVE MOVIE-FILTER.css-->
-        <link rel='stylesheet' href='/stylesheets/movie-filter.css' />
     {{else if (startsWith currentPath '/movie')}}
         <link rel='stylesheet' href='/stylesheets/movie-detail.css' />
     {{else if (startsWith currentPath '/oscars')}}
@@ -39,6 +39,8 @@
     {{else if (eq currentPath '/')}}
         <script src='/scripts/homepage.js' ></script>
     {{else if (eq currentPath '/movies')}}
+        <script src="scripts/filters.js"></script>
+    {{else if (eq currentPath '/reviews')}}
         <script src="scripts/filters.js"></script>
     {{/if}}
 </body>

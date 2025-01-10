@@ -159,3 +159,13 @@
 .chat-username-input button:hover {
     background: #1565c0;
 }
+
+.alert {
+    padding: 5px;
+    background-color: #ffffff;
+    color: #cc252f;
+    border-radius: 5px;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
