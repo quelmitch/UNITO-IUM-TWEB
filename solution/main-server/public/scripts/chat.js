@@ -21,15 +21,16 @@ if (!user) {
     usernameInputContainer.style.display = 'block';
     chatMessages.style.display = 'none';
     chatInputContainer.style.display = 'none';
+} else {
+    socket.emit('joinRoom', { room: roomId, username: user });
 }
-
-socket.emit('joinRoom', {room: roomId, username: user});
 
 chatToggle.addEventListener('click', () => {
     const isActive = chatPanel.classList.toggle('active');
     chatToggle.innerHTML = isActive ? '<span>&#x2715;</span>' : '<span>&#x1F4AC;</span>';
 
     if (!user) {
+        usernameInput.focus()
         usernameInputContainer.style.display = 'block';
         chatMessages.style.display = 'none';
         chatInputContainer.style.display = 'none';
@@ -43,19 +44,19 @@ usernameSubmit.addEventListener('click', () => {
 
         user = enteredUsername;
 
-        socket.emit('joinRoom', {room: roomId, username: user});
+        socket.emit('joinRoom', { room: roomId, username: user });
 
         usernameInputContainer.style.display = 'none';
-        chatMessages.style.display = 'block';
-        chatInputContainer.style.display = 'block';
+        chatMessages.style.display = 'flex';
+        chatInputContainer.style.display = 'flex';
     } else {
         alert('Please enter a valid username');
     }
 });
 
-socket.on('message', ({username, message}) => {
-    if (!message)
-        return;
+// Handle incoming messages
+socket.on('message', ({ username, message }) => {
+    if (!message) return;
 
     const userMessage = document.createElement('div');
 
@@ -70,7 +71,7 @@ socket.on('message', ({username, message}) => {
         : `${username}: ${message}`;
 
     chatMessages.appendChild(userMessage);
-    chatMessages.scrollTop = chatMessages.scrollHeight; // scroll to the last message
+    chatMessages.scrollTop = chatMessages.scrollHeight;
     chatInput.value = '';
 });
 
@@ -78,7 +79,7 @@ socket.on('message', ({username, message}) => {
 chatSend.addEventListener('click', () => {
     const message = chatInput.value;
     if (message.trim()) {
-        socket.emit('message', {room: roomId, username: user, message});
+        socket.emit('message', { room: roomId, username: user, message });
         chatInput.value = '';
     }
 });
@@ -87,4 +88,9 @@ chatSend.addEventListener('click', () => {
 chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter')
         chatSend.click();
+});
+
+usernameInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter')
+        usernameSubmit.click();
 });

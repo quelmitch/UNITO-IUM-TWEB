@@ -12,7 +12,7 @@ module.exports = (io) => {
                 rooms[room] = [];
             rooms[room].push({id: socket.id, username});
 
-            // console.log(`${username} joined room: ${room}`);
+            console.log(`${username} joined room: ${room}`);
 
             if (roomHistory[room])
                 roomHistory[room].forEach((message) => {
