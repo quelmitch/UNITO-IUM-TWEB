@@ -1,15 +1,16 @@
 <div class="container-fluid px-5">
     <div class="row g-4 py-4">
-        <!-- Movie Title Searchbar -->
-        <div class="col-12">
-            {{> movie-searchbar}}
-        </div>
+        <form id="filter-form">
+            <!-- Movie Title Searchbar -->
+            <div class="col-12">
+                {{> movie-searchbar title=filters.obj.title}}
+            </div>
 
-        <!-- Movie all Filters -->
-        <div class="col-12">
-            {{> movie-filter}}
-        </div>
-
+            <!-- Movie all Filters -->
+            <div class="col-12">
+                {{> movie-filter}}
+            </div>
+        </form>
         <!-- Movie cards container -->
         <div class="col-12">
             <!-- Pagination centered at the top of the movie cards -->

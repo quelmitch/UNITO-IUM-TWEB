@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
             const totalPages = movieResponse.data.totalPages;
 
             delete filters.page;
-
+            console.log(filters)
             res.render('pages/movies', {
                 title: 'Movies',
                 movies: movieResponse.data.content,

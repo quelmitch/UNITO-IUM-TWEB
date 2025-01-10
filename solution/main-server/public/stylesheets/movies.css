@@ -64,6 +64,7 @@
 .movie-details {
     padding: 1rem;
     text-align: center;
+    text-overflow: ellipsis;
 }
 
 .movie-details h3 {

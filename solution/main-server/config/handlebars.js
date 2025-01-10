@@ -10,6 +10,7 @@ const helpers = {
     sum: (a, b) => a + b,
     sub: (a, b) => a - b,
     startsWith: (a, b) => a.startsWith(b),
+    contains: (array, value) => (array === value) || (Array.isArray(array) && array.includes(value)),
 }
 
 module.exports = {

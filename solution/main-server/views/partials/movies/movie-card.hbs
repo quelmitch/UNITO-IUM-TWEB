@@ -1,8 +1,8 @@
 <div class="movie-item">
     <a href="/movie/{{movie.id}}">
     <div class="movie-image">
-        <img src="{{movie.posterLink}}" alt="{{movie.title}} Poster" />
-        <div class="rating">{{movie.rating}}</div>
+        <img src="{{#if movie.posterLink}}{{movie.posterLink}}{{else}}/images/default-poster.jpg{{/if}}" alt="{{movie.title}} Poster" />
+        <div class="rating">{{#if movie.rating}}{{movie.rating}}{{else}}N/A{{/if}}</div>
     </div>
     <div class="movie-details">
         <h3>{{movie.title}}</h3>

@@ -1,44 +1,66 @@
 <!-- Movie Details Section -->
 <div class="movie-container">
     <div class="poster">
-        <img src="{{movie.posterLink}}" alt="{{movie.title}} Poster">
+        <img src="{{#if movie.posterLink}}{{movie.posterLink}}{{else}}/images/default-poster.jpg{{/if}}" alt="{{movie.title}} Poster">
     </div>
     <div class="movie-details">
-        <div class="movie-title">{{movie.title}} <span class="movie-year">({{movie.releaseYear}})</span></div>
-        <div class="movie-year-genres">{{#each movie.genres}}{{this.genre}}, {{/each}} &bull; {{movie.runtime}} minutes</div>
-        <div id="rating-container">
-            <div class="rating" id="rating-value">{{movie.rating}}</div>
-            <div id="star-container"></div>
+        <div class="movie-title">
+            {{movie.title}} {{#if movie.releaseYear}}<span class="movie-year">({{movie.releaseYear}})</span>{{/if}}
         </div>
-        <div class="tagline">"{{movie.tagline}}"</div>
+        <div class="movie-year-genres">
+            {{#if movie.genres}}{{#each movie.genres}}{{this.genre}}, {{/each}} &bull; {{/if}} {{#if movie.runtime}} {{movie.runtime}} minutes{{/if}}
+        </div>
+        {{#if movie.rating}}
+            <div id="rating-container">
+                <div class="rating" id="rating-value">{{movie.rating}}</div>
+                <div id="star-container"></div>
+            </div>
+        {{/if}}
+        <div class="tagline">"{{#if movie.tagline}}{{movie.tagline}}{{else}}No tagline available{{/if}}"</div>
         <div class="movie-description">
-            {{movie.description}}
+            {{#if movie.description}}{{movie.description}}{{else}}No description available{{/if}}
         </div>
     </div>
     <div class="sidebar">
         <div>
             <strong>Languages</strong>
-            {{#each movie.languages}}
-                <span>{{this.language}} ({{this.type}})</span>
-            {{/each}}
+            {{#if movie.languages}}
+                {{#each movie.languages}}
+                    <span>{{this.language}} ({{this.type}})</span>
+                {{/each}}
+            {{else}}
+                <span>No languages available</span>
+            {{/if}}
         </div>
         <div>
             <strong>Countries of Production</strong>
-            {{#each movie.countries}}
-                <span>{{this.country}}</span>
-            {{/each}}
+            {{#if movie.countries}}
+                {{#each movie.countries}}
+                    <span>{{this.country}}</span>
+                {{/each}}
+            {{else}}
+                <span>No countries available</span>
+            {{/if}}
         </div>
         <div>
             <strong>Studios</strong>
-            {{#each movie.studios}}
-                <span>{{this.studio}}</span>
-            {{/each}}
+            {{#if movie.studios}}
+                {{#each movie.studios}}
+                    <span>{{this.studio}}</span>
+                {{/each}}
+            {{else}}
+                <span>No studios available</span>
+            {{/if}}
         </div>
         <div>
             <strong>Themes</strong>
-            {{#each movie.themes}}
-                <span>{{this.theme}}</span>
-            {{/each}}
+            {{#if movie.themes}}
+                {{#each movie.themes}}
+                    <span>{{this.theme}}</span>
+                {{/each}}
+            {{else}}
+                <span>No themes available</span>
+            {{/if}}
         </div>
     </div>
 </div>
@@ -56,11 +78,15 @@
             </h2>
             <div id="actors" class="accordion-collapse collapse" aria-labelledby="actorsHeader" data-bs-parent="#additionalInfoAccordion">
                 <div class="accordion-body">
-                    <ul class="list-group">
-                        {{#each movie.actors}}
-                            {{> movie-detail-crew-item actor=this}}
-                        {{/each}}
-                    </ul>
+                    {{#if movie.actors}}
+                        <ul class="list-group">
+                            {{#each movie.actors}}
+                                {{> movie-detail-crew-item actor=this}}
+                            {{/each}}
+                        </ul>
+                    {{else}}
+                        No actors available
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -74,11 +100,15 @@
             </h2>
             <div id="crew" class="accordion-collapse collapse" aria-labelledby="crewHeader" data-bs-parent="#additionalInfoAccordion">
                 <div class="accordion-body">
-                    <ul class="list-group">
-                        {{#each movie.crew}}
-                            {{> movie-detail-crew-item crew=this}}
-                        {{/each}}
-                    </ul>
+                    {{#if movie.crew}}
+                        <ul class="list-group">
+                            {{#each movie.crew}}
+                                {{> movie-detail-crew-item crew=this}}
+                            {{/each}}
+                        </ul>
+                    {{else}}
+                        No crew available
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -92,23 +122,27 @@
             </h2>
             <div id="releases" class="accordion-collapse collapse" aria-labelledby="releasesHeader" data-bs-parent="#additionalInfoAccordion">
                 <div class="accordion-body">
-                    <div class="table-responsive">
-                        <table class="table table-borderless align-middle">
-                            <thead>
-                            <tr>
-                                <th>Country</th>
-                                <th>Date</th>
-                                <th>Type</th>
-                                <th>Rating</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {{#each movie.releases}}
-                                    {{> movie-detail-release-item release=this}}
-                                {{/each}}
-                            </tbody>
-                        </table>
-                    </div>
+                    {{#if movie.releases}}
+                        <div class="table-responsive">
+                            <table class="table table-borderless align-middle">
+                                <thead>
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Rating</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each movie.releases}}
+                                        {{> movie-detail-release-item release=this}}
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    {{else}}
+                        No releases available
+                    {{/if}}
                 </div>
             </div>
         </div>

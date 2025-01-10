@@ -14,7 +14,9 @@
                 {{#each genres}}
                     <li>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
+                            <input class="form-check-input" type="checkbox" name="genre" value="{{this}}"
+                                   {{#if (contains @root.filters.obj.genre this)}}checked{{/if}}
+                            >
                             <label class="form-check-label" style="white-space: nowrap;">
                                 {{this}}
                             </label>
@@ -40,7 +42,9 @@
                 {{#each languages}}
                     <li>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
+                            <input class="form-check-input" type="checkbox" name="language" value="{{this}}"
+                                   {{#if (contains @root.filters.obj.language this)}}checked{{/if}}
+                            >
                             <label class="form-check-label" style="white-space: nowrap;">
                                 {{this}}
                             </label>
@@ -51,3 +55,4 @@
         </div>
     </div>
 </div>
+<button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
