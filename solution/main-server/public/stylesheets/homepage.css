@@ -1,0 +1,59 @@
+.hero {
+    background: linear-gradient(120deg, #1e1e1e, #282828);
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    color: #f39c12;
+}
+
+.hero p {
+    color: #bbb;
+    font-size: 1.25rem;
+}
+
+.features {
+    padding: 50px 10%;
+}
+
+.features h2 {
+    color: #f39c12;
+    margin-bottom: 20px;
+}
+
+.feature-item {
+    margin: 20px 0;
+    color: #bbb;
+    text-align: center;
+}
+
+.feature-item i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #f39c12;
+}
+
+.faq-section {
+    justify-self:center;
+    background-color: #222;
+    padding: 2rem;
+    margin-top: 40px;
+    border-radius: 15px;
+    border: 1px solid #444;
+    width: 80%
+}
+.faq-section .faq-question {
+    cursor: pointer;
+    color: #f39c12;
+    font-size: 1.25rem;
+}
+.faq-section .faq-answer {
+    display: none;
+    margin-bottom: 3px;
+    color: #bbb;
+}
+.faq-section .faq-question:hover {
+    color: white;
+}
