@@ -31,7 +31,8 @@
     bottom: 90px;
     right: 20px;
     width: 300px;
-    height: 400px;
+    height: auto;
+    max-height: 380px;
     background: #1e1e1e;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -54,8 +55,8 @@
 }
 
 .chat-messages {
-    flex: 1;
     padding: 10px;
+    height: 380px;
     overflow-y: auto;
     background: #121212;
     color: #e0e0e0;
@@ -108,6 +109,7 @@
 }
 
 .chat-input button {
+    flex: 1;
     margin-left: 10px;
     padding: 10px 15px;
     background: #1e88e5;
@@ -119,5 +121,43 @@
 }
 
 .chat-input button:hover {
+    background: #1565c0;
+}
+
+/* Username input section style */
+.chat-username-input {
+    padding: 20px;
+    background: #333;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #444;
+}
+
+.chat-username-input input {
+    padding: 10px;
+    background: #121212;
+    color: #e0e0e0;
+    border: 1px solid #333;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+.chat-username-input button {
+    padding: 10px 15px;
+    background: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+.chat-username-input button:hover {
     background: #1565c0;
 }

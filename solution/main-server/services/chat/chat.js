@@ -1,5 +1,5 @@
 module.exports = (io) => {
-    const users = {};
+    const rooms = {};
     const roomHistory = {};
 
     io.on('connection', (socket) => {
@@ -8,9 +8,9 @@ module.exports = (io) => {
         socket.on('joinRoom', ({room, username}) => {
             socket.join(room);
 
-            if (!users[room])
-                users[room] = [];
-            users[room].push({id: socket.id, username});
+            if (!rooms[room])
+                rooms[room] = [];
+            rooms[room].push({id: socket.id, username});
 
             // console.log(`${username} joined room: ${room}`);
 
@@ -39,7 +39,22 @@ module.exports = (io) => {
         });
 
         socket.on('disconnect', () => {
-            console.log('A user has logged out');
+            for (const room in rooms) {
+                const userIndex = rooms[room].findIndex(user => user.id === socket.id);
+                if (userIndex !== -1) {
+                    const username = rooms[room][userIndex].username;
+                    rooms[room].splice(userIndex, 1);
+
+                    io.to(room).emit('message', {
+                        username: 'System',
+                        message: `${username} has left the room`
+                    });
+
+                    break;
+                }
+            }
+
+            // console.log('A user has logged out');
         });
     });
 };
