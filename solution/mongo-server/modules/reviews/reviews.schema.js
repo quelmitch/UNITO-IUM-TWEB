@@ -14,4 +14,6 @@ const ReviewSchema = new mongoose.Schema({
     content: {type: String}
 });
 
+ReviewSchema.index({ movie_title: 'text' });
+
 module.exports = mongoose.model('Review', ReviewSchema);

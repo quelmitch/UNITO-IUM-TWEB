@@ -9,12 +9,12 @@ class ReviewFilter {
                     reviewDateLT,
                     score
                 }) {
-        this.movie_title = {$regex: new RegExp(movieTitle, 'i')}
-        this.critic_name = {$regex: new RegExp(criticName, 'i')}
-        this.is_top_critic = convertToBoolean(isTopCritic);
-        this.publisher_name = {$regex: new RegExp(publisherName, 'i')}
-        this.type = {$regex: new RegExp(type, 'i')}
-        this.score = {$regex: new RegExp(score, 'i')}
+        this.$text = movieTitle ? { $search: movieTitle } : undefined;
+        this.critic_name = criticName ? {$regex: new RegExp(criticName, 'i')} : undefined;
+        this.is_top_critic = isTopCritic ? convertToBoolean(isTopCritic) : undefined;
+        this.publisher_name = publisherName ? {$regex: new RegExp(publisherName, 'i')} : undefined;
+        this.type = type ? {$regex: new RegExp(type, 'i')} : undefined;
+        this.score = score ? {$regex: new RegExp(score, 'i')} : undefined;
 
         if (reviewDateGT || reviewDateLT) {
             this.review_date = {};
