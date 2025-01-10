@@ -25,7 +25,7 @@ public class CrewController {
     public CrewController(final CrewService crewService) { this.crewService = crewService; }
 
     @Operation(
-        summary = "Fetch Crew Members by filter",
+        summary = "Fetch Crew Members by filters",
         description =
             "Fetches a list of Crew members from the database based on the provided filter criteria." +
                 "<br>If no filter parameters are provided, all crew members are returned." +

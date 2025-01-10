@@ -4,15 +4,15 @@ const swaggerSpec = swaggerJsdoc({
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Movie Reviews API',
+            title: 'MongoDB API',
             version: '1.0.0',
-            description: 'API for querying Rotten Tomatoes Reviews from a MongoDB database.',
+            description: 'API for querying data from a MongoDB database.',
         },
         servers: [
             {url: 'http://localhost:3001', description: 'Local server'},
         ],
     },
-    apis: ['./modules/routes.js'],
+    apis: ['./modules/*/*.router.js'],
 });
 
 module.exports = swaggerSpec;

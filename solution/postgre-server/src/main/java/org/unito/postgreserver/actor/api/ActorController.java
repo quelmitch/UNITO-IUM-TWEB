@@ -28,7 +28,7 @@ public class ActorController {
     }
 
     @Operation(
-        summary = "Fetch Actors by filter",
+        summary = "Fetch Actors by filters",
         description =
             "Fetches a list of Actors from the database based on the provided filter criteria." +
                 "<br>If no filter parameters are provided, all actors are returned." +

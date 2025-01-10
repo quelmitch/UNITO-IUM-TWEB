@@ -101,7 +101,7 @@ public class MovieController {
 
 
     @Operation(
-        summary = "Fetch Movies by filter",
+        summary = "Fetch Movies by filters",
         description =
             "Fetches a list of Movies from the database based on the provided filter criteria." +
             "<br>If no filter parameters are provided, all Movies are returned." +

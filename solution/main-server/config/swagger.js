@@ -4,7 +4,7 @@ const swaggerSpec = swaggerJsdoc({
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Movie Reviews API',
+            title: 'Public API',
             version: '1.0.0',
             description: 'API for querying data from Spring Boot and Express JS (Mongoose) Servers.',
         },

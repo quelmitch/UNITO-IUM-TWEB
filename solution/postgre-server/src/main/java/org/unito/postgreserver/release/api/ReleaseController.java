@@ -29,7 +29,7 @@ public class ReleaseController {
 
 
     @Operation(
-        summary = "Fetch releases by filter",
+        summary = "Fetch releases by filters",
         description =
             "Fetches a list of releases from the database based on the provided filter criteria." +
             "<br>If no filter parameters are provided, all releases are returned." +

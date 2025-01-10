@@ -31,7 +31,7 @@ public class StudioController {
     }
 
     @Operation(
-        summary = "Fetch studios by filter",
+        summary = "Fetch studios by filters",
         description =
             "Fetches a list of studios from the database based on the provided filter criteria." +
                 "<br>If no filter parameters are provided, all studios are returned." +

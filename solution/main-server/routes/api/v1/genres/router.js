@@ -8,6 +8,8 @@ const router = express.Router();
  * @swagger
  * /api/v1/genre/all:
  *   get:
+ *     tags:
+ *       - Genres
  *     summary: Get all genres from the Spring Boot server
  *     description: Fetches a list of all genres from the server.
  *     responses:

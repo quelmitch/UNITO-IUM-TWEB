@@ -10,7 +10,9 @@ const router = express.Router()
  * @swagger
  * /api/v1/oscar/filter:
  *   get:
- *     summary: Fetch Oscars by filter
+ *     tags:
+ *       - Oscars
+ *     summary: Fetch Oscars by filters
  *     description: TODO
  *     parameters:
  *       - in: query
@@ -181,6 +183,36 @@ router.get('/filter', async (req, res, next) => {
         })
 })
 
+/**
+ * @swagger
+ * /api/v1/oscar/ceremonies:
+ *   get:
+ *     tags:
+ *       - Oscars
+ *     summary: Get all Oscar ceremonies from the Spring Boot server
+ *     description: Fetches a list of all Oscar ceremony objects from the server.
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   numberCeremony:
+ *                     type: integer
+ *                     example: 1
+ *                   yearCeremony:
+ *                     type: integer
+ *                     example: 1928
+ *             example:
+ *               - numberCeremony: 1
+ *                 yearCeremony: 1928
+ *               - numberCeremony: 2
+ *                 yearCeremony: 1929
+ */
 router.get('/ceremonies', async (req, res) => {
     axios.get(`${springbootServer}/oscar/ceremonies`)
         .then((response) => {

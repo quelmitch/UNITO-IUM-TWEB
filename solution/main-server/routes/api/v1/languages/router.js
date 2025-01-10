@@ -8,6 +8,8 @@ const router = express.Router();
  * @swagger
  * /api/v1/language/all:
  *   get:
+ *     tags:
+ *       - Languages
  *     summary: Get all languages from the Spring Boot server
  *     description: Fetches a list of all languages from the server.
  *     responses:

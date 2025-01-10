@@ -9,7 +9,9 @@ const router = express.Router()
  * @swagger
  * /api/v1/movie/filter:
  *   get:
- *     summary: Fetch Movies by filter
+ *     tags:
+ *       - Movies
+ *     summary: Fetch movies by filters
  *     description: TODO
  *     parameters:
  *       - in: query
@@ -230,8 +232,10 @@ router.get('/filter', async (req, res) => {
  * @swagger
  * /api/v1/movie/{id}:
  *   get:
- *     summary: Fetch Movie by ID
- *     description: Fetches a Movie from the Spring Boot server with the given ID.
+ *     tags:
+ *       - Movies
+ *     summary: Fetch movie by ID
+ *     description: Fetches a movie from the Spring Boot server with the given ID.
  *     parameters:
  *       - in: path
  *         name: id

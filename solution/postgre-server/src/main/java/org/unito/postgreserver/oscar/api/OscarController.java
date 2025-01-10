@@ -131,7 +131,7 @@ class OscarController {
     }
 
     @Operation(
-        summary = "Fetch Oscars by filter",
+        summary = "Fetch Oscars by filters",
         description =
             "Fetches a list of Oscars from the database based on the provided filter criteria." +
             "<br>If no filter parameters are provided, all Oscars are returned." +
