@@ -1,0 +1,153 @@
+/* Filter Container */
+.filter-container {
+    display: inline-block;
+    position: relative;
+}
+
+/* Filter Chip */
+.filter-chip {
+    padding: 10px 16px;
+    background-color: #282828;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+}
+.filter-chip:hover {
+    background-color: #383838;
+}
+.filter-chip .count {
+    background-color: #555;
+    color: #eee;
+    padding: 5px 10px;
+    border-radius: 12px;
+    margin-left: 10px;
+    font-size: 0.9em;
+}
+.filter-chip .arrow {
+    margin-left: 8px;
+    opacity: 0.7;
+}
+
+/* Filter Dropdown*/
+.filter-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    background-color: #1e1e1e;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    padding: 15px;
+    min-width: 200px;
+}
+.filter-dropdown.show {
+    display: block;
+}
+
+/* Filter Dropdown - Checkbox Container*/
+.checkbox-container {
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    margin-bottom: 10px;
+}
+.filter-dropdown label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.1s;
+    padding: 5px;
+    border-radius: 4px;
+}
+.filter-dropdown label:hover{
+    background-color: #333;
+}
+
+.filter-dropdown input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: #007bff;
+}
+/* Scrollbar */
+.checkbox-container::-webkit-scrollbar {
+    width: 8px;
+}
+.checkbox-container::-webkit-scrollbar-track {
+    background: #2c2c2c;
+}
+.checkbox-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+.checkbox-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+/* Filter Dropdown - Buttons */
+.filter-dropdown button {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    padding: 8px 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.filter-dropdown button:hover {
+    background-color: #0056b3;
+}
+.filter-dropdown .clear-all {
+    background-color: transparent;
+    color: #007bff;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Filter Dropdown - Checkbox Search Bar */
+.filter-dropdown .checkbox-search-bar{
+    width: calc(100% - 10px);
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #282828;
+    color: #eee;
+    outline: none;
+}
+
+/*Filter Dropdown - Search Field*/
+.filter-dropdown .selected-chips-elements-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.selected-chips-elements-container .selected-chips-elements {
+    padding: 9px 16px;
+    background-color: #282828;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+    margin-bottom: 5px;
+}
+.close-button {
+    margin-left: 10px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+

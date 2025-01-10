@@ -10,6 +10,9 @@
 
     {{#if (eq currentPath '/movies')}}
         <link rel='stylesheet' href='/stylesheets/movies.css' />
+        <link rel='stylesheet' href='/stylesheets/filters.css' />
+
+<!--    TODO REMOVE MOVIE-FILTER.css-->
         <link rel='stylesheet' href='/stylesheets/movie-filter.css' />
     {{else if (startsWith currentPath '/movie')}}
         <link rel='stylesheet' href='/stylesheets/movie-detail.css' />
@@ -32,9 +35,11 @@
     <script src="scripts/chat.js"></script>
 
     {{#if (startsWith currentPath '/oscars')}}
-        <script src="s/cripts/fetchCeremony.js"></script>
+        <script src="scripts/fetchCeremony.js"></script>
     {{else if (eq currentPath '/')}}
         <script src='/scripts/homepage.js' ></script>
+    {{else if (eq currentPath '/movies')}}
+        <script src="scripts/filters.js"></script>
     {{/if}}
 </body>
 </html>

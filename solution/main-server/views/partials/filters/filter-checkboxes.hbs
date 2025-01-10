@@ -1,0 +1,16 @@
+<div class="filter-container">
+    <div class="filter-chip">{{name}} <span class="count">0</span><span class="arrow">▼</span></div>
+    <div class="filter-dropdown">
+        <div class="checkbox-container">
+            {{#each elements}}
+                <label>
+                    <input type="checkbox" name="{{../id}}" value="{{this}}"
+                           {{#if (contains ../active-elements this)}}checked{{/if}}>
+                    {{this}}
+                </label>
+            {{/each}}
+        </div>
+        <button id="apply-button">Apply</button>
+        <button class="clear-all" id="clear-all">Clear All</button>
+    </div>
+</div>

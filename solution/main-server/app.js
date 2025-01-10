@@ -34,6 +34,7 @@ app.engine(
             path.join(__dirname, 'views/partials/oscars'),
             path.join(__dirname, 'views/partials/reviews'),
             path.join(__dirname, 'views/partials/ui'),
+            path.join(__dirname, 'views/partials/filters'),
         ],
         helpers: helpers,
     })

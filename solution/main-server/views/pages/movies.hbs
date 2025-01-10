@@ -6,9 +6,13 @@
                 {{> movie-searchbar title=filters.obj.title}}
             </div>
 
-            <!-- Movie all Filters -->
+            <!-- Movie Genre Filters -->
             <div class="col-12">
-                {{> movie-filter}}
+                {{> filter-checkboxes elements=genres active-elements=filters.obj.genre id="genre" name="Genre"}}
+
+                {{> filter-checkboxes-search elements=languages active-elements=filters.obj.language id="language" name="Language"}}
+
+                {{> filter-search active-elements=filters.obj.actor id="actor" name="Actor"}}
             </div>
         </form>
         <!-- Movie cards container -->
