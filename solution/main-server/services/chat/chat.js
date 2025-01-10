@@ -1,35 +1,45 @@
 module.exports = (io) => {
     const users = {};
+    const roomHistory = {};
 
     io.on('connection', (socket) => {
-        console.log('Un utente si è connesso');
+        // console.log('A user has logged in!');
 
-        // Gestione delle stanze
-        socket.on('joinRoom', ({ room, username }) => {
+        socket.on('joinRoom', ({room, username}) => {
             socket.join(room);
 
-            // Add user to the tracking object
-            if (!users[room]) users[room] = [];
-            users[room].push({ id: socket.id, username });
+            if (!users[room])
+                users[room] = [];
+            users[room].push({id: socket.id, username});
 
-            console.log(`${username} joined room: ${room}`);
+            // console.log(`${username} joined room: ${room}`);
 
-            // Notify everyone in the room about the new user
+            if (roomHistory[room])
+                roomHistory[room].forEach((message) => {
+                    socket.emit('message', message)
+                });
+
             io.to(room).emit('message', {
                 username: 'System',
-                message: `${username} has joined the room.`,
+                message: `${username} joined room`
             });
         });
 
-        // Gestione dei messaggi
-        socket.on('message', ({ room, message, username }) => {
-            console.log(`Utente ${username} dice "${message}" nella stanza: ${room}`);
-            io.to(room).emit('message', { username, message });
+        socket.on('message', ({room, message, username}) => {
+            // console.log(`User ${username} says "${message}" in the room: ${room}`);
+
+            if (!roomHistory[room])
+                roomHistory[room] = [];
+            roomHistory[room].push({username, message});
+
+            if (roomHistory[room].length > 20)
+                roomHistory[room].shift()
+
+            io.to(room).emit('message', {username, message});
         });
 
-        // Disconnessione
         socket.on('disconnect', () => {
-            console.log('Un utente si è disconnesso');
+            console.log('A user has logged out');
         });
     });
 };

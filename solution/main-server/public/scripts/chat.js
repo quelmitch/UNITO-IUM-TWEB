@@ -7,12 +7,12 @@ const chatSend = document.getElementById('chatSend');
 
 const movieId = "film_1234";
 
-// Connessione al server Socket.IO
+// connection to the Socket.IO server
 const socket = io();
 
 // UNCOMMENT TO ENTER USERNAME
-//const user = prompt("Enter your username:") || 'User';
-socket.emit('joinRoom', { room: movieId, username: user });
+const user = prompt("Enter your username:") || 'User';
+socket.emit('joinRoom', {room: movieId, username: user});
 
 chatToggle.addEventListener('click', () => {
     const isActive = chatPanel.classList.toggle('active');
@@ -20,24 +20,31 @@ chatToggle.addEventListener('click', () => {
 });
 
 socket.on('message', ({ username, message }) => {
-    if (message) {
-        const userMessage = document.createElement('div');
-        if (username === user)
-            userMessage.className = 'message user';
-        else
-            userMessage.className = 'message other';
-        userMessage.textContent = username + ": " + message;
-        chatMessages.appendChild(userMessage);
-        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
-        chatInput.value = '';
-    }
+    if (!message)
+        return;
+
+    const userMessage = document.createElement('div');
+
+    userMessage.className = username === user
+        ? 'message user'
+        : username === 'System'
+            ? 'message system'
+            : 'message other';
+
+    userMessage.textContent = username === 'System'
+        ? message
+        : `${username}: ${message}`;
+
+    chatMessages.appendChild(userMessage);
+    chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+    chatInput.value = '';
 });
 
 // Handle sending messages
 chatSend.addEventListener('click', () => {
     const message = chatInput.value;
     if (message.trim()) {
-        socket.emit('message', { room: movieId, username: user, message });
+        socket.emit('message', {room: movieId, username: user, message});
         chatInput.value = '';
     }
 });

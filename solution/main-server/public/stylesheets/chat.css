@@ -83,6 +83,13 @@
     align-self: flex-start;
 }
 
+.message.system {
+    color: #e0e0e0;
+    align-self: center;
+    font-style: italic;
+    font-size: 14px;
+}
+
 .chat-input {
     display: flex;
     padding: 10px;
