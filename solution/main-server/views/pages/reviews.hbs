@@ -9,6 +9,23 @@
             <!-- Review Generic Filters -->
             <div class="col-12 d-flex justify-content-center gap-2 mt-4">
                 {{> filter-search active-elements=filters.obj.criticName id="criticName" name="Critic Name"}}
+
+                {{> filter-search active-elements=filters.obj.publisherName id="publisherName" name="Publisher Name"}}
+
+                {{> filter-search active-elements=filters.obj.score id="score" name="Score"}}
+
+                {{> filter-range
+                        min=1800 max=2999 step=1
+                        type="date"
+                        range-start=filters.obj.reviewDateGT range-end=filters.obj.reviewDateLT
+                        id="reviewDate" name="Review Date"
+                }}
+
+                <!-- is_top_critic -->
+                {{> filter-radio elements=topCritics active-elements=filters.obj.isTopCritic id="isTopCritic" name="Top Critic"}}
+
+                <!-- type -->
+                {{> filter-radio elements=types active-elements=filters.obj.type id="type" name="Type"}}
             </div>
         </form>
 

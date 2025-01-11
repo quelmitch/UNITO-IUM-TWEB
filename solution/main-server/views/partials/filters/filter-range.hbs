@@ -7,10 +7,10 @@
     </div>
     <div class="filter-dropdown">
         <div class="range-inputs">
-            <input class="range-start" type="number" id="start-{{id}}" name="{{id}}GT" value="{{range-start}}" placeholder="Start"
-                   step="{{step}}" min="{{min}} max="{{max}}">
-            <input class="range-end" type="number" id="end-{{id}}" name="{{id}}LT" value="{{range-end}}" placeholder="End"
-                   step="{{step}}" min="{{min}} max="{{max}}">
+            <input class="range-start" type="{{type}}" id="start-{{id}}" name="{{id}}GT" value="{{range-start}}" placeholder="Start"
+                   step="{{step}}" min="{{min}}" max="{{max}}">
+            <input class="range-end" type="{{type}}" id="end-{{id}}" name="{{id}}LT" value="{{range-end}}" placeholder="End"
+                   step="{{step}}" min="{{min}}" max="{{max}}">
         </div>
         <button id="apply-button">Apply</button>
         <button class="clear-all" id="clear-all">Clear All</button>

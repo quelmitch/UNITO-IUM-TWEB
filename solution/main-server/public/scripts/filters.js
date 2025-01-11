@@ -12,7 +12,7 @@ document.querySelectorAll('.filter-container').forEach(container => {
     const dropdown = container.querySelector('.filter-dropdown');
     const clearAllButton = container.querySelector('.clear-all');
     const applyButton = container.querySelector('#apply-button');
-    const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]');
+    const checkboxes = dropdown.querySelectorAll('input[type="checkbox"], input[type="radio"]');
     const countElement = chip.querySelector('.count');
     const checkboxSearchBar = container.querySelector('.checkbox-search-bar');
     const fieldSearchBar = container.querySelector('.field-search-bar');

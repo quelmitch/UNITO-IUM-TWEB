@@ -13,10 +13,16 @@ router.get('/', (req, res) => {
             const page = response.data.page;
             const limit = response.data.limit;
             const totalPages = response.data.totalPages;
+
+            const typeValues = ["Fresh", "Rotten"]
+            const topCriticValues = ["True", "False"]
+
             delete filters.page;
             res.render('pages/reviews', {
                 title: 'Reviews',
                 reviews: response.data.content,
+                types: typeValues,
+                topCritics: topCriticValues,
                 pagingOptions: {
                     page: page - 1,
                     nextPage: page + 1,

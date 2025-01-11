@@ -1,0 +1,19 @@
+<div class="filter-container">
+    <div class="filter-chip">{{name}} <span class="count">0</span><span class="arrow">▼</span></div>
+    <div class="filter-dropdown">
+        {{#each elements}}
+            <label>
+                <input type="radio" name="{{../id}}" value="{{this}}"
+                       {{#if (contains ../active-elements this)}}checked{{/if}}>
+                {{this}}
+                {{#if (eq this "Fresh")}}
+                    <img src="/images/tomato-48.png" alt="Fresh" style="height: 20px; width:20px" />
+                {{else if (eq this "Rotten")}}
+                    <img src="/images/rotten-tomatoes-48.png" alt="Rotten" style="height: 20px; width:20px" />
+                {{/if}}
+            </label>
+        {{/each}}
+        <button id="apply-button">Apply</button>
+        <button class="clear-all" id="clear-all">Clear All</button>
+    </div>
+</div>

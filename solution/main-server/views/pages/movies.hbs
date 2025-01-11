@@ -6,7 +6,7 @@
                 {{> filter-main-searchbar title=filters.obj.title id="title" name="Movie Title"}}
             </div>
 
-            <!-- Movie Genre Filters -->
+            <!-- Movie Filters -->
             <div class="col-12 d-flex justify-content-center gap-2 mt-4">
                 {{> filter-checkboxes elements=genres active-elements=filters.obj.genre id="genre" name="Genre"}}
 
@@ -16,6 +16,7 @@
 
                 {{> filter-range
                         min=1800 max=2999 step=1
+                        type="number"
                         range-start=filters.obj.releaseYearGT range-end=filters.obj.releaseYearLT
                         id="releaseYear" name="Release Year"
                 }}
@@ -26,12 +27,14 @@
 
                 {{> filter-range
                         min=1 max=72001 step=1
+                        type="number"
                         range-start=filters.obj.runtimeGT range-end=filters.obj.runtimeLT
                         id="runtime" name="Runtime"
                 }}
 
                 {{> filter-range
                         min=0 max=5 step=0.1
+                        type="number"
                         range-start=filters.obj.ratingGT range-end=filters.obj.ratingLT
                         id="rating" name="Rating"
                 }}
