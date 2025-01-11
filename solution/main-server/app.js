@@ -53,10 +53,14 @@ app.use('/', routes)
 
 // Error Handling
 app.use((req, res, next) => {
-    // 404 errors
-    console.log('Request 404 for:', req.originalUrl);
-    next(createError(404));
+    res.status(404).render('pages/error', {
+        error_status: 404,
+        error_name: 'Not Found',
+        error_message: 'This page does not exist. Return to the Homepage.',
+        error_redirect: '/',
+    });
 })
+
 app.use((err, req, res) => {
     // Set error locals for development and production
     res.locals.message = err.message

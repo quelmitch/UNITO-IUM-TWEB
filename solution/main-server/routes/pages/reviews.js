@@ -5,14 +5,22 @@ const { fromObjectToUri } = require('@routes-utils/common_service')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
     const filters = req.query;
 
     axios.get(`${thisServer}/api/v1/review/filter?${fromObjectToUri(filters)}`)
         .then((response) => {
+            const totalPages = response.data.totalPages - 1;
+            if (totalPages < 0)
+                return res.render('pages/error', {
+                    error_status: 404,
+                    error_name: 'Not Found',
+                    error_message: 'No reviews found matching filters.',
+                    error_redirect: '/reviews',
+                });
+
             const page = response.data.page;
             const limit = response.data.limit;
-            const totalPages = response.data.totalPages;
 
             const typeValues = ["Fresh", "Rotten"]
             const topCriticValues = ["True", "False"]
@@ -24,10 +32,10 @@ router.get('/', (req, res) => {
                 types: typeValues,
                 topCritics: topCriticValues,
                 pagingOptions: {
-                    page: page - 1,
+                    page: page-1,
                     nextPage: page + 1,
                     prevPage: page - 1,
-                    totalPages: totalPages-1,
+                    totalPages: totalPages,
                     limit: limit,
                 },
                 filters: {
@@ -36,7 +44,9 @@ router.get('/', (req, res) => {
                 },
             })
         })
-        .catch((error) => {}) // TODO
+        .catch((error) => {
+            next(error)
+        })
 });
 
 module.exports = router;

@@ -13,7 +13,7 @@
         <link rel='stylesheet' href='/stylesheets/filters.css' />
     {{else if (eq currentPath '/reviews')}}
         <link rel='stylesheet' href='/stylesheets/filters.css' />
-
+        <link rel='stylesheet' href='/stylesheets/reviews.css' />
     {{else if (startsWith currentPath '/movie/')}}
         <link rel='stylesheet' href='/stylesheets/movie-detail.css' />
     {{else if (startsWith currentPath '/oscars')}}
@@ -27,22 +27,25 @@
     {{> navbar}}
     {{{body}}}
 
-    {{^if (startsWith currentPath '/movie/')}}
+    {{#if (or (eq currentPath '/') (or (eq currentPath '/movies') (or (eq currentPath '/oscars') (eq currentPath '/reviews'))))}}
         {{> chat }}
     {{/if}}
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="scripts/chat.js"></script>
-
     {{#if (startsWith currentPath '/oscars')}}
+        <script src="scripts/chat.js"></script>
         <script src="scripts/fetchCeremony.js"></script>
     {{else if (eq currentPath '/')}}
         <script src='/scripts/homepage.js' ></script>
+        <script src="scripts/chat.js"></script>
     {{else if (eq currentPath '/movies')}}
         <script src="scripts/filters.js"></script>
+        <script src="scripts/chat.js"></script>
     {{else if (eq currentPath '/reviews')}}
+        <script src="scripts/chat.js"></script>
         <script src="scripts/filters.js"></script>
     {{/if}}
 </body>

@@ -1,0 +1,33 @@
+/* Review Errors */
+div.error{
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1.error{
+    color: #d3162b;
+    font-size: 15rem;
+    margin-bottom: 0;
+    font-style: italic;
+    font-weight: bold;
+}
+h2.error{
+    color: #d3162b;
+    margin-top: 0;
+    font-size: 3rem;
+    font-style: italic;
+    font-weight: bold;
+}
+p.error{
+    color: white;
+    font-size: 7px;
+    margin: 10px 0;
+}
+a.error{
+    color: #d3162b;
+    font-weight: bold;
+}
+a:hover {
+    text-decoration: underline !important;
+}

@@ -21,9 +21,13 @@ router.get('/', (req, res) => {
             ]);
         })
         .then(([oscarsResponse, ceremonies]) => {
-            // if ceremony not only one then render error page
-            if (oscarsResponse.data.content.length !== 1)
-                return res.render('pages/errors/oscar-error'); // TODO !== or <
+            if (oscarsResponse.data.content.length < 1)
+                return res.render('pages/error', {
+                    error_status: 404,
+                    error_name: 'Not Found',
+                    error_message: 'No oscar found matching filters.',
+                    error_redirect: '/oscars',
+                });
 
             const lastCeremony = ceremonies[0].numberCeremony;
 

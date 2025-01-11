@@ -178,9 +178,6 @@ reviewsRouter.get('/filter',
 
         getPaginatedResults(Model, toPlainObject(req.entity_filters), req.generic_filters, sortField)
             .then((result) => {
-                if (!result.totalPages)
-                    throw ApiError.notFound("No reviews found matching the query");
-
                 res.json(cleanResults(result));
             })
             .catch((err) => {

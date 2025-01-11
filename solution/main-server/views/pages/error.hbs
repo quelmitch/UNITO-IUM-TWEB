@@ -1,4 +1,5 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
-<!-- TODO remove -->
+<div class="error">
+    <h1 class="error">{{error_status}}</h1>
+    <h2 class="error">{{error_name}}</h2>
+    <p>{{error_message}} <a class="error" href="{{error_redirect}}">Click here</a> to redirect.</p>
+</div>
