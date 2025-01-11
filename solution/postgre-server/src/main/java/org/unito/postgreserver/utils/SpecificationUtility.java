@@ -225,12 +225,12 @@ public class SpecificationUtility {
      * <p>
      * The generic type {@code J} is used for context and does not affect the method's behavior.
      *
-     * @param joinField   The name of the joinField to join on.
+     * @param joinField   The name of the field to join on.
      * @param matchField  The name of the field in the joined entity to compare with the value.
      * @param value       The value to search for, using a "like" pattern (e.g., '%value%').
      * @param <T>         The type of the entity.
      * @param <J>         The type of the joined entity (for context only).
-     * @return A Specification that performs a case-insensitive "like" search on a joined joinField, or null if the value is null or empty.
+     * @return A Specification that performs a case-insensitive "like" search on a joined field, or null if the value is null or empty.
      */
     public static <T, J> Specification<T> like(String joinField, String matchField, String value) {
         return (root, _, criteriaBuilder) ->
@@ -243,16 +243,43 @@ public class SpecificationUtility {
     }
 
     /**
-     * Creates a specification that applies the DISTINCT keyword to the query.
+     * Creates a specification that performs a case-insensitive "like" search to any value in the provided list of values.
      *
-     * @param <T> The type of the entity.
-     * @return A Specification that applies the DISTINCT keyword to the query.
+     * @param field  The name of the field to compare with the value.
+     * @param values The list of values to search for, using a "like" pattern (e.g., '%value%').
+     * @param <T>    The type of the entity.
+     * @return A Specification that performs a case-insensitive "like" search with each value in the list combined with AND logic, or null if the list of values is null or empty.
      */
-    public static <T> Specification<T> distinct() {
-        return (_, query, _) -> {
-            query.distinct(true);
-            return null;
-        };
+    public static <T> Specification<T> like(String field, List<String> values) {
+        if(values == null || values.isEmpty())
+            return Specification.where(null);
+
+        List<Specification<T>> specs = new ArrayList<>();
+        for (String value : values)
+            specs.add(like(field, value)); // Adding the equalsTo specification for each value in the list
+        return combineWithAnd(specs); // Combine all the specifications with AND logic
+    }
+
+    /**
+     * Creates a specification that that performs a case-insensitive "like" search on a joined entity with all the values in the provided list.
+     * <p>
+     * The generic type {@code J} is used for context and does not affect the method's behavior.
+     *
+     * @param joinField The name of the field to join on.
+     * @param field     The name of the field in the joined entity to compare with the values.
+     * @param values    The list of values to search for, using a "like" pattern (e.g., '%value%')
+     * @param <T>       The type of the root entity.
+     * @param <J>         The type of the joined entity (for context only).
+     * @return A Specification that performs a case-insensitive "like" search on a joined field combined with AND logic, or null if the list of values is null or empty.
+     */
+    public static <T, J> Specification<T> like(String joinField, String field, List<String> values) {
+        if(values == null || values.isEmpty())
+            return Specification.where(null);
+
+        List<Specification<T>> specs = new ArrayList<>();
+        for (String value : values)
+            specs.add(like(joinField, field, value));
+        return combineWithAnd(specs);
     }
 
     /**
