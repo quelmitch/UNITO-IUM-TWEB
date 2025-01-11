@@ -3,11 +3,11 @@
         <form id="filter-form">
             <!-- Movie Title Searchbar -->
             <div class="col-12">
-                {{> movie-searchbar title=filters.obj.title}}
+                {{> filter-main-searchbar title=filters.obj.title id="title" name="Movie Title"}}
             </div>
 
             <!-- Movie Genre Filters -->
-            <div class="col-12 d-flex flex-wrap gap-2 mt-4">
+            <div class="col-12 d-flex justify-content-center gap-2 mt-4">
                 {{> filter-checkboxes elements=genres active-elements=filters.obj.genre id="genre" name="Genre"}}
 
                 {{> filter-checkboxes-search elements=languages active-elements=filters.obj.language id="language" name="Language"}}
@@ -15,9 +15,34 @@
                 {{> filter-search active-elements=filters.obj.actor id="actor" name="Actor"}}
 
                 {{> filter-range
-                    min=1800 max=2999 step=1 range-start=filters.obj.releaseYearGT
-                    range-end=filters.obj.releaseYearLT id="releaseYear" name="Release Year"
+                        min=1800 max=2999 step=1
+                        range-start=filters.obj.releaseYearGT range-end=filters.obj.releaseYearLT
+                        id="releaseYear" name="Release Year"
                 }}
+
+                {{> filter-search active-elements=filters.obj.studio id="studio" name="Studio"}}
+
+                {{> filter-search active-elements=filters.obj.crew id="crew" name="Crew"}}
+
+                {{> filter-range
+                        min=1 max=72001 step=1
+                        range-start=filters.obj.runtimeGT range-end=filters.obj.runtimeLT
+                        id="runtime" name="Runtime"
+                }}
+
+                {{> filter-range
+                        min=0 max=5 step=0.1
+                        range-start=filters.obj.ratingGT range-end=filters.obj.ratingLT
+                        id="rating" name="Rating"
+                }}
+
+                {{> filter-search active-elements=filters.obj.character id="character" name="Character"}}
+
+                {{> filter-search active-elements=filters.obj.audienceRating id="audienceRating" name="Audience Rating"}}
+
+                {{> filter-search active-elements=filters.obj.releaseCountry id="releaseCountry" name="Release Country"}}
+
+                {{> filter-search active-elements=filters.obj.productionCountry id="productionCountry" name="Production Country"}}
             </div>
         </form>
         <!-- Movie cards container -->

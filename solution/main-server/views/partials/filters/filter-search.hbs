@@ -1,8 +1,8 @@
 <div class="filter-container">
     <div class="filter-chip">{{name}} <span id="{{id}}-count" class="count">0</span><span class="arrow">▼</span></div>
     <div class="filter-dropdown">
-        <input type="text" class="field-search-bar" placeholder="Search {{id}}...">
-        <div class="selected-chips-elements-container">
+        <input type="text" class="field-search-bar" placeholder="Search by {{id}}...">
+        <div class="selected-chips-elements-container" data-name="{{id}}">
             {{#each (toArray active-elements)}}
                 <div class="selected-chips-elements-wrapper">
                     {{this}}

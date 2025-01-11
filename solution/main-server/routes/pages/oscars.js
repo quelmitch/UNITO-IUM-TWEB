@@ -27,7 +27,6 @@ router.get('/', (req, res) => {
 
             const lastCeremony = ceremonies[0].numberCeremony;
 
-            console.log(oscarsResponse.data.content);
             res.render('pages/oscars', {
                 title: 'Oscars',
                 oscars: oscarsResponse.data.content[0],

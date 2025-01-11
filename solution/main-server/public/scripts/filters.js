@@ -96,11 +96,11 @@ document.querySelectorAll('.filter-container').forEach(container => {
     });
 
     rangeStart?.addEventListener('change', () => {
-        rangeEnd.min = parseInt(rangeStart.value, 10) + 1;
+        rangeEnd.min = parseInt(rangeStart.value, 10) + parseInt(rangeStart.step, 10);
     })
 
     rangeEnd?.addEventListener('change', () => {
-        rangeStart.max = parseInt(rangeEnd.value, 10) - 1;
+        rangeStart.max = parseInt(rangeEnd.value, 10) - parseInt(rangeEnd.step, 10);
     })
 
     if (!rangeStart && !rangeEnd)
@@ -133,7 +133,7 @@ function addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer
         inputChip.className = 'selected-chips-elements';
         inputChip.type = 'checkbox';
         inputChip.value = searchTerm;
-        inputChip.name = 'actor';
+        inputChip.name = selectedChipElementsContainer.dataset.name;
         inputChip.checked = true;
 
         const closeButton = document.createElement('span');
@@ -145,6 +145,7 @@ function addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer
         selectedChipElementsContainer.appendChild(chipContainer);
         fieldSearchBar.value = "";
     } else {
+        // TODO: generalize
         alert("Attore già aggiunto");
     }
 }

@@ -1,19 +1,19 @@
 <div class="container">
     <div class="d-flex justify-content-center">
         <div class="input-group input-group-lg" style="max-width: 600px;">
-            <input type="text" class="form-control movie-search-title" placeholder="Search by Movie Title..."
+            <input type="text" class="form-control movie-search-title" placeholder="Search by {{name}}..."
                    style="background-color: #333;
                           color: #fff;
                           border: 2px solid #555;
                           border-radius: 30px;
                           font-size: 18px;
                           padding: 15px 15px 15px 30px;"
-                   name="title" {{#if title}}value="{{title}}{{/if}}"
+                   name="{{id}}" {{#if title}}value="{{title}}{{/if}}"
             />
         </div>
     </div>
 </div>
 
 <style>
-.form-control::placeholder {color: #aaa;}
+    .form-control::placeholder {color: #aaa;}
 </style>

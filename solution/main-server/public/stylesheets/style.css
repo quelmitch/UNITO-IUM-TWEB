@@ -58,7 +58,7 @@ a {
     box-sizing: border-box; /* Include il padding nella larghezza */
 }
 .disabled {
-    display: none;
+    display: none !important;
 }
 .hidden {
     visibility:hidden;
