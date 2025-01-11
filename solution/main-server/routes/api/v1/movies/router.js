@@ -2,6 +2,7 @@ const express = require('express')
 const axios = require('axios')
 const { fromObjectToUri } = require('@routes-utils/common_service')
 const { springbootServer } = require('@config/server')
+const {ApiError} = require("../../../utils/error_handler");
 
 const router = express.Router()
 
@@ -12,7 +13,7 @@ const router = express.Router()
  *     tags:
  *       - Movies
  *     summary: Fetch movies by filters
- *     description: TODO
+ *     description: Fetches a list of movies that match the given filters, supporting pagination, case-insensitive search, and sorting by various fields.
  *     parameters:
  *       - in: query
  *         name: page
@@ -215,7 +216,7 @@ const router = express.Router()
  *                         type: string
  *                         example: "https://a.ltrbxd.com/resized/film-poster/2/7/7/0/6/4/277064-barbie-0-230-0-345-crop.jpg?v=1b83dc7a71"
  */
-router.get('/filter', async (req, res) => {
+router.get('/filter', async (req, res, next) => {
     const filters = fromObjectToUri(req.query)
 
     axios.get(`${springbootServer}/movie/filter?${filters}`)
@@ -223,8 +224,7 @@ router.get('/filter', async (req, res) => {
             res.json(response.data)
         })
         .catch((error) => {
-            // TODO
-            res.status(500).json({ error: 'Error communicating with the Spring Boot server' })
+            next(error)
         })
 })
 
@@ -278,7 +278,7 @@ router.get('/filter', async (req, res) => {
  *                   type: string
  *                   example: "https://a.ltrbxd.com/resized/film-poster/2/7/7/0/6/4/277064-barbie-0-230-0-345-crop.jpg?v=1b83dc7a71"
  */
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res, next) => {
     const movie_id = req.params.id
     if (!movie_id)
         res.status(400).send('Bad Request')
@@ -288,8 +288,7 @@ router.get('/:id', async (req, res) => {
             res.json(response.data)
         })
         .catch((error) => {
-            // TODO
-            res.status(500).json({ error: 'Errore nella comunicazione con il server Spring Boot' })
+            next(error)
         })
 })
 

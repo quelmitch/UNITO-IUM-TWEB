@@ -3,6 +3,7 @@ const axios = require("axios");
 const { fromObjectToUri } = require('@routes-utils/common_service')
 const { springbootServer } = require('@config/server')
 const { groupByAndReduce } = require("./service")
+const {ApiError} = require("../../../utils/error_handler");
 
 const router = express.Router()
 
@@ -114,7 +115,7 @@ const router = express.Router()
  *         description: Indicates whether the nominee was a winner.
  *     responses:
  *       200:
- *         description: OK TODO
+ *         description: ok
  *         content:
  *           application/json:
  *             schema:
@@ -125,7 +126,7 @@ const router = express.Router()
  *                   example: 10
  *                 totalPages:
  *                   type: integer
- *                   example: 545
+ *                   example: 1
  *                 page:
  *                   type: integer
  *                   example: 0
@@ -136,25 +137,36 @@ const router = express.Router()
  *                     properties:
  *                       numberCeremony:
  *                         type: integer
- *                         example: 1
+ *                         example: 91
  *                       yearCeremony:
  *                         type: integer
- *                         example: 1928
- *                       yearMovie:
- *                         type: integer
- *                         example: 1927
- *                       category:
- *                         type: string
- *                         example: "ACTOR"
- *                       nomineeName:
- *                         type: string
- *                         example: "Richard Barthelmess"
- *                       nomineeMovie:
- *                         type: string
- *                         example: "The Noose"
- *                       isWinner:
- *                         type: boolean
- *                         example: false
+ *                         example: 2019
+ *                       categories:
+ *                         type: object
+ *                         properties:
+ *                           ACTOR IN A LEADING ROLE:
+ *                             type: object
+ *                             properties:
+ *                               winners:
+ *                                 type: array
+ *                                 items:
+ *                                   type: object
+ *                                   properties:
+ *                                     nomineeName:
+ *                                       type: string
+ *                                       example: "Rami Malek"
+ *                                     nomineeMovie:
+ *                                       type: string
+ *                                       example: "Bohemian Rhapsody"
+ *                               nominees:
+ *                                 type: array
+ *                                 items:
+ *                                   type: object
+ *                             example:
+ *                               winners:
+ *                                 - nomineeName: "Rami Malek"
+ *                                   nomineeMovie: "Bohemian Rhapsody"
+ *                               nominees: []
  */
 router.get('/filter', async (req, res, next) => {
     const numberCeremony = req.query?.numberCeremony ? parseInt(req.query.numberCeremony, 10) : null
@@ -177,9 +189,7 @@ router.get('/filter', async (req, res, next) => {
             res.json(response.data)
         })
         .catch((error) => {
-            // TODO
-            console.log(error)
-            res.status(500).json({ error: 'Error communicating with the Spring Boot server' })
+            next(error)
         })
 })
 
@@ -213,15 +223,13 @@ router.get('/filter', async (req, res, next) => {
  *               - numberCeremony: 2
  *                 yearCeremony: 1929
  */
-router.get('/ceremonies', async (req, res) => {
+router.get('/ceremonies', async (req, res, next) => {
     axios.get(`${springbootServer}/oscar/ceremonies`)
         .then((response) => {
             res.json(response.data)
         })
         .catch((error) => {
-            // TODO
-            console.log(error)
-            res.status(500).json({ error: 'Error communicating with the Spring Boot server' })
+            next(error)
         })
 })
 

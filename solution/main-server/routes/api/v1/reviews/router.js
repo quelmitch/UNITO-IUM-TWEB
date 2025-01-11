@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const { fromObjectToUri } = require('@routes-utils/common_service')
 const { mongodbServer} = require('@config/server')
+const {ApiError} = require("../../../utils/error_handler");
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ const router = express.Router();
  *     tags:
  *       - Reviews
  *     summary: Fetch reviews by filters
- *     description: TODO
+ *     description: Fetches a list of reviews that match the given filters, supporting pagination, case-insensitive search, and sorting by a specified fields.
  *     parameters:
  *       - name: page
  *         in: query
@@ -161,7 +162,7 @@ const router = express.Router();
  *       500:
  *         description: Internal Server Error – An unexpected error occurred.
  */
-router.get('/filter', async (req, res) => {
+router.get('/filter', async (req, res, next) => {
     const filters = fromObjectToUri(req.query)
 
     axios.get(`${mongodbServer}/review/filter?${filters}`)
@@ -169,8 +170,7 @@ router.get('/filter', async (req, res) => {
             res.json(response.data)
         })
         .catch((error) => {
-            // TODO
-            res.status(500).json({ error: 'Failed to fetch data from MongoDB server' })
+            next(error)
         })
 })
 

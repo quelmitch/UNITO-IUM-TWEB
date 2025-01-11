@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const { springbootServer } = require('@config/server')
+const {ApiError} = require("../../../utils/error_handler");
 
 const router = express.Router();
 
@@ -26,14 +27,13 @@ const router = express.Router();
  *                 - "Japanese"
  *                 - "Korean"
  */
-router.get('/all', async (req, res) => {
+router.get('/all', async (req, res, next) => {
     axios.get(`${springbootServer}/genre`)
         .then((response) => {
             res.json(response.data)
         })
         .catch((error) => {
-            // TODO
-            res.status(500).json({ error: 'Failed to fetch data from Spring Boot server' })
+            next(error)
         })
 })
 
