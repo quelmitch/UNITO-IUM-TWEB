@@ -168,9 +168,7 @@ router.get('/filter', async (req, res, next) => {
         .then((response) => {
             res.json(response.data)
         })
-        .catch((error) => {
-            next(error)
-        })
+        .catch((error) => next(error))
 })
 
 module.exports = router;

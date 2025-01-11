@@ -4,7 +4,7 @@ const iso3166 = require('iso-3166-1');
 const { thisServer } = require('@config/server')
 const router = express.Router();
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
     const movie_id = req.params.id;
     if (!movie_id)
         res.status(400).send('Bad Request')
@@ -12,11 +12,11 @@ router.get('/:id', (req, res) => {
     axios.get(`${thisServer}/api/v1/movie/${movie_id}`)
         .then((response) => {
 
-            // TODO fix some flag not displaying
             response.data.releases.forEach((release) => {
                 if (release.country) {
                     const countryCode = iso3166.whereCountry(release.country)?.alpha2;
-                    if (countryCode) release.flagLink = `https://flagcdn.com/w40/${countryCode.toLowerCase()}.png`;
+                    if (countryCode)
+                        release.flagLink = `https://flagcdn.com/w40/${countryCode.toLowerCase()}.png`;
                 }
             })
             
@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
                 movie: response.data
             })
         })
-        .catch((error) => {}) // TODO
+        .catch((error) => next(error))
 
 })
 

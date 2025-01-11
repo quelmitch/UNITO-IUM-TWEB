@@ -187,9 +187,7 @@ router.get('/filter', async (req, res, next) => {
             response.data.content = groupByAndReduce(response.data.content)
             res.json(response.data)
         })
-        .catch((error) => {
-            next(error)
-        })
+        .catch((error) => next(error))
 })
 
 /**
@@ -227,9 +225,7 @@ router.get('/ceremonies', async (req, res, next) => {
         .then((response) => {
             res.json(response.data)
         })
-        .catch((error) => {
-            next(error)
-        })
+        .catch((error) => next(error))
 })
 
 module.exports = router;

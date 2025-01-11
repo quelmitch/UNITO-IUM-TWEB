@@ -52,7 +52,7 @@ const routes = require(path.join(__dirname, './routes/index'))
 app.use('/', routes)
 
 // Error Handling
-app.use((req, res, next) => {
+app.use((req, res) => {
     res.status(404).render('pages/error', {
         error_status: 404,
         error_name: 'Not Found',
@@ -60,15 +60,14 @@ app.use((req, res, next) => {
         error_redirect: '/',
     });
 })
-
-app.use((err, req, res) => {
-    // Set error locals for development and production
-    res.locals.message = err.message
-    res.locals.error = req.app.get('env') === 'development' ? err : {}
-
-    // Render the error page
-    res.status(err.status || 500)
-    res.render('error')
+app.use((err, req, res, next) => {
+    console.log(err)
+    res.status(err.status || 500).render('pages/error', {
+        error_status: err.status || 500,
+        error_name: err.response.statusText,
+        error_message: 'Return to the Homepage.',
+        error_redirect: '/',
+    })
 })
 
 module.exports = app;

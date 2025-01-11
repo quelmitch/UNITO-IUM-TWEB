@@ -5,7 +5,7 @@ const { fromObjectToUri } = require('@routes-utils/common_service')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
     axios.get(`${thisServer}/api/v1/oscar/ceremonies`)
         .then((ceremoniesResponse) => {
             // Get all ceremonies to know last ceremony
@@ -40,11 +40,7 @@ router.get('/', (req, res) => {
                 lastCeremony: lastCeremony
             });
         })
-        .catch((error) => {
-            // TODO
-            console.error(error);
-            res.status(500).send('Internal Server Error');
-        });
+        .catch((error) => next(error))
 });
 
 module.exports = router;

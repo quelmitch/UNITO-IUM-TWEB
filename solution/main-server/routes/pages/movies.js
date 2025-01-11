@@ -5,7 +5,7 @@ const {fromObjectToUri} = require("@routes-utils/common_service");
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
     const filters = req.query;
 
     Promise.all([
@@ -53,7 +53,7 @@ router.get('/', (req, res) => {
                 countries: countries,
             });
         })
-        .catch((error) => {});
+        .catch((error) => next(error))
 
 })
 

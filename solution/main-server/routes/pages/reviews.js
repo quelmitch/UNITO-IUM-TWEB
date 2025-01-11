@@ -6,6 +6,8 @@ const { fromObjectToUri } = require('@routes-utils/common_service')
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
+    // throw new Error()
+
     const filters = req.query;
 
     axios.get(`${thisServer}/api/v1/review/filter?${fromObjectToUri(filters)}`)
@@ -44,9 +46,7 @@ router.get('/', (req, res, next) => {
                 },
             })
         })
-        .catch((error) => {
-            next(error)
-        })
+        .catch((error) => next(error))
 });
 
 module.exports = router;
