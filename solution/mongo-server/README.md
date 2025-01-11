@@ -97,7 +97,7 @@ class GenericFilter {
 ---
 ## How to import database data
 The clean `review` dataset from the data-analysis project can be easily imported into MongoDB using the **Mongodb Database Tools**. <br>
-Here is the command line command to load the data. Adjust parameters based on your configuration:
+Here is the command line command to load the data. Adjust parameters based on your configuration (The file must be a JSON to correctly import the data types):
 ```bash
-mongoimport --uri="mongodb://localhost:27017" --db=<<DB_NAME>> --collection=reviews --type=csv --headerline --file=<<path/to/reviews.csv>>
+mongoimport --uri="mongodb://localhost:27017" --db=<<DB_NAME>> --collection=reviews --type=json --headerline --file=<<path/to/reviews.json>>
 ```
