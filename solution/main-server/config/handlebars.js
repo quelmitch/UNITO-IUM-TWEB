@@ -11,6 +11,9 @@ const helpers = {
     sub: (a, b) => a - b,
     startsWith: (a, b) => a.startsWith(b),
     contains: (array, value) => (array === value) || (Array.isArray(array) && array.includes(value)),
+    toArray: (a) => Array.isArray(a) ? a : a ? [a] : null,
+    and: (a, b) => a && b,
+    or: (a, b) => a || b,
 }
 
 module.exports = {

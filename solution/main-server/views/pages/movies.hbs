@@ -7,12 +7,17 @@
             </div>
 
             <!-- Movie Genre Filters -->
-            <div class="col-12">
+            <div class="col-12 d-flex flex-wrap gap-2 mt-4">
                 {{> filter-checkboxes elements=genres active-elements=filters.obj.genre id="genre" name="Genre"}}
 
                 {{> filter-checkboxes-search elements=languages active-elements=filters.obj.language id="language" name="Language"}}
 
                 {{> filter-search active-elements=filters.obj.actor id="actor" name="Actor"}}
+
+                {{> filter-range
+                    min=1800 max=2999 step=1 range-start=filters.obj.releaseYearGT
+                    range-end=filters.obj.releaseYearLT id="releaseYear" name="Release Year"
+                }}
             </div>
         </form>
         <!-- Movie cards container -->

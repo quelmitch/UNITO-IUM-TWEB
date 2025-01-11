@@ -1,10 +1,14 @@
 <div class="filter-container">
-    <div class="filter-chip">{{name}} <span class="count">0</span><span class="arrow">▼</span></div>
+    <div class="filter-chip">{{name}} <span id="{{id}}-count" class="count">0</span><span class="arrow">▼</span></div>
     <div class="filter-dropdown">
         <input type="text" class="field-search-bar" placeholder="Search {{id}}...">
         <div class="selected-chips-elements-container">
-            {{#each active-elements}}
-                <div class="selected-chips-elements">{{this}}</div>
+            {{#each (toArray active-elements)}}
+                <div class="selected-chips-elements-wrapper">
+                    {{this}}
+                    <input class="selected-chips-elements" type="checkbox" value="{{this}}" name="{{../id}}" checked>
+                    <span class="close-button" data-name="{{../id}}">×</span>
+                </div>
             {{/each}}
         </div>
         <button id="apply-button">Apply</button>

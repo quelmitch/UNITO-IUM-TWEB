@@ -9,7 +9,7 @@
     padding: 10px 16px;
     background-color: #282828;
     border: none;
-    border-radius: 24px;
+    border-radius: 14px;
     cursor: pointer;
     user-select: none;
     display: flex;
@@ -23,7 +23,7 @@
 .filter-chip .count {
     background-color: #555;
     color: #eee;
-    padding: 5px 10px;
+    padding: 0 10px;
     border-radius: 12px;
     margin-left: 10px;
     font-size: 0.9em;
@@ -115,7 +115,8 @@
 }
 
 /* Filter Dropdown - Checkbox Search Bar */
-.filter-dropdown .checkbox-search-bar{
+.filter-dropdown .checkbox-search-bar,
+.field-search-bar{
     width: calc(100% - 10px);
     margin-bottom: 10px;
     padding: 8px;
@@ -126,13 +127,13 @@
     outline: none;
 }
 
-/*Filter Dropdown - Search Field*/
+/* Filter Dropdown - Search Field */
 .filter-dropdown .selected-chips-elements-container {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 10px;
 }
-.selected-chips-elements-container .selected-chips-elements {
+.selected-chips-elements-container .selected-chips-elements-wrapper {
     padding: 9px 16px;
     background-color: #282828;
     border: none;
@@ -145,9 +146,30 @@
     transition: background-color 0.2s;
     margin-bottom: 5px;
 }
+.selected-chips-elements {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
 .close-button {
-    margin-left: 10px;
     opacity: 0.7;
     cursor: pointer;
+}
+
+/* Filter Dropdown - Range */
+.range-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.range-inputs input{
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #282828;
+    color: #eee;
+    outline: none;
+    text-align: center;
 }
 

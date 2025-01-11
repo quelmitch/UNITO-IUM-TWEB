@@ -1,3 +1,12 @@
+const form = document.getElementById("filter-form")
+
+form.addEventListener("submit", () => {
+    Array.from(form.elements).forEach(control => {
+        control.disabled = control.value === '';
+    });
+})
+
+
 document.querySelectorAll('.filter-container').forEach(container => {
     const chip = container.querySelector('.filter-chip');
     const dropdown = container.querySelector('.filter-dropdown');
@@ -8,15 +17,12 @@ document.querySelectorAll('.filter-container').forEach(container => {
     const checkboxSearchBar = container.querySelector('.checkbox-search-bar');
     const fieldSearchBar = container.querySelector('.field-search-bar');
     const selectedChipElementsContainer = container.querySelector('.selected-chips-elements-container');
-
-    // Funzione per aggiornare il conteggio
-    function updateCount() {
-        countElement.textContent = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
-    }
+    const rangeStart = container.querySelector('.range-start');
+    const rangeEnd = container.querySelector('.range-end');
 
     // Evento per aggiornare il conteggio quando cambia uno dei checkbox
     checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', updateCount);
+        checkbox.addEventListener('change', () => updateCount(countElement, checkboxes));
     });
 
     // Mostra/nasconde il dropdown quando si clicca sul chip
@@ -36,11 +42,20 @@ document.querySelectorAll('.filter-container').forEach(container => {
             checkbox.checked = false;
         });
         if (checkboxSearchBar) checkboxSearchBar.value = "";
+        if (fieldSearchBar) fieldSearchBar.value = "";
         checkboxes.forEach(checkbox => {
+            if (checkbox.parentElement.classList.contains('selected-chips-elements-wrapper')) {
+                checkbox.parentElement.remove()
+            }
             const label = checkbox.parentNode;
             label.style.display = "block";
         });
-        updateCount();
+
+        if (rangeStart && rangeEnd) {
+            rangeStart.value = "";
+            rangeEnd.value = "";
+        }
+        updateCount(countElement, checkboxes);
     });
 
     // Evento per chiudere il dropdown quando si clicca al di fuori
@@ -52,15 +67,9 @@ document.querySelectorAll('.filter-container').forEach(container => {
 
     // Apply Button
     applyButton.addEventListener('click', () => {
-        if(checkboxes) {
-            const activeFilters = Array.from(checkboxes)
-                .filter(checkbox => checkbox.checked)
-                .map(checkbox => checkbox.value);
-            console.log(`Filters applied for ${chip.textContent.trim()}:`, activeFilters);
-        }
-        else if (fieldSearchBar) {
+        if (fieldSearchBar)
             addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer)
-        }
+
         dropdown.classList.remove('show');
     });
 
@@ -86,9 +95,24 @@ document.querySelectorAll('.filter-container').forEach(container => {
         }
     });
 
-    updateCount();
+    rangeStart?.addEventListener('change', () => {
+        rangeEnd.min = parseInt(rangeStart.value, 10) + 1;
+    })
+
+    rangeEnd?.addEventListener('change', () => {
+        rangeStart.max = parseInt(rangeEnd.value, 10) - 1;
+    })
+
+    if (!rangeStart && !rangeEnd)
+        updateCount(countElement, checkboxes);
 });
 
+// Funzione per aggiornare il conteggio
+function updateCount(countElement, checkboxes) {
+    const count = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    if (count) countElement.textContent = count;
+    else countElement.style.display = "none";
+}
 
 function addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer) {
     const searchTerm = fieldSearchBar.value.trim();
@@ -101,22 +125,36 @@ function addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer
     });
 
     if(!alreadyAdded){
-        const newChip = document.createElement('div');
-        newChip.className = 'selected-chips-elements';
-        newChip.textContent = searchTerm;
+        const chipContainer = document.createElement('div');
+        chipContainer.className = 'selected-chips-elements-wrapper';
+        chipContainer.textContent = searchTerm;
+
+        const inputChip = document.createElement('input');
+        inputChip.className = 'selected-chips-elements';
+        inputChip.type = 'checkbox';
+        inputChip.value = searchTerm;
+        inputChip.name = 'actor';
+        inputChip.checked = true;
 
         const closeButton = document.createElement('span');
         closeButton.className = 'close-button';
         closeButton.textContent = '×';
-        closeButton.addEventListener('click', (event) => {
-            event.preventDefault()
-            event.stopPropagation()
-            newChip.remove();
-        });
-        newChip.appendChild(closeButton);
-        selectedChipElementsContainer.appendChild(newChip);
+
+        chipContainer.appendChild(inputChip);
+        chipContainer.appendChild(closeButton);
+        selectedChipElementsContainer.appendChild(chipContainer);
         fieldSearchBar.value = "";
     } else {
         alert("Attore già aggiunto");
     }
 }
+
+document.querySelectorAll('.close-button').forEach(button => {
+    button.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        button.parentNode.remove();
+        const name = button.dataset.name
+        updateCount(document.getElementById(name+"-count"), button.parentNode.querySelectorAll('input[type="checkbox"]'))
+    });
+})
