@@ -1,10 +1,10 @@
-const express = require('express')
-const {engine} = require('express-handlebars')
-const path = require('path')
-const cookieParser = require('cookie-parser')
-const logger = require('morgan')
+const express = require('express');
+const createError = require('http-errors');
+const {engine} = require('express-handlebars');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-const {errorHandler} = require('./routes/utils/error_handler');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('@config/swagger');
 
@@ -51,6 +51,20 @@ app.use((req, res, next) => {
 const routes = require(path.join(__dirname, './routes/index'))
 app.use('/', routes)
 
-app.use(errorHandler);
+// Error Handling
+app.use((req, res, next) => {
+    // 404 errors
+    console.log('Request 404 for:', req.originalUrl);
+    next(createError(404));
+})
+app.use((err, req, res) => {
+    // Set error locals for development and production
+    res.locals.message = err.message
+    res.locals.error = req.app.get('env') === 'development' ? err : {}
+
+    // Render the error page
+    res.status(err.status || 500)
+    res.render('error')
+})
 
 module.exports = app;

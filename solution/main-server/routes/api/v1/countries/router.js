@@ -1,7 +1,6 @@
 const express = require('express');
 const axios = require('axios');
 const { springbootServer } = require('@config/server')
-const {ApiError} = require("../../../utils/error_handler");
 
 const router = express.Router();
 
