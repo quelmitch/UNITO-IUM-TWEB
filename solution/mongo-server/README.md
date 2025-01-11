@@ -7,10 +7,18 @@
 ## Overview
 The MongoDB Server is a core microservice within the MovieDB project, responsible for managing and serving dynamic data such as movie reviews. This server is implemented in **Node.js** with **Express** and uses **MongoDB** as the database engine. Its design ensures modularity, reusability, and clarity, following a feature-driven folder structure.
 
+## How to import database data
+The clean `review` dataset from the data-analysis project can be easily imported into MongoDB using the **Mongodb Database Tools**. <br>
+Here is the command line command to load the data. Adjust parameters based on your configuration (The file must be a JSON to correctly import the data types):
+```bash
+mongoimport --uri="mongodb://localhost:27017" --db=<<DB_NAME>> --collection=reviews --type=json --file=<<path/to/reviews.json>>
+```
+Alternatively the `review` dataset can also be imported directly using MongoDB Compass.
+
 ## API Documentation
 This server is extensively documented using **Swagger** for API routes. Developers can access the Swagger UI locally via the following link:
 
-- Swagger UI: [http://localhost:3000/swagger-ui.html](http://localhost:3000/swagger-ui.html)
+- Swagger UI: [http://localhost:3000/swagger-ui/index.html](http://localhost:3000/swagger-ui/index.html)
 
 ## Project Structure
 The project follows a **domain-driven structure**, with each domain module encapsulating its own responsibilities:
@@ -93,11 +101,4 @@ class GenericFilter {
         if (isNaN(this.limit) || this.limit < 1) throw new Error('Limit must be a positive integer');
     }
 }
-```
----
-## How to import database data
-The clean `review` dataset from the data-analysis project can be easily imported into MongoDB using the **Mongodb Database Tools**. <br>
-Here is the command line command to load the data. Adjust parameters based on your configuration (The file must be a JSON to correctly import the data types):
-```bash
-mongoimport --uri="mongodb://localhost:27017" --db=<<DB_NAME>> --collection=reviews --type=json --file=<<path/to/reviews.json>>
 ```

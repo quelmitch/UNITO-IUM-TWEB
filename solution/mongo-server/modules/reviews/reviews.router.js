@@ -8,7 +8,6 @@ const {ReviewFilter} = require("./ReviewFilter");
 const {getPaginatedResults, toPlainObject} = require('@utils/routers.utils');
 const {GenericFilter} = require("@utils/GenericFilter");
 
-const {ApiError} = require("@middleware/errorHandler");
 const {parseFilters} = require("@middleware/filter-factory");
 
 const genericFilterMiddleware = parseFilters(GenericFilter);
@@ -180,10 +179,7 @@ reviewsRouter.get('/filter',
             .then((result) => {
                 res.json(cleanResults(result));
             })
-            .catch((err) => {
-                // delegate to the next middleware (error handler)
-                next(err)
-            })
+            .catch((err) => next(err))
     }
 )
 

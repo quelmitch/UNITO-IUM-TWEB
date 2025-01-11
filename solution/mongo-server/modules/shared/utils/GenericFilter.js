@@ -1,5 +1,3 @@
-const {ApiError} = require("../middleware/errorHandler");
-
 class GenericFilter {
     constructor({page, limit, sortOrder}) {
         this.page = page ? parseInt(page, 10) : 1;
@@ -7,9 +5,9 @@ class GenericFilter {
         this.sortOrder = sortOrder?.toLowerCase() || 'asc';
 
         if (isNaN(this.page) || this.page < 1)
-            throw ApiError.badRequest('Page number must be a positive integer');
+            this.page = 1;
         if (isNaN(this.limit) || this.limit < 1)
-            throw ApiError.badRequest('Limit must be a positive integer');
+            this.limit = 10;
     }
 }
 

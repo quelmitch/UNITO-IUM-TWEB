@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const swaggerUi = require('swagger-ui-express');
 
-const {errorHandler} = require('@middleware/errorHandler');
 const database = require('@config/database');
 const swaggerSpec = require('@config/swagger');
 const indexRouter = require('./modules/routes');
@@ -22,6 +21,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
-app.use(errorHandler);
+app.use((req, res) => {
+    res.status(404).json({
+        status : 404,
+        message: 'Not Found'
+    })
+})
+app.use((err, req, res, next) => {
+    res.status(err.status || 500).json({
+        status : err.status || 500,
+        message: err.response?.statusText || 'Internal Server Error'
+    })
+})
 
 module.exports = app;
