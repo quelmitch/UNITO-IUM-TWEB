@@ -67,9 +67,6 @@ document.querySelectorAll('.filter-container').forEach(container => {
 
     // Apply Button
     applyButton.addEventListener('click', () => {
-        if (fieldSearchBar)
-            addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer)
-
         dropdown.classList.remove('show');
     });
 
@@ -91,16 +88,16 @@ document.querySelectorAll('.filter-container').forEach(container => {
     fieldSearchBar?.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
-            addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer)
+            addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer, event)
         }
     });
 
     rangeStart?.addEventListener('change', () => {
-        rangeEnd.min = parseInt(rangeStart.value, 10) + parseInt(rangeStart.step, 10);
+        rangeEnd.min = parseFloat(rangeStart.value) + parseFloat(rangeStart.step);
     })
 
     rangeEnd?.addEventListener('change', () => {
-        rangeStart.max = parseInt(rangeEnd.value, 10) - parseInt(rangeEnd.step, 10);
+        rangeStart.max = parseFloat(rangeEnd.value) - parseFloat(rangeEnd.step);
     })
 
     if (!rangeStart && !rangeEnd)
@@ -116,38 +113,39 @@ function updateCount(countElement, checkboxes) {
 
 function addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer) {
     const searchTerm = fieldSearchBar.value.trim();
+
+    if (!searchTerm)
+        return
+
     let alreadyAdded = false;
     const existingChips = selectedChipElementsContainer.querySelectorAll('.selected-chips-elements');
     existingChips.forEach(existingChip => {
-        if(existingChip.textContent.slice(0,-1).trim().toLowerCase() === searchTerm.toLowerCase()){
+        if(existingChip.value.trim().toLowerCase() === searchTerm.toLowerCase())
             alreadyAdded = true;
-        }
     });
 
-    if(!alreadyAdded){
-        const chipContainer = document.createElement('div');
-        chipContainer.className = 'selected-chips-elements-wrapper';
-        chipContainer.textContent = searchTerm;
+    if(alreadyAdded)
+        return;
 
-        const inputChip = document.createElement('input');
-        inputChip.className = 'selected-chips-elements';
-        inputChip.type = 'checkbox';
-        inputChip.value = searchTerm;
-        inputChip.name = selectedChipElementsContainer.dataset.name;
-        inputChip.checked = true;
+    const chipContainer = document.createElement('div');
+    chipContainer.className = 'selected-chips-elements-wrapper';
+    chipContainer.textContent = searchTerm;
 
-        const closeButton = document.createElement('span');
-        closeButton.className = 'close-button';
-        closeButton.textContent = '×';
+    const inputChip = document.createElement('input');
+    inputChip.className = 'selected-chips-elements';
+    inputChip.type = 'checkbox';
+    inputChip.value = searchTerm;
+    inputChip.name = selectedChipElementsContainer.dataset.name;
+    inputChip.checked = true;
 
-        chipContainer.appendChild(inputChip);
-        chipContainer.appendChild(closeButton);
-        selectedChipElementsContainer.appendChild(chipContainer);
-        fieldSearchBar.value = "";
-    } else {
-        // TODO: generalize
-        alert("Attore già aggiunto");
-    }
+    const closeButton = document.createElement('span');
+    closeButton.className = 'close-button';
+    closeButton.textContent = '×';
+
+    chipContainer.appendChild(inputChip);
+    chipContainer.appendChild(closeButton);
+    selectedChipElementsContainer.appendChild(chipContainer);
+    fieldSearchBar.value = "";
 }
 
 document.querySelectorAll('.close-button').forEach(button => {
