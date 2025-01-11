@@ -5,6 +5,7 @@ const reviews = require('./reviews/router')
 const oscars = require('./oscars/router')
 const genres = require('./genres/router')
 const languages = require('./languages/router')
+const countries = require('./countries/router')
 
 const router = express.Router()
     .use('/movie', movies)
@@ -12,5 +13,6 @@ const router = express.Router()
     .use('/review', reviews)
     .use('/genre', genres)
     .use('/language', languages)
+    .use('/country', countries)
 
 module.exports = router;
