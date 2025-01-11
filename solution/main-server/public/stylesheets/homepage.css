@@ -47,9 +47,10 @@
 .faq-section .faq-question {
     cursor: pointer;
     color: #f39c12;
-    font-size: 1.25rem;
+    font-size: 2rem;
 }
 .faq-section .faq-answer {
+    font-size: 1.25rem;
     display: none;
     margin-bottom: 3px;
     color: #bbb;
