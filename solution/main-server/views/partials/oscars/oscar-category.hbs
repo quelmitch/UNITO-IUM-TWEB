@@ -1,0 +1,22 @@
+<div class="floating-container">
+    <div class="category-title">{{category}}</div>
+    <div class="winner-section">
+    {{#each winners}}
+        {{#if (or this.nomineeName this.nomineeMovie)}}
+            <div class="winner">
+                {{this.nomineeName}} <br> <span style="font-weight: 500;">{{this.nomineeMovie}}</span>
+            </div>
+        {{else}}
+            <div class="winner">
+                Unknown Nominee <br>
+            </div>
+        {{/if}}
+    {{/each}}
+    </div>
+
+    <div class="nominees">
+    {{#each nominees}}
+        <div class="nominee">{{this.nomineeName}} <br> <span>{{this.nomineeMovie}}</span></div>
+    {{/each}}
+    </div>
+</div>

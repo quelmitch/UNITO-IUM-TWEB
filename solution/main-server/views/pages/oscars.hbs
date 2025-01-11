@@ -15,17 +15,14 @@
                 {{/each}}
             </select>
         </div>
-
-        <a class="nav-button {{#if (eq oscars.numberCeremony lastCeremony)}}hidden{{/if}}"
+         <a class="nav-button {{#if (eq oscars.numberCeremony lastCeremony)}}hidden{{/if}}"
            href="?numberCeremony={{nextCeremony}}&{{filters.uri}}"
         >
             Next
         </a>
     </div>
-
-    <div id="categories-container">
-        {{> oscar-categories}}
-    </div>
-
+    {{#each oscars.categories}}
+        {{> oscar-category category=@key winners=this.winners nominees=this.nominees}}
+    {{/each}}
 </div>
 

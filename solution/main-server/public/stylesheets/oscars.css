@@ -136,3 +136,38 @@ body {
 .ceremony-dropdown:focus {
     outline: 2px solid var(--highlight-color);
 }
+
+
+/* Oscar Errors */
+div.error{
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1.error{
+    color: #ffdb1a;
+    font-size: 15rem;
+    margin-bottom: 0;
+    font-style: italic;
+    font-weight: bold;
+}
+h2.error{
+    color: #ffdb1a;
+    margin-top: 0;
+    font-size: 3rem;
+    font-style: italic;
+    font-weight: bold;
+}
+p.error{
+    color: white;
+    font-size: 7px;
+    margin: 10px 0;
+}
+a.error{
+    color: #ffdb1a;
+    font-weight: bold;
+}
+a:hover {
+    text-decoration: underline !important;
+}

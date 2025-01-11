@@ -6,49 +6,42 @@ const { fromObjectToUri } = require('@routes-utils/common_service')
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const filters = req.query;
+    axios.get(`${thisServer}/api/v1/oscar/ceremonies`)
+        .then((ceremoniesResponse) => {
+            // Get all ceremonies to know last ceremony
+            const ceremonies = ceremoniesResponse.data.reverse();
+            const lastCeremony = ceremonies[0].numberCeremony;
 
-    Promise.all([
-        axios.get(`${thisServer}/api/v1/oscar/filter?limit=500&${fromObjectToUri(filters)}`),
-        axios.get(`${thisServer}/api/v1/oscar/ceremonies`),
-    ])
-        .then(([oscarsResponse, ceremoniesResponse]) => {
+            const filters = req.query;
+            filters.numberCeremony ??= lastCeremony; // last ceremony default value
+
+            return Promise.all([
+                axios.get(`${thisServer}/api/v1/oscar/filter?limit=500&${fromObjectToUri(filters)}`),
+                Promise.resolve(ceremonies)
+            ]);
+        })
+        .then(([oscarsResponse, ceremonies]) => {
+            // if ceremony not only one then render error page
+            if (oscarsResponse.data.content.length !== 1)
+                return res.render('pages/errors/oscar-error'); // TODO !== or <
+
+            const lastCeremony = ceremonies[0].numberCeremony;
+
+            console.log(oscarsResponse.data.content);
             res.render('pages/oscars', {
                 title: 'Oscars',
-                oscars: oscarsResponse.data.content,
-                ceremonies: ceremoniesResponse.data,
-                nextCeremony: oscarsResponse.data.content.numberCeremony + 1,
-                previousCeremony: oscarsResponse.data.content.numberCeremony - 1,
-                lastCeremony: ceremoniesResponse.data[ceremoniesResponse.data.length - 1].numberCeremony,
-            })
+                oscars: oscarsResponse.data.content[0],
+                ceremonies: ceremonies,
+                nextCeremony: oscarsResponse.data.content[0].numberCeremony + 1,
+                previousCeremony: oscarsResponse.data.content[0].numberCeremony - 1,
+                lastCeremony: lastCeremony
+            });
         })
         .catch((error) => {
-            console.log(error)
-        }) // TODO
-});
-
-// TODO REMOVE
-/*axios.get(`http://localhost:3000/oscars/partial?limit=500&numberCeremony=${selectedCeremony}`)
-    //.then(response => JSON.stringify(response.data))
-    .then(response => {
-        categoriesContainer.innerHTML = response.data;
-    })
-    .catch(error => {
-        console.error(error);
-    });
-router.get('/partial', (req, res) => {
-    const filters = req.query;
-
-    axios.get(`${thisServer}/api/v1/oscar/filter?limit=500&ceremonyNumber=2&${fromObjectToUri(filters)}`)
-        .then(response => {
-            const oscarsData = response.data.content;
-            console.log(oscarsData);
-            res.render('partials/oscars/oscar-categories', { oscars: oscarsData }); // Assuming your partial is oscars-details.handlebars
-        })
-        .catch(error => {
-            console.error('Error fetching ceremony data:', error);
-            res.status(500).send('Error retrieving ceremony details'); // Handle errors appropriately
+            // TODO
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         });
 });
-*/
+
 module.exports = router;

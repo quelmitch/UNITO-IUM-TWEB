@@ -1,35 +1,31 @@
-function groupByAndReduce(data) {
-    // TODO
-    if (data?.content)
-        throw Error(`No content for ${data?.content}`)
+/* Group by the result by ceremony, category, winners and nominee */
+function groupByAndReduce(arr) {
+    const groupedByCeremony = {};
 
-    const { numberCeremony, yearCeremony } = data.content[0]; // Si assume che siano uguali per tutti i record.
+    for (const { numberCeremony, yearCeremony, category, isWinner, nomineeName, nomineeMovie } of arr) {
+        // Init ceremonyGroup if not already existing
+        const ceremonyGroup = (groupedByCeremony[`${numberCeremony}_${yearCeremony}`] ??= {
+            numberCeremony,
+            yearCeremony,
+            categories: {}
+        });
 
-    // Creare la struttura desiderata
-    const result = {
-        numberCeremony,
-        yearCeremony,
-        categories: {}
-    };
+        // Initialize the category group if not already existing
+        const categoryGroup = (ceremonyGroup.categories[category] ??= {
+            winners: [],
+            nominees: []
+        });
 
-    // Popolare le categorie
-    data.content.forEach(nominee => {
-        const { category, isWinner, nomineeName, nomineeMovie } = nominee;
+        // Add nominee to the correct group
         const nomineeData = { nomineeName, nomineeMovie };
-
-        // Inizializzare la categoria se non esiste
-        if (!result.categories[category])
-            result.categories[category] = { winners: [], nominees: [] };
-
-        // Aggiungere il nominato al giusto array
         if (isWinner)
-            result.categories[category].winners.push(nomineeData);
+            categoryGroup.winners.push(nomineeData);
         else
-            result.categories[category].nominees.push(nomineeData);
-    });
+            categoryGroup.nominees.push(nomineeData);
+    }
 
-    data.content = result;
-    return data;
+    // Transform the grouped object into an array of ceremonies
+    return Object.values(groupedByCeremony);
 }
 
 module.exports = {

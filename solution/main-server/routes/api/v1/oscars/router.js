@@ -13,7 +13,7 @@ const router = express.Router()
  *     tags:
  *       - Oscars
  *     summary: Fetch Oscars by filters
- *     description: TODO
+ *     description: Fetches a list of oscars grouped by ceremony, category. Each category includes lists of winners and nominees.
  *     parameters:
  *       - in: query
  *         name: page
@@ -114,7 +114,7 @@ const router = express.Router()
  *         description: Indicates whether the nominee was a winner.
  *     responses:
  *       200:
- *         description: OK
+ *         description: OK TODO
  *         content:
  *           application/json:
  *             schema:
@@ -173,8 +173,8 @@ router.get('/filter', async (req, res, next) => {
 
     axios.get(`${springbootServer}/oscar/filter?${filters}`)
         .then((response) => {
-            const data = groupByAndReduce(response.data)
-            res.json(data)
+            response.data.content = groupByAndReduce(response.data.content)
+            res.json(response.data)
         })
         .catch((error) => {
             // TODO
