@@ -14,7 +14,7 @@
     {{else if (eq currentPath '/reviews')}}
         <link rel='stylesheet' href='/stylesheets/filters.css' />
 
-    {{else if (startsWith currentPath '/movie')}}
+    {{else if (startsWith currentPath '/movie/')}}
         <link rel='stylesheet' href='/stylesheets/movie-detail.css' />
     {{else if (startsWith currentPath '/oscars')}}
         <link rel='stylesheet' href='/stylesheets/oscars.css' />
@@ -26,8 +26,10 @@
 <body class="min-vh-100">
     {{> navbar}}
     {{{body}}}
-    {{> chat }}
 
+    {{^if (startsWith currentPath '/movie/')}}
+        {{> chat }}
+    {{/if}}
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

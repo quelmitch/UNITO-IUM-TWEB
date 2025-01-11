@@ -11,11 +11,13 @@ router.get('/', (req, res) => {
     Promise.all([
         axios.get(`${thisServer}/api/v1/genre/all`),
         axios.get(`${thisServer}/api/v1/language/all`),
+        axios.get(`${thisServer}/api/v1/country/all`),
         axios.get(`${thisServer}/api/v1/movie/filter?responseType=BASIC&${fromObjectToUri(filters)}`)
     ])
-        .then(([genreResponse, languageResponse, movieResponse]) => {
+        .then(([genreResponse, languageResponse, countryResponse, movieResponse]) => {
             const genres = genreResponse.data;
             const languages = languageResponse.data;
+            const countries = countryResponse.data;
 
             const page = movieResponse.data.page;
             const limit = movieResponse.data.limit;
@@ -39,6 +41,7 @@ router.get('/', (req, res) => {
                 },
                 genres: genres,
                 languages: languages,
+                countries: countries,
             });
         })
         .catch((error) => {});
