@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const database = 'mongodb://localhost:27017/IUM-TWEB';
+const databaseName = "IUM-TWEB"
+const database = `mongodb://localhost:27017/${databaseName}`;
 mongoose.Promise = global.Promise;
 
 mongoose.connect(database, {
@@ -12,6 +13,3 @@ mongoose.connect(database, {
     .catch((err) => {
         console.error('connection error:', err);
     });
-
-
-// TODO add config env

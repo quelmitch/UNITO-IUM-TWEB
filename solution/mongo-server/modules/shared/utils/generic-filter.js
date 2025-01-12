@@ -1,3 +1,7 @@
+/*
+ * Generic Filter class to dynamically handle and clean filtering parameters relative to all collections.
+ * Implements pagination with page numbers, page limit and sort order.
+ */
 class GenericFilter {
     constructor({page, limit, sortOrder}) {
         this.page = page ? parseInt(page, 10) : 1;

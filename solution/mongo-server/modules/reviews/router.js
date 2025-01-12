@@ -1,13 +1,14 @@
 const express = require('express');
 const reviewsRouter = express.Router();
-const Model = require("./reviews.schema");
 
-const {cleanResults} = require("./reviews.service");
-const {ReviewFilter} = require("./ReviewFilter");
+// Reviews import
+const Model = require("./schema");
+const {cleanResults} = require("./service");
+const {ReviewFilter} = require("./filter");
 
-const {getPaginatedResults, toPlainObject} = require('@utils/routers.utils');
-const {GenericFilter} = require("@utils/GenericFilter");
-
+// Utils import
+const {getPaginatedResults, toPlainObject} = require('@utils/routers-utils');
+const {GenericFilter} = require("@utils/generic-filter");
 const {parseFilters} = require("@middleware/filter-factory");
 
 const genericFilterMiddleware = parseFilters(GenericFilter);

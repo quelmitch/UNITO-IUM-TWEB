@@ -14,6 +14,7 @@ const ReviewSchema = new mongoose.Schema({
     content: {type: String}
 });
 
+// Text index for fast query
 ReviewSchema.index({ movie_title: 'text' });
 
 module.exports = mongoose.model('Review', ReviewSchema);

@@ -32,17 +32,17 @@ mongo-server/
 │   └── swagger.js
 ├── modules/
 │   └── reviews/
-│       ├── ReviewFilter.js
-│       ├── reviews.router.js
-│       ├── reviews.schema.js
-│       └── reviews.service.js
+│       ├── filter.js
+│       ├── router.js
+│       ├── schema.js
+│       └── service.js
 ├── shared/
 │   ├── middleware/
 │   │   ├── errorHandler.js
 │   │   └── filter-factory.js
 │   └── utils/
-│       ├── GenericFilter.js
-│       └── routers.utils.js
+│       ├── generic-filter.js
+│       └── routers-utils.js
 ├── routes.js
 └── app.js
 ```
@@ -58,7 +58,7 @@ Encapsulates domain-specific features like `reviews`.
 ### Shared
 Contains common code across modules.
 - **`middleware`**: Provides reusable middlewares like error handling (`errorHandler.js`) and filtering factories (`filter-factory.js`).
-- **`utils`**: Contains utility functions such as `GenericFilter.js` for dynamic query construction and `routers.utils.js` for router-specific helpers.
+- **`utils`**: Contains utility functions such as `generic-filter.js` for dynamic query construction and `routers-utils.js` for router-specific helpers.
 
 ## Technology Stack and Dependencies
 The server leverages the following technologies:

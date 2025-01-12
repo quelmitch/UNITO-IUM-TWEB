@@ -1,3 +1,4 @@
+/* Review Filter class to dynamically handle and clean filtering parameters */
 class ReviewFilter {
     constructor({
                     movieTitle,
