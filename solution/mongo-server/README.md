@@ -1,7 +1,3 @@
-# TODO
-- fix code snippets
-- swagger link
-
 # MongoDB Server
 
 ## Overview
