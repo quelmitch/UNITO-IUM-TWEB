@@ -75,30 +75,28 @@ The MongoDB server supports advanced filtering and querying using the `filter-fa
 
 ```javascript
 function parseFilters(FilterClass) {
-    return (req, res, next) => {
-        try {
-            if (FilterClass === GenericFilter)
-                req.generic_filters = new FilterClass(req.query);
-            else
-                req.entity_filters = new FilterClass(req.query);
-            next();
-        } catch (error) {
-            // TODO error handling
-            res.status(400).json({error: error.message});
-        }
-    };
+  return (req, res, next) => {
+    // Generic filtering
+    if (FilterClass === GenericFilter)
+      req.generic_filters = new FilterClass(req.query);
+    // Entity filtering
+    else
+      req.entity_filters = new FilterClass(req.query);
+    next();
+  };
 }
 ```
 ```javascript
 class GenericFilter {
-    constructor({page, limit, sortOrder}) {
-        this.page = page ? parseInt(page, 10) : 1;
-        this.limit = limit ? parseInt(limit, 10) : 10;
-        this.sortOrder = sortOrder || 'asc';
+  constructor({page, limit, sortOrder}) {
+    this.page = page ? parseInt(page, 10) : 1;
+    this.limit = limit ? parseInt(limit, 10) : 10;
+    this.sortOrder = sortOrder?.toLowerCase() || 'asc';
 
-        // TODO check error handling
-        if (isNaN(this.page) || this.page < 1) throw new Error('Page must be a positive integer'); // TODO < 0 or < 1 ?
-        if (isNaN(this.limit) || this.limit < 1) throw new Error('Limit must be a positive integer');
-    }
+    if (isNaN(this.page) || this.page < 1)
+      this.page = 1;
+    if (isNaN(this.limit) || this.limit < 1)
+      this.limit = 10;
+  }
 }
 ```
