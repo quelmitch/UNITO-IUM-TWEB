@@ -163,12 +163,32 @@ const reviewFilterMiddleware = parseFilters(ReviewFilter);
  *                       content:
  *                         type: string
  *                         example: "A wildly entertaining and dazzling mind-trip not to be missed. Kubrick would have been proud."
- *       400:
- *         description: Bad Request – Invalid or malformed request.
  *       404:
  *         description: Not Found – No reviews match the query criteria.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 404
+ *                 message:
+ *                   type: string
+ *                   example: "Not Found"
  *       500:
  *         description: Internal Server Error – An unexpected error occurred.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 500
+ *                 message:
+ *                   type: string
+ *                   example: "Internal Server Error"
  */
 reviewsRouter.get('/filter',
     genericFilterMiddleware,

@@ -12,7 +12,7 @@ const swaggerSpec = swaggerJsdoc({
             {url: 'http://localhost:3001', description: 'Local server'},
         ],
     },
-    apis: ['./modules/*/*.router.js'],
+    apis: ['./modules/*/router.js'],
 });
 
 module.exports = swaggerSpec;
