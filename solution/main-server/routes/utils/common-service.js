@@ -1,3 +1,4 @@
+/* Convert a filter object into URI */
 function fromObjectToUri(filters) {
     const params = new URLSearchParams()
 
@@ -13,6 +14,4 @@ function fromObjectToUri(filters) {
     return params.toString()
 }
 
-module.exports = {
-    fromObjectToUri
-}
+module.exports = {fromObjectToUri}

@@ -1,8 +1,8 @@
 const express = require('express');
 const axios = require("axios");
-const { fromObjectToUri } = require('@routes-utils/common_service');
-const { springbootServer } = require('@config/server');
-const { groupByAndReduce } = require("./service");
+const {fromObjectToUri} = require('@routes-utils/common-service');
+const {springbootServer} = require('@config/server');
+const {groupByAndReduce} = require("./service");
 
 const router = express.Router()
 
@@ -170,14 +170,14 @@ const router = express.Router()
 router.get('/filter', async (req, res, next) => {
     const numberCeremony = req.query?.numberCeremony ? parseInt(req.query.numberCeremony, 10) : null
     const yearCeremony = req.query?.yearCeremony ? parseInt(req.query.yearCeremony, 10) : null
-    if (numberCeremony){
-        req.query.numberCeremonyGT = numberCeremony-1
-        req.query.numberCeremonyLT = numberCeremony+1
+    if (numberCeremony) {
+        req.query.numberCeremonyGT = numberCeremony - 1
+        req.query.numberCeremonyLT = numberCeremony + 1
         delete req.query.numberCeremony
     }
-    if (yearCeremony){
-        req.query.yearCeremonyGT = yearCeremony-1
-        req.query.yearCeremonyLT = yearCeremony+1
+    if (yearCeremony) {
+        req.query.yearCeremonyGT = yearCeremony - 1
+        req.query.yearCeremonyLT = yearCeremony + 1
         delete req.query.yearCeremony
     }
     const filters = fromObjectToUri(req.query)

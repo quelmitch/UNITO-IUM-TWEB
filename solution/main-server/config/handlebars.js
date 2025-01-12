@@ -1,8 +1,8 @@
 const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/movies', label: 'Movies' },
-    { path: '/oscars', label: 'Oscars' },
-    { path: '/reviews', label: 'Reviews' },
+    {path: '/', label: 'Home'},
+    {path: '/movies', label: 'Movies'},
+    {path: '/oscars', label: 'Oscars'},
+    {path: '/reviews', label: 'Reviews'},
 ]
 
 const helpers = {

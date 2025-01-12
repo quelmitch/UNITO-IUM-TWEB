@@ -16,7 +16,7 @@ const roomId = window.location.href
 // connection to the Socket.IO server
 const socket = io();
 
-// Retrieve username from localStorage
+// Retrieve username from localStorage if it set
 let user = localStorage.getItem('username');
 if (!user) {
     usernameInputContainer.style.display = 'block';
@@ -40,7 +40,9 @@ chatToggle.addEventListener('click', () => {
 
 usernameSubmit.addEventListener('click', () => {
     const enteredUsername = usernameInput.value.trim();
+    // Check if the entered username is not empty
     if (enteredUsername) {
+        // Store the username in localStorage for persistence
         localStorage.setItem('username', enteredUsername);
 
         user = enteredUsername;
@@ -91,7 +93,7 @@ chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter')
         chatSend.click();
 });
-
+// Allow confirms username with Enter key
 usernameInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter')
         usernameSubmit.click();

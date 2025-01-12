@@ -36,7 +36,7 @@
 }
 
 .faq-section {
-    justify-self:center;
+    justify-self: center;
     background-color: #222;
     padding: 2rem;
     margin-bottom: 40px;
@@ -44,17 +44,20 @@
     border: 1px solid #444;
     width: 80%
 }
+
 .faq-section .faq-question {
     cursor: pointer;
     color: #f39c12;
     font-size: 2rem;
 }
+
 .faq-section .faq-answer {
     font-size: 1.25rem;
     display: none;
     margin-bottom: 3px;
     color: #bbb;
 }
+
 .faq-section .faq-question:hover {
     color: white;
 }

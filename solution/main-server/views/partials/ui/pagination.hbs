@@ -1,11 +1,13 @@
 <div class="pagination">
-    <a href="?page={{pagingOptions.prevPage}}&{{filters.uri}}" class="prev  {{#if (eq pagingOptions.page 0)}}disabled{{/if}}">
-        ← Previous
+    <a href="?page={{pagingOptions.prevPage}}&{{filters.uri}}" class="prev  {{#if (eq pagingOptions.page 0)}}
+    disabled{{/if}}">
+    ← Previous
     </a>
 
     {{log pagingOptions.totalPages}}
     {{log pagingOptions.page}}
-    <a href="?page={{pagingOptions.nextPage}}&{{filters.uri}}" class="next {{#if (eq pagingOptions.page pagingOptions.totalPages)}}disabled{{/if}}">
-        Next →
+    <a href="?page={{pagingOptions.nextPage}}&{{filters.uri}}" class="next {{#if
+        (eq pagingOptions.page pagingOptions.totalPages)}}disabled{{/if}}">
+    Next →
     </a>
 </div>

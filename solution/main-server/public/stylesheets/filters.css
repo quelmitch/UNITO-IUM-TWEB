@@ -69,11 +69,11 @@
 .filter-dropdown label:hover{
     background-color: #333;
 }
-
 .filter-dropdown input[type="checkbox"] {
     margin-right: 8px;
     accent-color: #007bff;
 }
+
 /* Scrollbar */
 .checkbox-container::-webkit-scrollbar {
     width: 8px;
@@ -172,4 +172,3 @@
     outline: none;
     text-align: center;
 }
-

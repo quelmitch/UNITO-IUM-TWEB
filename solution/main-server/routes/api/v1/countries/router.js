@@ -1,6 +1,6 @@
 const express = require('express');
 const axios = require('axios');
-const { springbootServer } = require('@config/server')
+const {springbootServer} = require('@config/server')
 
 const router = express.Router();
 

@@ -20,22 +20,24 @@ document.querySelectorAll('.filter-container').forEach(container => {
     const rangeStart = container.querySelector('.range-start');
     const rangeEnd = container.querySelector('.range-end');
 
-    // Evento per aggiornare il conteggio quando cambia uno dei checkbox
+    // Update counter on checkbox change
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', () => updateCount(countElement, checkboxes));
     });
 
-    // Mostra/nasconde il dropdown quando si clicca sul chip
+    // Toggle visibility of the filter dropdown
     chip.addEventListener('click', () => {
+        // Close any other dropdown
         document.querySelectorAll('.filter-dropdown').forEach(otherDropdown => {
             if (otherDropdown !== dropdown) {
                 otherDropdown.classList.remove('show');
             }
         });
+        // Toggle the visibility of the current dropdown
         dropdown.classList.toggle('show');
     });
 
-    // Rimuove tutte le selezioni quando si clicca su "Clear All"
+    // Handle clearing all selected options
     clearAllButton.addEventListener('click', (event) => {
         event.preventDefault();
         checkboxes.forEach(checkbox => {
@@ -58,14 +60,14 @@ document.querySelectorAll('.filter-container').forEach(container => {
         updateCount(countElement, checkboxes);
     });
 
-    // Evento per chiudere il dropdown quando si clicca al di fuori
+    // Hide the dropdown if the click is outside the filter container
     window.addEventListener('click', (event) => {
         if (!event.target.closest('.filter-container')) {
             dropdown.classList.remove('show');
         }
     });
 
-    // Apply Button
+    // Apply filters button
     applyButton.addEventListener('click', () => {
         dropdown.classList.remove('show');
     });
@@ -104,7 +106,7 @@ document.querySelectorAll('.filter-container').forEach(container => {
         updateCount(countElement, checkboxes);
 });
 
-// Funzione per aggiornare il conteggio
+// Update the counter of the filter
 function updateCount(countElement, checkboxes) {
     const count = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
     if (count) countElement.textContent = count;
@@ -120,11 +122,11 @@ function addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer
     let alreadyAdded = false;
     const existingChips = selectedChipElementsContainer.querySelectorAll('.selected-chips-elements');
     existingChips.forEach(existingChip => {
-        if(existingChip.value.trim().toLowerCase() === searchTerm.toLowerCase())
+        if (existingChip.value.trim().toLowerCase() === searchTerm.toLowerCase())
             alreadyAdded = true;
     });
 
-    if(alreadyAdded)
+    if (alreadyAdded)
         return;
 
     const chipContainer = document.createElement('div');
@@ -154,6 +156,6 @@ document.querySelectorAll('.close-button').forEach(button => {
         event.stopPropagation();
         button.parentNode.remove();
         const name = button.dataset.name
-        updateCount(document.getElementById(name+"-count"), button.parentNode.querySelectorAll('input[type="checkbox"]'))
+        updateCount(document.getElementById(name + "-count"), button.parentNode.querySelectorAll('input[type="checkbox"]'))
     });
 })

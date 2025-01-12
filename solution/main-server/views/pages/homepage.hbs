@@ -11,7 +11,8 @@
             <div class="col-md-4">
                 <div class="feature-item">
                     <h2>Movie Database</h2>
-                    <p>Browse an extensive collection of movies with detailed metadata such as genres, directors, cast, release dates, and production studios.</p>
+                    <p>Browse an extensive collection of movies with detailed metadata such as genres, directors, cast,
+                        release dates, and production studios.</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -23,7 +24,8 @@
             <div class="col-md-4">
                 <div class="feature-item">
                     <h2>Community Reviews</h2>
-                    <p>Access a repository of reviews written by movie critics and aggregated by the famous website Rotten Tomatoes. </p>
+                    <p>Access a repository of reviews written by movie critics and aggregated by the famous website
+                        Rotten Tomatoes. </p>
                 </div>
             </div>
         </div>
@@ -36,54 +38,71 @@
     <div>
         <div class="faq-question" data-toggle="faq-1"> &bull; What is MovieDB?</div>
         <div class="faq-answer" id="faq-1">
-            MovieDB is a dynamic platform that brings together datasets about movies, Oscar Awards, and user reviews to create a precious resource for cinephiles.
-            By integrating comprehensive datasets, MovieDB allows users to explore and analyze cinematic information through intuitive search and filtering options.
+            MovieDB is a dynamic platform that brings together datasets about movies, Oscar Awards, and user reviews to
+            create a precious resource for cinephiles.
+            By integrating comprehensive datasets, MovieDB allows users to explore and analyze cinematic information
+            through intuitive search and filtering options.
         </div>
     </div>
     <div>
         <div class="faq-question" data-toggle="faq-2"> &bull; How do I find detailed movie information?</div>
         <div class="faq-answer" id="faq-2">
             Finding detailed movie information on MovieDB is simple and efficient.
-            Use the search bar to look up movies by title, or explore our advanced filtering options to refine your search.
-            You can filter movies by genres, release years, rating, cast members, or even specific characters in the movie.
+            Use the search bar to look up movies by title, or explore our advanced filtering options to refine your
+            search.
+            You can filter movies by genres, release years, rating, cast members, or even specific characters in the
+            movie.
             The filtering option is also available on the Review Section.
         </div>
     </div>
     <div>
         <div class="faq-question" data-toggle="faq-3"> &bull; How does MovieDB handle user reviews?</div>
-        <div class="faq-answer" id="faq-3">User reviews are stored in a dynamic MongoDB database, allowing for real-time updates and feedback aggregation. You can also contribute by submitting your own reviews.</div>
+        <div class="faq-answer" id="faq-3">User reviews are stored in a dynamic MongoDB database, allowing for real-time
+            updates and feedback aggregation. You can also contribute by submitting your own reviews.
+        </div>
     </div>
     <div>
         <div class="faq-question" data-toggle="faq-4"> &bull; What tools and technologies power MovieDB?</div>
-        <div class="faq-answer" id="faq-4">MovieDB uses a microservice architecture with Express.js for the main server, Spring Boot for static data access, and MongoDB for dynamic user-generated content.</div>
+        <div class="faq-answer" id="faq-4">MovieDB uses a microservice architecture with Express.js for the main server,
+            Spring Boot for static data access, and MongoDB for dynamic user-generated content.
+        </div>
     </div>
     <div>
         <div class="faq-question" data-toggle="faq-5"> &bull; How does the main server of MovieDB work?</div>
         <div class="faq-answer" id="faq-5">
-            At its core, the platform uses Node.js with Express as the main server, which handles client requests and serves the dynamic frontend built with HTML, CSS, and Handlebars.js.
+            At its core, the platform uses Node.js with Express as the main server, which handles client requests and
+            serves the dynamic frontend built with HTML, CSS, and Handlebars.js.
             Handlebars allows efficient content rendering by dynamically injecting data from the backend.
         </div>
         <div class="faq-question" data-toggle="faq-6"> &bull; Where are the data stored?</div>
         <div class="faq-answer" id="faq-6">
             The system relies on two databases for storing and managing information.
-            PostgreSQL handles structured and relatively static data, such as detailed movie information and Oscar awards, while MongoDB is for dynamic, fast-changing content like reviews.
-            These databases are accessed through dedicated servers —one in Spring Boot for PostgreSQL and another in Express for MongoDB— ensuring that the main server efficiently delegates resource-heavy tasks.
+            PostgreSQL handles structured and relatively static data, such as detailed movie information and Oscar
+            awards, while MongoDB is for dynamic, fast-changing content like reviews.
+            These databases are accessed through dedicated servers —one in Spring Boot for PostgreSQL and another in
+            Express for MongoDB— ensuring that the main server efficiently delegates resource-heavy tasks.
         </div>
         <div class="faq-question" data-toggle="faq-7"> &bull; Where does the data come from?</div>
         <div class="faq-answer" id="faq-7">
-            The data comes from different sources as the Letterboxd database for movies and the Rotten Tomatoes database for reviews.
-            Data preprocessing is a key part of the project, with Jupyter Notebooks and Python libraries like pandas and geopandas used for cleaning, analyzing, and visualizing raw datasets.
-            The refined data is then imported into the databases through custom scripts, maintaining separation between preprocessing and application logic.
+            The data comes from different sources as the Letterboxd database for movies and the Rotten Tomatoes database
+            for reviews.
+            Data preprocessing is a key part of the project, with Jupyter Notebooks and Python libraries like pandas and
+            geopandas used for cleaning, analyzing, and visualizing raw datasets.
+            The refined data is then imported into the databases through custom scripts, maintaining separation between
+            preprocessing and application logic.
         </div>
         <div class="faq-question" data-toggle="faq-7"> &bull; How does the chat feature works?</div>
         <div class="faq-answer" id="faq-7">
-            The chat feature in MovieDB enables users to engage in real-time conversations, share their thoughts on movies, Oscar winners, and reviews, and discuss various topics related to cinema.
-            There are four main rooms available for users to engage in real-time conversations each accessible by navigating to the corresponding page:
+            The chat feature in MovieDB enables users to engage in real-time conversations, share their thoughts on
+            movies, Oscar winners, and reviews, and discuss various topics related to cinema.
+            There are four main rooms available for users to engage in real-time conversations each accessible by
+            navigating to the corresponding page:
             <br> - Homepage, for generic discussions.
             <br> - Movies, for movie related topics.
             <br> - Oscars, for oscars related topics.
             <br> - Review, for reviews related topics.
-            <br> The chat is always available by clicking on the blue icon in the bottom right corner. It requires a username to log in that will be remembered for this browser.
+            <br> The chat is always available by clicking on the blue icon in the bottom right corner. It requires a
+            username to log in that will be remembered for this browser.
         </div>
     </div>
 </div>

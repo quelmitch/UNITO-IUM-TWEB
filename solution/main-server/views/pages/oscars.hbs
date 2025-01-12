@@ -1,28 +1,28 @@
 <div id="oscar-page-container" class="container">
+    <!-- Ceremony Year and Number -->
     <div class="main-title">{{oscars.yearCeremony}} - {{oscars.numberCeremony}}th Academy Awards</div>
     <div class="navigation">
         <a class="nav-button {{#if (eq oscars.numberCeremony 1)}}hidden{{/if}}"
-           href="?numberCeremony={{previousCeremony}}&{{filters.uri}}"
-        >
-            Previous
+           href="?numberCeremony={{previousCeremony}}&{{filters.uri}}">
+        Previous
         </a>
+        <!-- Ceremony Selector -->
         <div class="ceremony-selector">
             <label for="ceremony-dropdown">Select Ceremony:</label>
             <select id="ceremony-dropdown" class="ceremony-dropdown">
                 {{#each ceremonies}}
                     <option  {{#if (eq @root.oscars.numberCeremony this.numberCeremony)}}selected{{/if}}
-                            value="{{this.numberCeremony}}">{{this.numberCeremony}} - {{this.yearCeremony}}</option>
+                             value="{{this.numberCeremony}}">{{this.numberCeremony}} - {{this.yearCeremony}}</option>
                 {{/each}}
             </select>
         </div>
-         <a class="nav-button {{#if (eq oscars.numberCeremony lastCeremony)}}hidden{{/if}}"
-           href="?numberCeremony={{nextCeremony}}&{{filters.uri}}"
-        >
-            Next
+        <a class="nav-button {{#if (eq oscars.numberCeremony lastCeremony)}}hidden{{/if}}"
+           href="?numberCeremony={{nextCeremony}}&{{filters.uri}}">
+        Next
         </a>
     </div>
+    <!-- Oscar Awards -->
     {{#each oscars.categories}}
         {{> oscar-category category=@key winners=this.winners nominees=this.nominees}}
     {{/each}}
 </div>
-

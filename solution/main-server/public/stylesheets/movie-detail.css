@@ -50,12 +50,10 @@
     gap: 10px;
     margin-top: 20px;
 }
-
 #star-container {
     display: flex;
     gap: 5px;
 }
-
 #star-container svg {
     width: 24px;
     height: 24px;

@@ -21,10 +21,8 @@
                         id="reviewDate" name="Review Date"
                 }}
 
-                <!-- is_top_critic -->
                 {{> filter-radio elements=topCritics active-elements=filters.obj.isTopCritic id="isTopCritic" name="Top Critic"}}
 
-                <!-- type -->
                 {{> filter-radio elements=types active-elements=filters.obj.type id="type" name="Type"}}
             </div>
         </form>
@@ -36,6 +34,7 @@
                 {{> pagination prevPage=prevPage nextPage=nextPage}}
             </div>
 
+            <!-- Review cards -->
             <div class="row g-3">
                 {{#each reviews}}
                     <div class="col-6">

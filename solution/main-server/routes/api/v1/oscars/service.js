@@ -28,6 +28,4 @@ function groupByAndReduce(arr) {
     return Object.values(groupedByCeremony);
 }
 
-module.exports = {
-    groupByAndReduce
-};
+module.exports = {groupByAndReduce}

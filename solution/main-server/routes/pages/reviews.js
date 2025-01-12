@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require("axios");
-const { thisServer } = require('@config/server')
-const { fromObjectToUri } = require('@routes-utils/common_service')
+const {thisServer} = require('@config/server')
+const {fromObjectToUri} = require('@routes-utils/common-service')
 
 const router = express.Router();
 
@@ -34,14 +34,14 @@ router.get('/', (req, res, next) => {
                 types: typeValues,
                 topCritics: topCriticValues,
                 pagingOptions: {
-                    page: page-1,
+                    page: page - 1,
                     nextPage: page + 1,
                     prevPage: page - 1,
                     totalPages: totalPages,
                     limit: limit,
                 },
                 filters: {
-                    obj : filters,
+                    obj: filters,
                     uri: fromObjectToUri(filters),
                 },
             })

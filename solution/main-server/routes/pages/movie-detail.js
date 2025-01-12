@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require("axios");
 const iso3166 = require('iso-3166-1');
-const { thisServer } = require('@config/server')
+const {thisServer} = require('@config/server')
 const router = express.Router();
 
 router.get('/:id', (req, res, next) => {
@@ -19,7 +19,7 @@ router.get('/:id', (req, res, next) => {
                         release.flagLink = `https://flagcdn.com/w40/${countryCode.toLowerCase()}.png`;
                 }
             })
-            
+
             res.render('pages/movie-detail', {
                 title: response.data.title || 'Not Found',
                 movie: response.data

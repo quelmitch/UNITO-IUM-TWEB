@@ -1,14 +1,16 @@
 <!-- Movie Details Section -->
 <div class="movie-container">
     <div class="poster">
-        <img src="{{#if movie.posterLink}}{{movie.posterLink}}{{else}}/images/default-poster.jpg{{/if}}" alt="{{movie.title}} Poster">
+        <img src="{{#if movie.posterLink}}{{movie.posterLink}}{{else}}/images/default-poster.jpg{{/if}}"
+             alt="{{movie.title}} Poster">
     </div>
     <div class="movie-details">
         <div class="movie-title">
             {{movie.title}} {{#if movie.releaseYear}}<span class="movie-year">({{movie.releaseYear}})</span>{{/if}}
         </div>
         <div class="movie-year-genres">
-            {{#if movie.genres}}{{#each movie.genres}}{{this.genre}}, {{/each}} &bull; {{/if}} {{#if movie.runtime}} {{movie.runtime}} minutes{{/if}}
+            {{#if movie.genres}}{{#each movie.genres}}{{this.genre}}, {{/each}} &bull; {{/if}} {{#if
+                movie.runtime}} {{movie.runtime}} minutes{{/if}}
         </div>
         {{#if movie.rating}}
             <div id="rating-container">
@@ -72,11 +74,13 @@
         <!-- Actors Section -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="actorsHeader">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#actors" aria-expanded="false" aria-controls="actors">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#actors" aria-expanded="false" aria-controls="actors">
                     Actors
                 </button>
             </h2>
-            <div id="actors" class="accordion-collapse collapse" aria-labelledby="actorsHeader" data-bs-parent="#additionalInfoAccordion">
+            <div id="actors" class="accordion-collapse collapse" aria-labelledby="actorsHeader"
+                 data-bs-parent="#additionalInfoAccordion">
                 <div class="accordion-body">
                     {{#if movie.actors}}
                         <ul class="list-group">
@@ -94,11 +98,13 @@
         <!-- Crew Section -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="crewHeader">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crew" aria-expanded="false" aria-controls="crew">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#crew" aria-expanded="false" aria-controls="crew">
                     Crew
                 </button>
             </h2>
-            <div id="crew" class="accordion-collapse collapse" aria-labelledby="crewHeader" data-bs-parent="#additionalInfoAccordion">
+            <div id="crew" class="accordion-collapse collapse" aria-labelledby="crewHeader"
+                 data-bs-parent="#additionalInfoAccordion">
                 <div class="accordion-body">
                     {{#if movie.crew}}
                         <ul class="list-group">
@@ -116,11 +122,13 @@
         <!-- Releases Section -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="releasesHeader">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#releases" aria-expanded="false" aria-controls="releases">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#releases" aria-expanded="false" aria-controls="releases">
                     Releases
                 </button>
             </h2>
-            <div id="releases" class="accordion-collapse collapse" aria-labelledby="releasesHeader" data-bs-parent="#additionalInfoAccordion">
+            <div id="releases" class="accordion-collapse collapse" aria-labelledby="releasesHeader"
+                 data-bs-parent="#additionalInfoAccordion">
                 <div class="accordion-body">
                     {{#if movie.releases}}
                         <div class="table-responsive">
@@ -134,9 +142,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {{#each movie.releases}}
-                                        {{> movie-detail-release-item release=this}}
-                                    {{/each}}
+                                {{#each movie.releases}}
+                                    {{> movie-detail-release-item release=this}}
+                                {{/each}}
                                 </tbody>
                             </table>
                         </div>

@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require("axios");
 const {thisServer} = require('@config/server')
-const {fromObjectToUri} = require("@routes-utils/common_service");
+const {fromObjectToUri} = require("@routes-utils/common-service");
 
 const router = express.Router();
 
@@ -41,7 +41,7 @@ router.get('/', (req, res, next) => {
                     page: page,
                     nextPage: page + 1,
                     prevPage: page - 1,
-                    totalPages: totalPages === 0 ? 0 : totalPages-1,
+                    totalPages: totalPages === 0 ? 0 : totalPages - 1,
                     limit: limit,
                 },
                 filters: {
