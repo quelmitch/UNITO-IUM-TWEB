@@ -1,7 +1,3 @@
-TODO:
-- Update code snippets at the end
-- swagger and javadocs link
-
 # PostgreSQL Server
 
 ## Overview
@@ -41,6 +37,7 @@ postgre-server/
     ├── application-dev.properties
     └── data.sql
 ```
+
 ### Domain Packages
 1. **`api`**: Contains controllers, services, and repositories.
 2. **`dto`**: Defines Data Transfer Objects, including:
@@ -55,19 +52,17 @@ The `utils` package provides reusable components for simplifying common operatio
 - **`ServiceCommon`**: Contains shared methods across services.
 - **`SpecificationUtility`**: Offers generic methods for constructing dynamic JPA Specifications. For example:
 ```java
-public static <T> Specification<T> equalsTo(String field, Comparable<?> value) {
-    return (root, _, criteriaBuilder) ->
-        value == null ? null : criteriaBuilder.equal(root.get(field), value);
+ public static <T> Specification<T> equalsTo(String field, Comparable<?> value) {
+      return (root, _, criteriaBuilder) ->
+         value == null ? null : criteriaBuilder.equal(root.get(field), value);
 }
 ```
 
 These utilities empower the server to dynamically build complex queries based on user input without requiring explicit SQL.
 
 ### Data Access
-The server primarily employs **JPA Specifications** with `Pageable` for all database queries, utilizing the default `findAll` method of JPA repositories. Explicit SQL queries are avoided, except in specialized cases, such as:
-
-- Advanced movie title search with fuzzy matching and autocompletion.
-- **TODO**: Placeholder for additional explicit query examples in the future.
+The server primarily employs **JPA Specifications** with `Pageable` for all database queries, utilizing the default `findAll` method of JPA repositories. 
+Explicit SQL queries are avoided, except for queries where the DISTINCT is required, that is not applicable with JPA Specifications.
 
 ## Technology Stack and Dependencies
 The server leverages the following technologies:
@@ -83,23 +78,30 @@ Dependencies are managed using Gradle.
 Most API endpoints support advanced filtering and pagination using `GenericFilterDTO` and `SpecificationUtility`. Below is an example of a filtering method for the `Movie` entity:
 
 ```java
-public Map<String, Object> getMovieWithFilter(GenericFilterDTO genericFilter, MovieFilterDTO movieFilter) {
-    Specification<Movie> specification = combineWithAnd(List.of(
-        greaterThan("runtime", movieFilter.getRuntimeGT()),
-        lessThan("runtime", movieFilter.getRuntimeLT()),
-        greaterThan("releaseYear", movieFilter.getReleaseYearGT()),
-        lessThan("releaseYear", movieFilter.getReleaseYearLT()),
-        greaterThan("rating", movieFilter.getRatingGT()),
-        lessThan("rating", movieFilter.getRatingLT()),
-        equalsIn("actors", "name", movieFilter.getActor())
-    ));
+ public Map<String, Object> getMovieWithFilter(GenericFilterDTO genericFilter, MovieFilterDTO movieFilter) {
+      Specification<Movie> specification = combineWithAnd(List.of(
+              like("title", movieFilter.getTitle()),
+              greaterThan("runtime", movieFilter.getRuntimeGT()),
+              lessThan("runtime", movieFilter.getRuntimeLT()),
+              greaterThan("releaseYear", movieFilter.getReleaseYearGT()),
+              lessThan("releaseYear", movieFilter.getReleaseYearLT()),
+              greaterThan("rating", movieFilter.getRatingGT()),
+              lessThan("rating", movieFilter.getRatingLT()),
+              like("actors", "name", movieFilter.getActor()),
+              like("actors", "role", movieFilter.getCharacter()),
+              like("crew", "name", movieFilter.getCrew()),
+              equalsTo("genres", "genre", movieFilter.getGenre()),
+              equalsTo("countries", "country", movieFilter.getProductionCountry()),
+              equalsTo("languages", "language", movieFilter.getLanguage()),
+              equalsTo("studios", "studio", movieFilter.getStudio())
+      ));
 
-    Pageable pageable = setPageable(genericFilter, movieFilter.getSortBy());
-    Page<Movie> moviePage = movieRepository.findAll(specification, pageable);
-    List<? extends MovieType> movies = mapMovies(moviePage.getContent(), genericFilter.getResponseType());
-
-    return buildResponse(genericFilter, moviePage.getTotalPages(), movies);
-}
+      Pageable pageable = setPageable(genericFilter, movieFilter.getSortBy());
+      Page<Movie> moviePage = movieRepository.findAll(specification, pageable);
+      List<? extends MovieType> movies = mapMovies(moviePage.getContent(), genericFilter.getResponseType());
+   
+      return buildResponse(genericFilter, moviePage.getTotalPages(), movies);
+ }
 ```
 ---
 ## How to Import Database Data
