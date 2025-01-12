@@ -1,64 +1,67 @@
-#### Clean Datasets:
-- https://drive.google.com/drive/folders/14OxhhOg3TxA2dzB_y8f4NYJa3RL1wGee?usp=sharing
 
-Python Version: 3.13.1
 
-TODO:
-- Visualizzare e scrivere perché ci sono tanti valori di runtime così alti (sono serie tv) (pulizia o visualizzazione??)
+# README for Data Analysis Project
 
-Data Cleaning
-import
-1. Data Understanding
- head
- shape
- dtypes
-2. Data Cleaning
- Rename columns
- Check for null values
- Check for duplicate rows
- typing columns
- reset index if rows are dropped
- Deep Clean (optional)
-3. Final Result
- head
- shape
- print to csv & set df to null
+## Overview
+
+This project focuses on analyzing and visualizing datasets related to movies. It is structured into two main Jupyter Notebooks:
+
+1. **Data Cleaning**: Prepares raw data for analysis by cleaning, validating, and formatting datasets.  
+2. **Data Visualization**: Explores and interprets cleaned data using various visualization techniques to uncover insights.
+
+The cleaned datasets can be found on this shared drive:
+- [Shared Google Drive Folder](https://drive.google.com/drive/folders/14OxhhOg3TxA2dzB_y8f4NYJa3RL1wGee)
 
 ---
 
-Data Visualization
-1. Introduction
-   - Short description of the three datasets
-   - Short introduction of the methodology (prediction -> analysis -> visualization -> conclusion)
-   - Loading data and imports
-     - Explanation of tools (python libraries, use of fuzzy matching, type of graph)
-2. Exploratory Data Analysis (EDA)
-   - Basic
-     - Language Success
-   - In-Depth
-     - Evolution of Movie Genres and Themes; Relation between them.
-     - Geographic and Temporal distribution of Movie Production
-     - Genre Fusion Popularity
-     - Rotten Tomatoes "Top Critic" Bias
-     - Studio Influence on Genre
-     - The Language Map Distribution and Popularity
-     - Network (Graph) of Actors and Crew
-     - Most Popular Release Window and Release Type per Country
-     - EXTRA: Posters Colors Correlation with Genres
-     
-3. ?? Final Conclusions ??
+## Notebooks
 
-TODO:
-Give names to each in-depth EDA
+### 1. Data Cleaning
+The **Data Cleaning** notebook processes several `.csv` files, each corresponding to a distinct dataset. For each dataset, the cleaning workflow includes:  
+- **Data Understanding**: Initial exploration to understand the dataset's structure and contents.  
+- **Data Cleaning**: Addressing missing values, removing duplicates, validating foreign keys, ensuring correct data types, and renaming columns for clarity.  
+- *(Optional)* **Deep Clean**: Applying dataset-specific cleaning operations.  
+- **Final Result**: Outputting cleaned datasets to new `.csv` files for downstream analysis.  
+
+This step ensures high data quality, enabling reliable and meaningful analysis in subsequent stages.
 
 
-OLD IDEAS:
-- Evolution of Movie Genres
-- ?? Oscar Effect (Blessing or Curse) ?? 
-- Characteristics of Highly-Rated Movies
-- Geographic and Temporal distribution of Movie Production and Success
-- Genre Fusion Popularity and Success
-- Rotten Tomatoes "Top Critic" Bias
-- Studio Influence on Genre and Success
-- International Release Impact (Globalization Impact and Distribution Type Impact)
-- The less-celebrated crew roles that lead to success
+### 2. Data Visualization
+The **Data Visualization** notebook examines three datasets:  
+1. **Movie Dataset**: Detailed information on individual films, fragmented into multiple linked tables.  
+2. **Oscar Awards Dataset**: Historical records of nominations and winners since the inception of the Oscars.  
+3. **Rotten Tomatoes Review Dataset**: Aggregated reviews and scores from critics.
+
+Since these datasets lack a common unique identifier, correlating data across them poses a challenge. The visualization notebook addresses this by employing advanced exploratory techniques to analyze trends, patterns, and relationships.
+
+#### Methodology:
+- **Introduction**: Setting the context and objectives of the analysis.  
+- **Prediction**: Hypotheses are developed to guide exploration and uncover biases.  
+- **Analysis and Visualization**: Combining simple and advanced techniques to extract insights.  
+- **Conclusion**: Summarizing findings and comparing results with predictions.
+
+#### Visualization Tools:
+A diverse set of Python libraries is used to create static, interactive, and geographic visualizations:  
+- **Plotly**: Interactive plots and dashboards.  
+- **Seaborn**: Aesthetic statistical graphics.  
+- **Matplotlib**: Foundational static visualizations.  
+- **Geopandas**: Geographic data handling and mapping.  
+- **Folium**: Interactive geographic visualizations. TODO
+
+These tools facilitate a comprehensive and engaging analysis of the datasets.
+
+#### Visualizations:
+The visualizations done include:
+- TODO
+
+---
+
+## Requirements
+The project relies on the following Python libraries:
+- **Pandas** and **NumPy** for data manipulation.
+- **Plotly**, **Matplotlib**, **Seaborn**, **Geopandas**, and **Folium** for visualizations. TODO 
+- **Jupyter Notebook** for running and documenting the analysis.
+
+**Python Version**: The project uses Python **3.13**
+
+Install dependencies using `pip` or `conda`.
