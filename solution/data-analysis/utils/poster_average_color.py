@@ -1,10 +1,9 @@
 import os
 import numpy as np
-from PIL import Image
-from collections import Counter
 import pandas as pd
-from multiprocessing import Pool, cpu_count
 import time
+from PIL import Image
+from multiprocessing import Pool, cpu_count
 
 
 # Retrieve the mathematical average color
