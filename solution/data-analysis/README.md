@@ -14,7 +14,8 @@ pip install pandas matplotlib seaborn plotly wordcloud networkx Pillow scipy
 **Data Cleaning Notebook**
   1. Be sure the variable `PRINT_CSV` in the first code cell is set to `True` 
   2. Put the raw datasets in the `datasets` directory under the project folder `data-analysis`
-  3. Run all
+  3. Create the `clean_datasets` directory under the project folder `data-analysis`
+  4. Run all
 
 **Data Visualization**
 1. The `poster_color.csv` dataset used in the **Poster Color Brightness Across Genres** visualization 
