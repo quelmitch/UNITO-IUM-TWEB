@@ -10,7 +10,7 @@ const usernameInput = document.getElementById('usernameInput');
 const usernameSubmit = document.getElementById('usernameSubmit');
 const usernameError = document.getElementById('usernameError');
 
-const roomId = window.location.href;
+const roomId = window.location.pathname;
 // Connection to the Socket.IO server
 const socket = io();
 
