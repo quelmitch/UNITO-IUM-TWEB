@@ -74,7 +74,7 @@
         </form>
         <!-- Movie cards container -->
         <div class="col-12">
-            {{#if (eq pagingOptions.totalPages 0)}}
+            {{#if (eq (len movies) 0)}}
                 <div class="error">
                     <h2 class="error">No results found</h2>
                 </div>

@@ -30,7 +30,7 @@
         <!-- Review cards container -->
         <div class="col-lg-12">
 
-            {{#if (eq pagingOptions.totalPages -1)}}
+            {{#if (eq (len reviews) 0)}}
                 <div class="error">
                     <h2 class="error">No results found</h2>
                 </div>

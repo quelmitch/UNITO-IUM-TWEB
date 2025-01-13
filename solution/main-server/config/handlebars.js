@@ -14,6 +14,7 @@ const helpers = {
     toArray: (a) => Array.isArray(a) ? a : a ? [a] : null,
     and: (a, b) => a && b,
     or: (a, b) => a || b,
+    len: (a) => a.length,
 }
 
 module.exports = {
