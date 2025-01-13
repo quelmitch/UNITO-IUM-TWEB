@@ -155,3 +155,12 @@
     height: auto;
     margin-right: 8px;
 }
+table, td, th {
+    background-color: #222222 !important;
+}
+thead tr {
+    border-bottom: 2px solid #585858;
+}
+tr {
+    border-bottom: 1px solid #585858;
+}
