@@ -1,4 +1,3 @@
-// Toggle chat panel
 const chatToggle = document.getElementById('chatToggle');
 const chatPanel = document.getElementById('chatPanel');
 const chatMessages = document.getElementById('chatMessages');
@@ -11,90 +10,92 @@ const usernameInput = document.getElementById('usernameInput');
 const usernameSubmit = document.getElementById('usernameSubmit');
 const usernameError = document.getElementById('usernameError');
 
-const roomId = window.location.href
-
-// connection to the Socket.IO server
+const roomId = window.location.href;
+// Connection to the Socket.IO server
 const socket = io();
 
-// Retrieve username from localStorage if it set
+// Retrieve username from localStorage if it is set
 let user = localStorage.getItem('username');
-if (!user) {
-    usernameInputContainer.style.display = 'block';
-    chatMessages.style.display = 'none';
-    chatInputContainer.style.display = 'none';
-} else {
-    socket.emit('joinRoom', { room: roomId, username: user });
-}
+// Initial UI setup
+if (!user)
+    showUsernameInput();
+else
+    socket.emit('joinRoom', {room: roomId, username: user});
 
-chatToggle.addEventListener('click', () => {
+/* Helper functions */
+function toggleChatPanel() {
     const isActive = chatPanel.classList.toggle('active');
     chatToggle.innerHTML = isActive ? '<span>&#x2715;</span>' : '<span>&#x1F4AC;</span>';
 
-    if (!user) {
-        usernameInput.focus()
-        usernameInputContainer.style.display = 'block';
-        chatMessages.style.display = 'none';
-        chatInputContainer.style.display = 'none';
-    }
-});
+    if (!user)
+        showUsernameInput();
+}
 
-usernameSubmit.addEventListener('click', () => {
+function showUsernameInput() {
+    usernameInput.focus();
+    usernameInputContainer.style.display = 'block';
+    chatMessages.style.display = 'none';
+    chatInputContainer.style.display = 'none';
+}
+
+function hideUsernameInput() {
+    usernameInputContainer.style.display = 'none';
+    chatMessages.style.display = 'flex';
+    chatInputContainer.style.display = 'flex';
+}
+
+function handleUsernameSubmit() {
     const enteredUsername = usernameInput.value.trim();
-    // Check if the entered username is not empty
+
     if (enteredUsername) {
-        // Store the username in localStorage for persistence
         localStorage.setItem('username', enteredUsername);
-
         user = enteredUsername;
-
-        socket.emit('joinRoom', { room: roomId, username: user });
-
-        usernameError.style.display = 'inline-block';
-        usernameInputContainer.style.display = 'none';
-        chatMessages.style.display = 'flex';
-        chatInputContainer.style.display = 'flex';
+        socket.emit('joinRoom', {room: roomId, username: user});
+        hideUsernameInput();
     } else {
         usernameError.style.display = 'inline-block';
     }
-});
+}
 
-// Handle incoming messages
-socket.on('message', ({ username, message }) => {
+function handleMessageReceived({username, message}) {
     if (!message) return;
 
     const userMessage = document.createElement('div');
-
-    userMessage.className = username === user
-        ? 'message user'
-        : username === 'System'
-            ? 'message system'
-            : 'message other';
-
-    userMessage.textContent = username === 'System'
-        ? message
-        : `${username}: ${message}`;
+    userMessage.className = getMessageClass(username);
+    userMessage.textContent = username === 'System' ? message : `${username}: ${message}`;
 
     chatMessages.appendChild(userMessage);
     chatMessages.scrollTop = chatMessages.scrollHeight;
     chatInput.value = '';
-});
+}
 
-// Handle sending messages
-chatSend.addEventListener('click', () => {
-    const message = chatInput.value;
-    if (message.trim()) {
-        socket.emit('message', { room: roomId, username: user, message });
+function getMessageClass(username) {
+    if (username === user)
+        return 'message user';
+    if (username === 'System')
+        return 'message system';
+
+    return 'message other';
+}
+
+function sendMessage() {
+    const message = chatInput.value.trim();
+    if (message) {
+        socket.emit('message', {room: roomId, username: user, message});
         chatInput.value = '';
     }
-});
+}
 
-// Allow sending messages with Enter key
+/* Event listeners */
+chatToggle.addEventListener('click', toggleChatPanel);
 chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter')
-        chatSend.click();
+    if (e.key === 'Enter') chatSend.click();
 });
-// Allow confirms username with Enter key
+chatSend.addEventListener('click', sendMessage);
+
 usernameInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter')
-        usernameSubmit.click();
+    if (e.key === 'Enter') usernameSubmit.click();
 });
+usernameSubmit.addEventListener('click', handleUsernameSubmit);
+
+socket.on('message', handleMessageReceived);
