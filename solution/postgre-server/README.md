@@ -103,19 +103,3 @@ Most API endpoints support advanced filtering and pagination using `GenericFilte
       return buildResponse(genericFilter, moviePage.getTotalPages(), movies);
  }
 ```
----
-## How to Import Database Data
-The clean datasets from the data-analysis project can be easily imported into PostgreSQL using the `load_csv_into_db.py` script.  
-This script can be modified to import all or specific datasets into the database.
-
-### Steps:
-1. Install the required library by running the following command in your terminal:
-   ```bash
-   pip install psycopg2
-   ```
-2. Set your database configuration in the `conn_params` variable within the script.
-3. To exclude specific datasets, comment out or remove the corresponding entries in the `csv_files` variable.
-4. Run the script using the following command:
-   ```bash
-   py .\load_csv_into_db.py
-   ```
