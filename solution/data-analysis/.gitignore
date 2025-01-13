@@ -1,6 +1,5 @@
-datasets/
-clean_datasets/
 *.csv
+*.json
 
 # JUPYTER NOTEBOOK
 *.bundle.*

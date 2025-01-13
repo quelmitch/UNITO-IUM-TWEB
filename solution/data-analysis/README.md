@@ -1,6 +1,32 @@
 
 
-# README for Data Analysis Project
+# Data Analysis
+
+## How to run
+### Requirements
+**Python Version**: The project uses Python **3.13**
+
+The project relies on several Python libraries that can be installed with the following command:
+```
+pip install pandas matplotlib seaborn plotly wordcloud networkx Pillow scipy
+```
+### Step-by-Step guide
+**Data Cleaning Notebook**
+  1. Be sure the variable `PRINT_CSV` in the first code cell is set to `True` 
+  2. Put the raw datasets in the `datasets` directory under the project folder `data-analysis`
+  3. Run all
+
+**Data Visualization**
+1. The `poster_color.csv` dataset used in the **Poster Color Brightness Across Genres** visualization 
+is generated through the `poster_average_color.py` script. As written in its notebook sections the running time to generate
+the dataset is quite long, and it also requires to download approximately 23 GB of movie posters from this
+[link](https://www.kaggle.com/datasets/gsimonx37/letterboxd?select=posters). <br>
+We recommend to download directly the dataset from this shared Drive:
+    - [Shared Google Drive Folder (clean datasets)](https://drive.google.com/drive/folders/14OxhhOg3TxA2dzB_y8f4NYJa3RL1wGee)
+2. Put the `poster_color.csv` in the `clean_datasets` directory
+3. Run all
+
+---
 
 ## Overview
 
@@ -8,9 +34,6 @@ This project focuses on analyzing and visualizing datasets related to movies. It
 
 1. **Data Cleaning**: Prepares raw data for analysis by cleaning, validating, and formatting datasets.  
 2. **Data Visualization**: Explores and interprets cleaned data using various visualization techniques to uncover insights.
-
-The cleaned datasets can be found on this shared drive:
-- [Shared Google Drive Folder](https://drive.google.com/drive/folders/14OxhhOg3TxA2dzB_y8f4NYJa3RL1wGee)
 
 ---
 
@@ -39,29 +62,3 @@ Since these datasets lack a common unique identifier, correlating data across th
 - **Prediction**: Hypotheses are developed to guide exploration and uncover biases.  
 - **Analysis and Visualization**: Combining simple and advanced techniques to extract insights.  
 - **Conclusion**: Summarizing findings and comparing results with predictions.
-
-#### Visualization Tools:
-A diverse set of Python libraries is used to create static, interactive, and geographic visualizations:  
-- **Plotly**: Interactive plots and dashboards.  
-- **Seaborn**: Aesthetic statistical graphics.  
-- **Matplotlib**: Foundational static visualizations.  
-- **Geopandas**: Geographic data handling and mapping.  
-- **Folium**: Interactive geographic visualizations. TODO
-
-These tools facilitate a comprehensive and engaging analysis of the datasets.
-
-#### Visualizations:
-The visualizations done include:
-- TODO
-
----
-
-## Requirements
-The project relies on the following Python libraries:
-- **Pandas** and **NumPy** for data manipulation.
-- **Plotly**, **Matplotlib**, **Seaborn**, **Geopandas**, and **Folium** for visualizations. TODO 
-- **Jupyter Notebook** for running and documenting the analysis.
-
-**Python Version**: The project uses Python **3.13**
-
-Install dependencies using `pip` or `conda`.
