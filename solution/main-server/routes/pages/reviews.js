@@ -13,14 +13,6 @@ router.get('/', (req, res, next) => {
     axios.get(`${thisServer}/api/v1/review/filter?${fromObjectToUri(filters)}`)
         .then((response) => {
             const totalPages = response.data.totalPages - 1;
-            if (totalPages < 0)
-                return res.render('pages/error', {
-                    error_status: 404,
-                    error_name: 'Not Found',
-                    error_message: 'No reviews found matching filters.',
-                    error_redirect: '/reviews',
-                });
-
             const page = response.data.page;
             const limit = response.data.limit;
 

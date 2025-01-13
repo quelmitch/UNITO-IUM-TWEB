@@ -1,126 +1,174 @@
-const form = document.getElementById("filter-form")
+// Query selector shorthand utility functions
+const qs = (selector, scope = document) => scope.querySelector(selector);
+const qsa = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
-form.addEventListener("submit", () => {
-    Array.from(form.elements).forEach(control => {
-        control.disabled = control.value === '';
-    });
-})
+document.addEventListener('DOMContentLoaded', () => {
+    qsa(`.filter-container`).forEach(initFilterContainer);
 
+    qsa('.close-button').forEach(button => {
+        manageChipCloseButton(button)
+    })
 
-document.querySelectorAll('.filter-container').forEach(container => {
-    const chip = container.querySelector('.filter-chip');
-    const dropdown = container.querySelector('.filter-dropdown');
-    const clearAllButton = container.querySelector('.clear-all');
-    const applyButton = container.querySelector('#apply-button');
-    const checkboxes = dropdown.querySelectorAll('input[type="checkbox"], input[type="radio"]');
-    const countElement = chip.querySelector('.count');
-    const checkboxSearchBar = container.querySelector('.checkbox-search-bar');
-    const fieldSearchBar = container.querySelector('.field-search-bar');
-    const selectedChipElementsContainer = container.querySelector('.selected-chips-elements-container');
-    const rangeStart = container.querySelector('.range-start');
-    const rangeEnd = container.querySelector('.range-end');
+    initForm();
+});
 
-    // Update counter on checkbox change
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', () => updateCount(countElement, checkboxes));
-    });
-
-    // Toggle visibility of the filter dropdown
-    chip.addEventListener('click', () => {
-        // Close any other dropdown
-        document.querySelectorAll('.filter-dropdown').forEach(otherDropdown => {
-            if (otherDropdown !== dropdown) {
-                otherDropdown.classList.remove('show');
-            }
+function initForm() {
+    const form = document.getElementById("filter-form")
+    form.addEventListener("submit", () => {
+        Array.from(form.elements).forEach(control => {
+            control.disabled = control.value === '';
         });
-        // Toggle the visibility of the current dropdown
-        dropdown.classList.toggle('show');
-    });
+    })
+}
 
-    // Handle clearing all selected options
-    clearAllButton.addEventListener('click', (event) => {
+function initFilterContainer(container) {
+    const chip = qs('.filter-chip', container);
+    const dropdown = qs(`.filter-dropdown`, container);
+    const countElement = qs('.count', chip);
+
+    const clearButton = qs('.clear-all', container);
+    const applyButton = qs('#apply-button', container);
+
+    const checkboxes = qsa('input[type="checkbox"], input[type="radio"]', dropdown);
+    const checkboxSearchBar = qs('.checkbox-search-bar', container);
+
+    const fieldSearchBar = qs('.field-search-bar', container);
+    const selectedChipElementsContainer = qs('.selected-chips-elements-container', container);
+
+    const rangeStart = qs('.range-start', container);
+    const rangeEnd = qs('.range-end', container);
+
+    toggleFilterDropdownVisibility(chip, dropdown);
+
+    if (rangeStart && rangeEnd)
+        handleRangeFilter(rangeStart, rangeEnd);
+
+    if (fieldSearchBar)
+        handleSearchFilter(fieldSearchBar, selectedChipElementsContainer);
+
+    if (checkboxes)
+        handleCheckboxFilter(checkboxes, checkboxSearchBar, countElement)
+
+    // Handle clearing selected options for each type of filter
+    clearButton.addEventListener('click', (event) => {
         event.preventDefault();
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = false;
-        });
-        if (checkboxSearchBar) checkboxSearchBar.value = "";
-        if (fieldSearchBar) fieldSearchBar.value = "";
-        checkboxes.forEach(checkbox => {
-            if (checkbox.parentElement.classList.contains('selected-chips-elements-wrapper')) {
-                checkbox.parentElement.remove()
-            }
-            const label = checkbox.parentNode;
-            label.style.display = "block";
-        });
 
-        if (rangeStart && rangeEnd) {
-            rangeStart.value = "";
-            rangeEnd.value = "";
+        checkboxes.forEach(checkbox => checkbox.checked = false);
+
+        if (checkboxSearchBar) {
+            checkboxSearchBar.value = "";
+
+            // Clean checkbox research
+            checkboxes.forEach(checkbox => {
+                checkbox.parentNode.style.display = "block";
+            });
         }
+
+        if (fieldSearchBar) {
+            fieldSearchBar.value = "";
+            selectedChipElementsContainer.innerHTML = ""
+        }
+
+        if (rangeStart && rangeEnd) rangeStart.value = rangeEnd.value = "";
+
         updateCount(countElement, checkboxes);
-    });
-
-    // Hide the dropdown if the click is outside the filter container
-    window.addEventListener('click', (event) => {
-        if (!event.target.closest('.filter-container')) {
-            dropdown.classList.remove('show');
-        }
     });
 
     // Apply filters button
     applyButton.addEventListener('click', () => {
         dropdown.classList.remove('show');
+
+        if (fieldSearchBar)
+            addChipInSearchFilter(fieldSearchBar, selectedChipElementsContainer)
     });
-
-    checkboxSearchBar?.addEventListener('input', () => {
-        const searchTerm = checkboxSearchBar.value.toLowerCase();
-        checkboxes.forEach(checkbox => {
-            const label = checkbox.parentNode;
-            const languageName = checkbox.value.toLowerCase();
-            label.style.display = languageName.includes(searchTerm) ? "block" : "none";
-        });
-    });
-
-    checkboxSearchBar?.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-        }
-    });
-
-    fieldSearchBar?.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer, event)
-        }
-    });
-
-    rangeStart?.addEventListener('change', () => {
-        rangeEnd.min = parseFloat(rangeStart.value) + parseFloat(rangeStart.step);
-    })
-
-    rangeEnd?.addEventListener('change', () => {
-        rangeStart.max = parseFloat(rangeEnd.value) - parseFloat(rangeEnd.step);
-    })
 
     if (!rangeStart && !rangeEnd)
         updateCount(countElement, checkboxes);
-});
+}
+
+
+/* Generic Filter Functions */
+// Toggle the filter dropdown visibility
+function toggleFilterDropdownVisibility(chip, dropdown) {
+    chip.addEventListener('click', () => {
+        qsa('.filter-dropdown').forEach(otherDropdown => {
+            if (otherDropdown !== dropdown)
+                otherDropdown.classList.remove('show');
+        });
+        dropdown.classList.toggle('show');
+    });
+
+    // Hide the dropdown if the click is outside the filter container
+    window.addEventListener('click', (event) => {
+        if (!event.target.closest('.filter-container'))
+            dropdown.classList.remove('show');
+    });
+}
 
 // Update the counter of the filter
 function updateCount(countElement, checkboxes) {
     const count = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
-    if (count) countElement.textContent = count;
-    else countElement.style.display = "none";
+    if (count > 0) {
+        countElement.textContent = count;
+        countElement.style.display = "block";
+    } else {
+        countElement.style.display = "none";
+    }
 }
 
-function addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer) {
-    const searchTerm = fieldSearchBar.value.trim();
+
+/* Filter Range */
+function handleRangeFilter(rangeStart, rangeEnd) {
+    rangeStart.addEventListener('change', () => {
+        rangeEnd.min = parseFloat(rangeStart.value) + parseFloat(rangeStart.step);
+    })
+
+    rangeEnd.addEventListener('change', () => {
+        rangeStart.max = parseFloat(rangeEnd.value) - parseFloat(rangeEnd.step);
+    })
+}
+
+
+/* Filter Checkbox */
+function handleCheckboxFilter(checkboxes, checkboxSearchBar, counterLabel) {
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => updateCount(counterLabel, checkboxes));
+    });
+
+    // Search for labels in a checkbox filter
+    checkboxSearchBar?.addEventListener('input', () => {
+        const searchTerm = checkboxSearchBar.value.toLowerCase();
+        checkboxes.forEach(checkbox => {
+            const label = checkbox.parentNode;
+            const value = checkbox.value.toLowerCase();
+            label.style.display = value.includes(searchTerm) ? "block" : "none";
+        });
+    });
+
+    checkboxSearchBar?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') event.preventDefault();
+    });
+}
+
+
+/* Filter Search */
+function handleSearchFilter(searchBar, selectedChipElementsContainer) {
+    searchBar.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            addChipInSearchFilter(searchBar, selectedChipElementsContainer)
+        }
+    });
+}
+
+function addChipInSearchFilter(searchBar, chipsContainer) {
+    const searchTerm = searchBar.value.trim();
 
     if (!searchTerm)
         return
 
     let alreadyAdded = false;
-    const existingChips = selectedChipElementsContainer.querySelectorAll('.selected-chips-elements');
+    const existingChips = qsa('.selected-chips-elements', chipsContainer);
     existingChips.forEach(existingChip => {
         if (existingChip.value.trim().toLowerCase() === searchTerm.toLowerCase())
             alreadyAdded = true;
@@ -137,25 +185,26 @@ function addChipElementInContainer(fieldSearchBar, selectedChipElementsContainer
     inputChip.className = 'selected-chips-elements';
     inputChip.type = 'checkbox';
     inputChip.value = searchTerm;
-    inputChip.name = selectedChipElementsContainer.dataset.name;
+    inputChip.name = chipsContainer.dataset.name;
     inputChip.checked = true;
 
     const closeButton = document.createElement('span');
     closeButton.className = 'close-button';
     closeButton.textContent = '×';
+    manageChipCloseButton(closeButton)
 
     chipContainer.appendChild(inputChip);
     chipContainer.appendChild(closeButton);
-    selectedChipElementsContainer.appendChild(chipContainer);
-    fieldSearchBar.value = "";
+    chipsContainer.appendChild(chipContainer);
+    searchBar.value = "";
 }
 
-document.querySelectorAll('.close-button').forEach(button => {
+function manageChipCloseButton(button) {
     button.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
         button.parentNode.remove();
         const name = button.dataset.name
-        updateCount(document.getElementById(name + "-count"), button.parentNode.querySelectorAll('input[type="checkbox"]'))
+        updateCount(document.getElementById(name + "-count"), qsa('input[type="checkbox"]', button.parentNode))
     });
-})
+}

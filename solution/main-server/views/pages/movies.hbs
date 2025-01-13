@@ -74,17 +74,23 @@
         </form>
         <!-- Movie cards container -->
         <div class="col-12">
-            <!-- Pagination centered at the top of the movie cards -->
-            <div class="d-flex justify-content-center mb-3">
-                {{> pagination prevPage=prevPage nextPage=nextPage}}
-            </div>
+            {{#if (eq pagingOptions.totalPages 0)}}
+                <div class="error">
+                    <h2 class="error">No results found</h2>
+                </div>
+            {{else}}
+                <!-- Pagination centered at the top of the movie cards -->
+                <div class="d-flex justify-content-center mb-3">
+                    {{> pagination prevPage=prevPage nextPage=nextPage}}
+                </div>
 
-            <!-- Movie cards -->
-            <div class="movie-grid">
-                {{#each movies}}
-                    {{> movie-card movie=this}}
-                {{/each}}
-            </div>
+                <!-- Movie cards -->
+                <div class="movie-grid">
+                    {{#each movies}}
+                        {{> movie-card movie=this}}
+                    {{/each}}
+                </div>
+            {{/if}}
         </div>
     </div>
 </div>

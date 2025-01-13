@@ -29,20 +29,26 @@
 
         <!-- Review cards container -->
         <div class="col-lg-12">
-            <!-- Pagination centered at the top of the review cards -->
-            <div class="d-flex justify-content-center mb-3">
-                {{> pagination prevPage=prevPage nextPage=nextPage}}
-            </div>
 
-            <!-- Review cards -->
-            <div class="row g-3">
-                {{#each reviews}}
-                    <div class="col-6">
-                        {{> review-card review=this}}
-                    </div>
-                {{/each}}
-            </div>
+            {{#if (eq pagingOptions.totalPages -1)}}
+                <div class="error">
+                    <h2 class="error">No results found</h2>
+                </div>
+            {{else}}
+                <!-- Pagination centered at the top of the review cards -->
+                <div class="d-flex justify-content-center mb-3">
+                    {{> pagination prevPage=prevPage nextPage=nextPage}}
+                </div>
 
+                <!-- Review cards -->
+                <div class="row g-3">
+                    {{#each reviews}}
+                        <div class="col-6">
+                            {{> review-card review=this}}
+                        </div>
+                    {{/each}}
+                </div>
+            {{/if}}
         </div>
     </div>
 </div>

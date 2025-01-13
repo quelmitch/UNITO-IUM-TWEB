@@ -60,10 +60,9 @@ app.use((req, res) => {
     });
 })
 app.use((err, req, res, next) => {
-    console.log(err)
-    res.status(err.status || 500).render('pages/error', {
-        error_status: err.status || 500,
-        error_name: err.response.statusText,
+    res.status(err?.status || 500).render('pages/error', {
+        error_status: err?.status || 500,
+        error_name: err?.response?.statusText,
         error_message: 'Return to the Homepage.',
         error_redirect: '/',
     })

@@ -1,4 +1,5 @@
 module.exports = (io) => {
+    const HISTORY_LIMIT = 20
     const rooms = {}; // Store active rooms and users
     const roomHistory = {}; // Store message history for each room
 
@@ -25,15 +26,13 @@ module.exports = (io) => {
         });
 
         socket.on('message', ({room, message, username}) => {
-            // console.log(`User ${username} says "${message}" in the room: ${room}`);
-
             // Save the new message to the room's history
             if (!roomHistory[room])
                 roomHistory[room] = [];
             roomHistory[room].push({username, message});
 
-            // Limit room history to the last 20 messages
-            if (roomHistory[room].length > 20)
+            // Limit room history to the last HISTORY_LIMIT messages
+            if (roomHistory[room].length > HISTORY_LIMIT)
                 roomHistory[room].shift()
 
             // Broadcast the message to everyone in the room

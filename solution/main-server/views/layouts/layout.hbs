@@ -8,10 +8,10 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/chat.css' />
 
-    {{#if (eq currentPath '/movies')}}
+    {{#if (startsWith currentPath '/movies')}}
         <link rel='stylesheet' href='/stylesheets/movies.css' />
         <link rel='stylesheet' href='/stylesheets/filters.css' />
-    {{else if (eq currentPath '/reviews')}}
+    {{else if (startsWith currentPath '/reviews')}}
         <link rel='stylesheet' href='/stylesheets/filters.css' />
         <link rel='stylesheet' href='/stylesheets/reviews.css' />
     {{else if (startsWith currentPath '/movie/')}}
